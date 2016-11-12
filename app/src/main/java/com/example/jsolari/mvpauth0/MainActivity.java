@@ -8,28 +8,14 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
-
-import com.auth0.android.Auth0;
-import com.auth0.android.authentication.AuthenticationAPIClient;
-import com.auth0.android.authentication.AuthenticationException;
-import com.auth0.android.callback.BaseCallback;
-import com.auth0.android.lock.Lock;
-import com.auth0.android.lock.LockCallback;
-import com.auth0.android.lock.utils.LockException;
-import com.auth0.android.result.Credentials;
-import com.auth0.android.lock.AuthenticationCallback;
-import com.auth0.android.result.UserProfile;
-import com.example.jsolari.mvpauth0.utils.CredentialsManager;
 
 public class MainActivity extends AppCompatActivity {
     private Toolbar appbar;
     private DrawerLayout drawerLayout;
     private NavigationView navView;
+
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,14 +67,14 @@ public class MainActivity extends AppCompatActivity {
 
                         switch (menuItem.getItemId()) {
                             case R.id.login:
-//                                fragment = new Fragment1();
-//                                fragmentTransaction = true;
                                 intent = new Intent(MainActivity.this, LoginActivity.class);
                                 startActivity(intent);
                                 break;
                             case R.id.capacitationCenters:
-                                fragment = new Fragment2();
+                                fragment = new FragmentCapacitationCenters();
                                 fragmentTransaction = true;
+//                                intent = new Intent(MainActivity.this, FragmentCapacitationCenters.class);
+//                                startActivity(intent);
                                 break;
                         }
 

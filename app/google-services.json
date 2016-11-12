@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "593532671314",
+    "firebase_url": "https://mvpauth0.firebaseio.com",
+    "project_id": "mvpauth0",
+    "storage_bucket": "mvpauth0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:593532671314:android:34243541b9cec60d",
+        "android_client_info": {
+          "package_name": "com.example.jsolari.mvpauth0"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "593532671314-jttikjfl9vo6g93h7nq1di2ralp3nfa4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzrbtJDrPZbpLdkH-MG35kGKai9s9XmT8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
