@@ -6,6 +6,10 @@
             android:icon="@drawable/ic_menu"
             android:title="@string/signup"/>
         <item
+            android:id="@+id/map"
+            android:icon="@drawable/ic_menu"
+            android:title="@string/map"/>
+        <item
             android:id="@+id/capacitationCenters"
             android:icon="@drawable/ic_menu"
             android:title="@string/capacitationCenters"/>

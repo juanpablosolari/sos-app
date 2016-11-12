@@ -9,8 +9,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
 
-public class MainActivity extends AppCompatActivity {
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
     private Toolbar appbar;
     private DrawerLayout drawerLayout;
     private NavigationView navView;
@@ -70,15 +80,28 @@ public class MainActivity extends AppCompatActivity {
                                 intent = new Intent(MainActivity.this, LoginActivity.class);
                                 startActivity(intent);
                                 break;
+                            case R.id.map:
+//                                fragment = new FragmentMap();
+//                                fragmentTransaction = true;
+                                getSupportActionBar().setTitle("Mapa");
+                                menuItem.setChecked(true);
+                                FrameLayout content_frame = (FrameLayout)findViewById(R.id.content_frame);
+                                content_frame.setVisibility(View.GONE);
+                                FrameLayout map = (FrameLayout)findViewById(R.id.map);
+                                map.setVisibility(View.VISIBLE);
+                                break;
                             case R.id.capacitationCenters:
                                 fragment = new FragmentCapacitationCenters();
                                 fragmentTransaction = true;
-//                                intent = new Intent(MainActivity.this, FragmentCapacitationCenters.class);
-//                                startActivity(intent);
                                 break;
                         }
 
                         if(fragmentTransaction) {
+                            FrameLayout layout = (FrameLayout)findViewById(R.id.map);
+                            layout.setVisibility(View.GONE);
+                            FrameLayout content_frame = (FrameLayout)findViewById(R.id.content_frame);
+                            content_frame.setVisibility(View.VISIBLE);
+
                             getSupportFragmentManager().beginTransaction()
                                     .replace(R.id.content_frame, fragment)
                                     .commit();
@@ -92,14 +115,13 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     }
                 });
-    }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return true;
-//    }
+
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        MapFragment mapFragment = (MapFragment) getFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+    }
 
 //    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -110,5 +132,21 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private GoogleMap mMap;
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+        LatLng davinci = new LatLng(-34.604346, -58.395783);
+        mMap.addMarker(new MarkerOptions().position(davinci).title("Escuela Da Vinci"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(davinci, 14.0f));
+
+        LatLng avaya = new LatLng(-34.603114, -58.393598);
+        mMap.addMarker(new MarkerOptions().position(avaya).title("Avaya"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(avaya));
+        mMap.setTrafficEnabled(true);
     }
 }
