@@ -94,6 +94,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 fragment = new FragmentCapacitationCenters();
                                 fragmentTransaction = true;
                                 break;
+                            case R.id.emergencies:
+                                fragment = new FragmentEmergencies();
+                                fragmentTransaction = true;
+                                break;
                         }
 
                         if(fragmentTransaction) {
@@ -149,4 +153,5 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.moveCamera(CameraUpdateFactory.newLatLng(avaya));
         mMap.setTrafficEnabled(true);
     }
+
 }

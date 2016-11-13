@@ -3,6 +3,7 @@ package com.example.jsolari.mvpauth0;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.auth0.android.Auth0;
@@ -79,6 +80,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public void onAuthentication(Credentials credentials) {
             Toast.makeText(getApplicationContext(), "Log In - Success", Toast.LENGTH_SHORT).show();
+            Log.d("credentials", credentials.toString());
             CredentialsManager.saveCredentials(getApplicationContext(), credentials);
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
             finish();

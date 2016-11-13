@@ -10,6 +10,10 @@
             android:icon="@drawable/ic_menu"
             android:title="@string/map"/>
         <item
+            android:id="@+id/emergencies"
+            android:icon="@drawable/ic_menu"
+            android:title="@string/emergencies"/>
+        <item
             android:id="@+id/capacitationCenters"
             android:icon="@drawable/ic_menu"
             android:title="@string/capacitationCenters"/>
