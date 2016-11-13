@@ -1,8 +1,11 @@
 package com.example.jsolari.mvpauth0;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -55,18 +58,6 @@ public class FragmentEmergencies extends Fragment {
     @Override
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
-//        lstListado = (ListView)getView().findViewById(R.id.LstListado);
-//
-//        lstListado.setAdapter(new AdaptadorCorreos(this));
-//
-//        lstListado.setOnItemClickListener(new OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> list, View view, int pos, long id) {
-//                if (listener!=null) {
-//                    listener.onCorreoSeleccionado((Correo)lstListado.getAdapter().getItem(pos));
-//                }
-//            }
-//        });
         arrayAdapter = new FragmentEmergenciesAdapter(this, datos);
         emergenciesList = (ListView)getView().findViewById(R.id.emergenciesList);
         emergenciesList.setAdapter(arrayAdapter);
@@ -77,35 +68,7 @@ public class FragmentEmergencies extends Fragment {
         btnShowToken.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //Get the token
-                String token = FirebaseInstanceId.getInstance().getToken();
-                //Toast.makeText(FragmentEmergencies.this, "Enviando...", Toast.LENGTH_SHORT).show();
-
-//                nameField = (EditText) findViewById(R.id.nameField);
-//                txtField = (EditText) findViewById(R.id.txtField);
-//                name = nameField.getText().toString();
-//                txt = txtField.getText().toString();
-
-                RequestParams params = new RequestParams();
-                params.put("name", "Nahuel");
-                params.put("txt", "Descripcion");
-                params.put("token", token);
-
-                client.post("/emergencies", params,  new JsonHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, JSONObject responseBody) {
-                        super.onSuccess(statusCode, headers, responseBody);
-                        Log.d("Emergencies", responseBody.toString());
-                        getEmergencies();
-                    }
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                        super.onFailure(statusCode, headers, responseString, throwable);
-                        Log.e("Emergencies",  "failure: " + responseString);
-                        Log.e("Emergencies",  "failurecode: " + statusCode);
-                    }
-                });
+                sendEmergency("Nahuel", "Descripcion");
             }
         });
     }
@@ -131,6 +94,30 @@ public class FragmentEmergencies extends Fragment {
             return(item);
         }
     }
+    public static void sendEmergency(String name, String description){
+        RequestParams params = new RequestParams();
+        params.put("name", "Nahuel");
+        params.put("txt", "Descripcion");
+        params.put("token", FirebaseInstanceId.getInstance().getToken());
+
+        MainActivity.showEmergencyToast("text");
+
+        client.post("/emergencies", params,  new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject responseBody) {
+                super.onSuccess(statusCode, headers, responseBody);
+                Log.d("Emergencies", responseBody.toString());
+                getEmergencies();
+                //Toast.makeText(FragmentEmergencies.this, "asd", Toast.LENGTH_LONG).show();
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+                Log.e("Emergencies",  "failure: " + responseString);
+                Log.e("Emergencies",  "failurecode: " + statusCode);
+            }
+        });
+    }
 
     public static void getEmergencies(){
         RequestParams params = new RequestParams();
@@ -139,6 +126,8 @@ public class FragmentEmergencies extends Fragment {
             public void onSuccess(int statusCode, Header[] headers, JSONArray responseBody) {
                 super.onSuccess(statusCode, headers, responseBody);
                 Log.d("Emergencies", responseBody.toString());
+
+                arrayAdapter.clear();
 
                 for (int i = 0; i < responseBody.length(); i++ ) {
                     String name = null;

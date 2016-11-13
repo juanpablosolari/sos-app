@@ -68,14 +68,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(0 /*ID of notification*/, notifiBuilder.build());
-
-
-        Handler h = new Handler(Looper.getMainLooper());
-        h.post(new Runnable() {
-            public void run() {
-                FragmentEmergencies.UpdateEmergencies(title, body);
-            }
-        });
     }
 
 }

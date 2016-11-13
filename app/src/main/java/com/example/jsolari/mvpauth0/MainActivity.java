@@ -1,6 +1,9 @@
 package com.example.jsolari.mvpauth0;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
@@ -10,7 +13,9 @@ import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -125,6 +130,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        Button btnEmergency = (Button) findViewById(R.id.btnEmergency);
+        btnEmergency.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentEmergencies.sendEmergency("Hola", "Chau");
+            }
+        });
     }
 
 //    @Override
@@ -154,4 +167,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.setTrafficEnabled(true);
     }
 
+    public static void showEmergencyToast(String text) {
+        //Toast.makeText(new MainActivity(), text, Toast.LENGTH_LONG).show();
+    }
 }
