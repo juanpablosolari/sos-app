@@ -127,7 +127,7 @@ public class FragmentEmergencies extends Fragment {
                 super.onSuccess(statusCode, headers, responseBody);
                 Log.d("Emergencies", responseBody.toString());
 
-                arrayAdapter.clear();
+                //arrayAdapter.clear();
 
                 for (int i = 0; i < responseBody.length(); i++ ) {
                     String name = null;
