@@ -61,7 +61,6 @@
             android:theme="@style/Lock.Theme.ActionBar" />
         <!-- Auth0 Lock Passwordless SMS Country Code Selection -->
         <activity android:name=".LoginActivity" />
-        <activity android:name=".FragmentCapacitationCenters" />
 
         <meta-data
             android:name="com.google.android.gms.version"
