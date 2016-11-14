@@ -2,9 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.jsolari.mvpauth0">
 
-    <permission
+    <!--<permission
         android:name="com.expocodetech.android.maps.permission.MAPS_RECEIVE"
-        android:protectionLevel="signature" />
+        android:protectionLevel="signature" /> -->
 
     <uses-permission android:name="com.expocodetech.android.maps.permission.MAPS_RECEIVE" />
     <uses-permission android:name="android.permission.INTERNET" />
