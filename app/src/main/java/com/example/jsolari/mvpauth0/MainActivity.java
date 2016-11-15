@@ -1,27 +1,22 @@
 package com.example.jsolari.mvpauth0;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Looper;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -156,15 +151,21 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.getUiSettings().setZoomControlsEnabled(true); //Botonera de Zoom
+        mMap.setTrafficEnabled(false); //Mostar trafico
+        mMap.getUiSettings().setMapToolbarEnabled(true); //Botonera del Toolbar
+
+
 
         LatLng davinci = new LatLng(-34.604346, -58.395783);
         mMap.addMarker(new MarkerOptions().position(davinci).title("Escuela Da Vinci"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(davinci, 14.0f));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(davinci, 15.0f)); //Esto deberia apuntar a la Latitud y Longitud del Voluntario
+
 
         LatLng avaya = new LatLng(-34.603114, -58.393598);
         mMap.addMarker(new MarkerOptions().position(avaya).title("Avaya"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(avaya));
-        mMap.setTrafficEnabled(true);
+
     }
 
     public static void showEmergencyToast(String text) {

@@ -35,12 +35,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="5dp" >
 
-            <ImageView
-                android:id="@+id/imgMyLocation"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/maps" />
+
 
         </LinearLayout>
     </fragment>
