@@ -1,16 +1,10 @@
 package com.example.jsolari.mvpauth0;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -18,17 +12,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-
-import cz.msebera.android.httpclient.Header;
 
 public class FragmentMap extends Fragment implements OnMapReadyCallback {
     private GoogleMap mMap;
@@ -54,14 +37,20 @@ public class FragmentMap extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.getUiSettings().setZoomControlsEnabled(true); //Botonera de Zoom
+        mMap.setTrafficEnabled(false); //Mostar trafico
+        mMap.getUiSettings().setMapToolbarEnabled(true); //Botonera del Toolbar
+        mMap.getUiSettings().setMyLocationButtonEnabled(true); //Boton de Location
+
 
         LatLng davinci = new LatLng(-34.604346, -58.395783);
         mMap.addMarker(new MarkerOptions().position(davinci).title("Escuela Da Vinci"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(davinci, 14.0f));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(davinci, 15.0f)); //Esto deberia apuntar a la Latitud y Longitud del Voluntario
+
 
         LatLng avaya = new LatLng(-34.603114, -58.393598);
         mMap.addMarker(new MarkerOptions().position(avaya).title("Avaya"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(avaya));
-        mMap.setTrafficEnabled(true);
+
     }
 }
