@@ -38,13 +38,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        appbar = (Toolbar)findViewById(R.id.appbar);
+        appbar = (Toolbar) findViewById(R.id.appbar);
         setSupportActionBar(appbar);
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_nav_menu);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         /*
         //Eventos del Drawer Layout
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
         */
 
-        navView = (NavigationView)findViewById(R.id.navview);
+        navView = (NavigationView) findViewById(R.id.navview);
         navView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -91,9 +91,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //                                fragmentTransaction = true;
                                 getSupportActionBar().setTitle("Mapa");
                                 menuItem.setChecked(true);
-                                FrameLayout content_frame = (FrameLayout)findViewById(R.id.content_frame);
+                                FrameLayout content_frame = (FrameLayout) findViewById(R.id.content_frame);
                                 content_frame.setVisibility(View.GONE);
-                                FrameLayout map = (FrameLayout)findViewById(R.id.map);
+                                FrameLayout map = (FrameLayout) findViewById(R.id.map);
                                 map.setVisibility(View.VISIBLE);
                                 break;
                             case R.id.capacitationCenters:
@@ -106,10 +106,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 break;
                         }
 
-                        if(fragmentTransaction) {
-                            FrameLayout layout = (FrameLayout)findViewById(R.id.map);
+                        if (fragmentTransaction) {
+                            FrameLayout layout = (FrameLayout) findViewById(R.id.map);
                             layout.setVisibility(View.GONE);
-                            FrameLayout content_frame = (FrameLayout)findViewById(R.id.content_frame);
+                            FrameLayout content_frame = (FrameLayout) findViewById(R.id.content_frame);
                             content_frame.setVisibility(View.VISIBLE);
 
                             getSupportFragmentManager().beginTransaction()
@@ -141,9 +141,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
     }
 
-//    @Override
+    //    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
@@ -157,6 +157,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+<<<<<<< HEAD
+=======
+        mMap.getUiSettings().setZoomControlsEnabled(true); //Botonera de Zoom
+        mMap.setTrafficEnabled(false); //Mostar trafico
+        mMap.getUiSettings().setMapToolbarEnabled(true); //Botonera del Toolbar
+
+>>>>>>> e96e38281d68be7b96e22163f37c965f4c864087
 
         LatLng davinci = new LatLng(-34.604346, -58.395783);
         mMap.addMarker(new MarkerOptions().position(davinci).title("Escuela Da Vinci"));
@@ -190,7 +197,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
+
+
     public static void showEmergencyToast(String text) {
         //Toast.makeText(new MainActivity(), text, Toast.LENGTH_LONG).show();
     }
+
+
 }
