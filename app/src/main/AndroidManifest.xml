@@ -43,8 +43,8 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="juanpablosolari.auth0.com"
-                    android:pathPrefix="/android/com.example.jsolari.vsos/callback"
+                    android:host="@string/auth0_domain"
+                    android:pathPrefix="@string/auth0_callback"
                     android:scheme="https" />
             </intent-filter>
         </activity>
