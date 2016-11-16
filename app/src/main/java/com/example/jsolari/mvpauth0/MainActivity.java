@@ -1,6 +1,8 @@
 package com.example.jsolari.mvpauth0;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -17,8 +19,12 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
     private Toolbar appbar;
@@ -151,20 +157,36 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.getUiSettings().setZoomControlsEnabled(true); //Botonera de Zoom
-        mMap.setTrafficEnabled(false); //Mostar trafico
-        mMap.getUiSettings().setMapToolbarEnabled(true); //Botonera del Toolbar
-
-
 
         LatLng davinci = new LatLng(-34.604346, -58.395783);
         mMap.addMarker(new MarkerOptions().position(davinci).title("Escuela Da Vinci"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(davinci, 15.0f)); //Esto deberia apuntar a la Latitud y Longitud del Voluntario
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(davinci, 14.0f));
 
+        LatLng obelisco = new LatLng(-34.601646, -58.386752);
+        mMap.addMarker(new MarkerOptions().position(obelisco).title("Avaya"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(obelisco));
+        mMap.setTrafficEnabled(false);
 
-        LatLng avaya = new LatLng(-34.603114, -58.393598);
-        mMap.addMarker(new MarkerOptions().position(avaya).title("Avaya"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(avaya));
+        /*
+        //Trazar linea de un punto a otro
+        PolylineOptions rectOptions = new PolylineOptions()
+                .add(obelisco)
+                .add(davinci)
+                .color(Color.BLUE)
+                .geodesic(true)
+                .width(10f);
+
+        Polyline polyline = mMap.addPolyline(rectOptions);
+
+        //Radio de un punto
+        CircleOptions circleOptions = new CircleOptions()
+                .center(obelisco)
+                .radius(500);
+
+        //Radio de un punto
+        Circle circle = mMap.addCircle(circleOptions);
+        */
+
 
     }
 
