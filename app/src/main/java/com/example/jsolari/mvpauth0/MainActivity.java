@@ -87,8 +87,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 startActivity(intent);
                                 break;
                             case R.id.map:
-//                                fragment = new FragmentMap();
-//                                fragmentTransaction = true;
                                 getSupportActionBar().setTitle("Mapa");
                                 menuItem.setChecked(true);
                                 FrameLayout content_frame = (FrameLayout) findViewById(R.id.content_frame);
