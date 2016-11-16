@@ -155,13 +155,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-<<<<<<< HEAD
-=======
+
         mMap.getUiSettings().setZoomControlsEnabled(true); //Botonera de Zoom
         mMap.setTrafficEnabled(false); //Mostar trafico
         mMap.getUiSettings().setMapToolbarEnabled(true); //Botonera del Toolbar
 
->>>>>>> e96e38281d68be7b96e22163f37c965f4c864087
 
         LatLng davinci = new LatLng(-34.604346, -58.395783);
         mMap.addMarker(new MarkerOptions().position(davinci).title("Escuela Da Vinci"));
