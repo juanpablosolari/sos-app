@@ -64,26 +64,26 @@ public class FragmentEmergencies extends Fragment {
 
         getEmergencies();
 
-        Button btnShowToken = (Button)getView().findViewById(R.id.button_show_token);
-        btnShowToken.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendEmergency("Nahuel", "Descripcion");
-            }
-        });
+        // Button btnShowToken = (Button)getView().findViewById(R.id.button_show_token);
+        // btnShowToken.setOnClickListener(new View.OnClickListener() {
+        //     @Override
+        //     public void onClick(View v) {
+        //         sendEmergency("Nahuel", "Descripcion");
+        //     }
+        // });
     }
 
     class FragmentEmergenciesAdapter extends ArrayAdapter<EmergencyItem> {
         Activity context;
 
         public FragmentEmergenciesAdapter(Fragment context, ArrayList<EmergencyItem> datos) {
-            super(context.getActivity(), R.layout.item_capacitation_center, datos);
+            super(context.getActivity(), R.layout.item_emergency, datos);
             this.context = context.getActivity();
         }
 
         public View getView(int position, View convertView, ViewGroup parent) {
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            View item = inflater.inflate(R.layout.item_capacitation_center, null);
+            View item = inflater.inflate(R.layout.item_emergency, null);
 
             TextView lblTitulo = (TextView)item.findViewById(R.id.title);
             lblTitulo.setText(datos.get(position).getTitle());
@@ -94,12 +94,12 @@ public class FragmentEmergencies extends Fragment {
             return(item);
         }
     }
-    public static void sendEmergency(String name, String description){
+    public static void sendEmergency(String title, String body){
         RequestParams params = new RequestParams();
-        params.put("name", "Nahuel");
-        params.put("txt", "Descripcion");
+        params.put("title", title);
+        params.put("body", body);
         params.put("token", FirebaseInstanceId.getInstance().getToken());
-
+        
         MainActivity.showEmergencyToast("text");
 
         client.post("/emergencies", params,  new JsonHttpResponseHandler() {
@@ -130,13 +130,13 @@ public class FragmentEmergencies extends Fragment {
                 //arrayAdapter.clear();
 
                 for (int i = 0; i < responseBody.length(); i++ ) {
-                    String name = null;
-                    String description = null;
+                    String title = null;
+                    String body = null;
                     try {
                         JSONObject item = responseBody.getJSONObject(i);
-                        name = item.getString("name");
-                        description = item.getString("txt");
-                        arrayAdapter.add(new EmergencyItem(name, description));
+                        title = item.getString("title");
+                        body = item.getString("body");
+                        arrayAdapter.add(new EmergencyItem(title, body));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
