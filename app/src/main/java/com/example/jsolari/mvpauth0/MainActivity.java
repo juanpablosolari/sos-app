@@ -1,8 +1,7 @@
 package com.example.jsolari.mvpauth0;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -19,12 +18,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.Circle;
-import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polyline;
-import com.google.android.gms.maps.model.PolylineOptions;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
     private Toolbar appbar;
@@ -136,6 +131,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             public void onClick(View v) {
                 FragmentEmergencies.sendEmergency("Hola", "Chau");
 
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                String phone = "911";
+                String temp = "tel:" + phone;
+                intent.setData(Uri.parse(temp));
+
+                startActivity(intent);
             }
         });
     }
