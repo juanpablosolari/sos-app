@@ -1,26 +1,17 @@
 package com.example.jsolari.mvpauth0;
 
 import android.app.Activity;
-import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.support.annotation.RequiresApi;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.support.v4.app.Fragment;
-import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -127,7 +118,9 @@ public class FragmentEmergencies extends Fragment {
                 super.onSuccess(statusCode, headers, responseBody);
                 Log.d("Emergencies", responseBody.toString());
 
-                //arrayAdapter.clear();
+                if (arrayAdapter != null) {
+                    arrayAdapter.clear();
+                }
 
                 for (int i = 0; i < responseBody.length(); i++ ) {
                     String title = null;
@@ -136,7 +129,9 @@ public class FragmentEmergencies extends Fragment {
                         JSONObject item = responseBody.getJSONObject(i);
                         title = item.getString("title");
                         body = item.getString("body");
-                        arrayAdapter.add(new EmergencyItem(title, body));
+                        if (arrayAdapter != null) {
+                            arrayAdapter.add(new EmergencyItem(title, body));
+                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

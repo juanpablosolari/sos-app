@@ -3,6 +3,7 @@ package com.example.jsolari.mvpauth0;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
@@ -13,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -131,12 +133,23 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             public void onClick(View v) {
                 FragmentEmergencies.sendEmergency("Hola", "Chau");
 
-                Intent intent = new Intent(Intent.ACTION_DIAL);
-                String phone = "107";
-                String temp = "tel:" + phone;
-                intent.setData(Uri.parse(temp));
+                Toast.makeText(MainActivity.this,
+                        "Llamando al SAME!", Toast.LENGTH_LONG).show();
 
-                startActivity(intent);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                            Intent intent = new Intent(Intent.ACTION_DIAL);
+                            String phone = "107";
+                            String temp = "tel:" + phone;
+                            intent.setData(Uri.parse(temp));
+
+                            startActivity(intent);
+                    }
+                }, 3000);
+
+
             }
         });
     }
