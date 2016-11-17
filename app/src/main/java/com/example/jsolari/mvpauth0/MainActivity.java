@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 FragmentEmergencies.sendEmergency("Hola", "Chau");
 
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                String phone = "911";
+                String phone = "107";
                 String temp = "tel:" + phone;
                 intent.setData(Uri.parse(temp));
 
