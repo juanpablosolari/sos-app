@@ -1,6 +1,7 @@
 package com.example.jsolari.mvpauth0;
 
 import android.app.Activity;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -54,14 +55,6 @@ public class FragmentEmergencies extends Fragment {
         emergenciesList.setAdapter(arrayAdapter);
 
         getEmergencies();
-
-        // Button btnShowToken = (Button)getView().findViewById(R.id.button_show_token);
-        // btnShowToken.setOnClickListener(new View.OnClickListener() {
-        //     @Override
-        //     public void onClick(View v) {
-        //         sendEmergency("Nahuel", "Descripcion");
-        //     }
-        // });
     }
 
     class FragmentEmergenciesAdapter extends ArrayAdapter<EmergencyItem> {
@@ -85,10 +78,9 @@ public class FragmentEmergencies extends Fragment {
             return(item);
         }
     }
-    public static void sendEmergency(String title, String body){
+    public static void sendEmergency(Location location){
         RequestParams params = new RequestParams();
-        params.put("title", title);
-        params.put("body", body);
+        params.put("location", location.toString());
         params.put("token", FirebaseInstanceId.getInstance().getToken());
         
         MainActivity.showEmergencyToast("text");

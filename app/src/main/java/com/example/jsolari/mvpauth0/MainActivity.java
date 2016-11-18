@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -22,6 +24,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -133,25 +136,43 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mapFragment.getMapAsync(this);
 
 
-        Button btnEmergency = (Button) findViewById(R.id.btnEmergency);
-        btnEmergency.setOnClickListener(new View.OnClickListener() {
+        final Button btnEmergency = (Button) findViewById(R.id.btnEmergency);
+        btnEmergency.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                int z = 5;
+                btnEmergency.setVisibility(View.GONE);
 
-                if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
-                    return;
+                do {
+                    Toast.makeText(MainActivity.this, "Llamando al Same en..." + String.valueOf(z), Toast.LENGTH_SHORT).show();
+                    z = z - 1;
+                }while (z!=0);
+
+                if(z==0){
+                    if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        return;
+                    }
+                    Location loc = LocationServices.FusedLocationApi.getLastLocation(apiClient);
+                    if (loc != null) {
+                        FragmentEmergencies.sendEmergency(loc);
+                    }
+
+                    Toast.makeText(MainActivity.this, "Llamando al SAME!", Toast.LENGTH_SHORT).show();
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            Intent intent = new Intent(Intent.ACTION_DIAL);
+                            String phone = "107";
+                            String temp = "tel:" + phone;
+                            intent.setData(Uri.parse(temp));
+
+                            startActivity(intent);
+                        }
+                    }, 10000);
                 }
-                Location loc = LocationServices.FusedLocationApi.getLastLocation(apiClient);
-                FragmentEmergencies.sendEmergency(String.valueOf(loc.getLatitude()), String.valueOf(loc.getLongitude()));
             }
-
         });
     }
 
