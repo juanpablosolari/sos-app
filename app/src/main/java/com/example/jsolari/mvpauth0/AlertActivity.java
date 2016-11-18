@@ -21,7 +21,6 @@ public class AlertActivity extends AppCompatActivity implements GoogleApiClient.
 
     TextView lblLatitud;
     TextView lblLongitud;
-    Button btnActualizar;
 
     private static final String LOGTAG = "android-localizacion";
     private static final int PETICION_PERMISO_LOCALIZACION = 101;
@@ -34,7 +33,6 @@ public class AlertActivity extends AppCompatActivity implements GoogleApiClient.
 
         lblLatitud = (TextView) findViewById(R.id.lblLatitud);
         lblLongitud = (TextView) findViewById(R.id.lblLongitud);
-        btnActualizar = (ToggleButton) findViewById(R.id.btnActualizar);
 
         apiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this, this)

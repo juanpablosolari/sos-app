@@ -1,34 +1,57 @@
 package com.example.jsolari.mvpauth0;
 
+import android.*;
+import android.Manifest;
 import android.content.Intent;
-import android.net.Uri;
+import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.location.Location;
 import android.os.Bundle;
-import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.Toast;
+import android.widget.TextView;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
+import static com.example.jsolari.mvpauth0.R.id.lblLatitud;
+import static com.example.jsolari.mvpauth0.R.id.lblLongitud;
+
+public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
     private Toolbar appbar;
     private DrawerLayout drawerLayout;
     private NavigationView navView;
 
     private static final String TAG = "MainActivity";
+    private static final String LOGTAG = "android-localizacion";
+
+    //Localizacion
+    private static final int PETICION_PERMISO_LOCALIZACION = 101;
+    private GoogleApiClient apiClient;
+    //--Localizacion
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,30 +66,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        /*
-        //Eventos del Drawer Layout
-        drawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
-            @Override
-            public void onDrawerSlide(View drawerView, float slideOffset) {
+        apiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, this)
+                .addConnectionCallbacks(this)
+                .addApi(LocationServices.API)
+                .build();
 
-            }
-
-            @Override
-            public void onDrawerOpened(View drawerView) {
-
-            }
-
-            @Override
-            public void onDrawerClosed(View drawerView) {
-
-            }
-
-            @Override
-            public void onDrawerStateChanged(int newState) {
-
-            }
-        });
-        */
 
         navView = (NavigationView) findViewById(R.id.navview);
         navView.setNavigationItemSelectedListener(
@@ -127,39 +132,26 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        final Button btnEmergency = (Button) findViewById(R.id.btnEmergency);
-        btnEmergency.setOnClickListener(new View.OnClickListener()
 
-        {
+        Button btnEmergency = (Button) findViewById(R.id.btnEmergency);
+        btnEmergency.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                int z = 5;
-                do{
-                    Toast.makeText(MainActivity.this, "Llamando al Same en..." + String.valueOf(z), Toast.LENGTH_SHORT).show();
-                    z = z - 1;
-                }while (z!=0);
-
-                if(z==0){
-                    btnEmergency.setVisibility(View.GONE);
-                    FragmentEmergencies.sendEmergency("Hola", "Chau");
-                    Toast.makeText(MainActivity.this,
-                            "Llamando al SAME!", Toast.LENGTH_SHORT).show();
-
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-
-                            Intent intent = new Intent(Intent.ACTION_DIAL);
-                            String phone = "107";
-                            String temp = "tel:" + phone;
-                            intent.setData(Uri.parse(temp));
-
-                            startActivity(intent);
-                        }
-                    }, 10000);
+                if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return;
                 }
+                Location loc = LocationServices.FusedLocationApi.getLastLocation(apiClient);
+                FragmentEmergencies.sendEmergency(String.valueOf(loc.getLatitude()), String.valueOf(loc.getLongitude()));
             }
+
         });
     }
 
@@ -185,13 +177,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.getUiSettings().setMapToolbarEnabled(true); //Botonera del Toolbar
 
 
-        LatLng davinci = new LatLng(-34.604346, -58.395783);
-        mMap.addMarker(new MarkerOptions().position(davinci).title("Escuela Da Vinci"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(davinci, 14.0f));
+        LatLng obelisco = new LatLng(-34.604346, -58.395783);
+        mMap.addMarker(new MarkerOptions().position(obelisco).title("Escuela Da Vinci"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(obelisco, 14.0f));
 
-        LatLng obelisco = new LatLng(-34.601646, -58.386752);
-        mMap.addMarker(new MarkerOptions().position(obelisco).title("Avaya"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(obelisco));
+        LatLng avaya = new LatLng(-34.602629, -58.393655);
+        mMap.addMarker(new MarkerOptions().position(avaya).title("Avaya"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(avaya));
         mMap.setTrafficEnabled(false);
 
         /*
@@ -223,5 +215,18 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         //Toast.makeText(new MainActivity(), text, Toast.LENGTH_LONG).show();
     }
 
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
 
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
 }
