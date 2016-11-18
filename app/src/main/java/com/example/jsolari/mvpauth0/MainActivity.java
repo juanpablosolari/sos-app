@@ -127,18 +127,28 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        Button btnEmergency = (Button) findViewById(R.id.btnEmergency);
-        btnEmergency.setOnClickListener(new View.OnClickListener() {
+        final Button btnEmergency = (Button) findViewById(R.id.btnEmergency);
+        btnEmergency.setOnClickListener(new View.OnClickListener()
+
+        {
             @Override
             public void onClick(View v) {
-                FragmentEmergencies.sendEmergency("Hola", "Chau");
 
-                Toast.makeText(MainActivity.this,
-                        "Llamando al SAME!", Toast.LENGTH_LONG).show();
+                int z = 5;
+                do{
+                    Toast.makeText(MainActivity.this, "Llamando al Same en..." + String.valueOf(z), Toast.LENGTH_SHORT).show();
+                    z = z - 1;
+                }while (z!=0);
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
+                if(z==0){
+                    btnEmergency.setVisibility(View.GONE);
+                    FragmentEmergencies.sendEmergency("Hola", "Chau");
+                    Toast.makeText(MainActivity.this,
+                            "Llamando al SAME!", Toast.LENGTH_SHORT).show();
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
 
                             Intent intent = new Intent(Intent.ACTION_DIAL);
                             String phone = "107";
@@ -146,10 +156,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             intent.setData(Uri.parse(temp));
 
                             startActivity(intent);
-                    }
-                }, 3000);
-
-
+                        }
+                    }, 10000);
+                }
             }
         });
     }
