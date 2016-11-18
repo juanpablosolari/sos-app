@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <!--<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
@@ -22,3 +22,4 @@
         <item name="Auth0.DarkPrimaryColor">#000000</item>
     </style>
 </resources>
+
