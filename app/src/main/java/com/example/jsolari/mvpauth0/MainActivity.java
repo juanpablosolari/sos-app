@@ -1,10 +1,8 @@
 package com.example.jsolari.mvpauth0;
 
-import android.*;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,12 +16,10 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -33,15 +29,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.Circle;
-import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polyline;
-import com.google.android.gms.maps.model.PolylineOptions;
-
-import static com.example.jsolari.mvpauth0.R.id.lblLatitud;
-import static com.example.jsolari.mvpauth0.R.id.lblLongitud;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
     private Toolbar appbar;
@@ -167,11 +156,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             String phone = "107";
                             String temp = "tel:" + phone;
                             intent.setData(Uri.parse(temp));
-
+                            btnEmergency.setVisibility(View.VISIBLE);
                             startActivity(intent);
                         }
                     }, 10000);
                 }
+
             }
         });
     }
