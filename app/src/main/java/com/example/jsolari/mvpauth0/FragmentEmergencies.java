@@ -1,6 +1,8 @@
 package com.example.jsolari.mvpauth0;
 
 import android.app.Activity;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -21,6 +23,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -31,6 +35,7 @@ public class FragmentEmergencies extends Fragment {
     private ListView lstOpciones;
 
     private static ApiSrv client = new ApiSrv();
+
 
     private ArrayList<EmergencyItem> datos = new ArrayList<EmergencyItem>();
 
@@ -78,9 +83,10 @@ public class FragmentEmergencies extends Fragment {
             return(item);
         }
     }
-    public static void sendEmergency(Location location){
+    public static void sendEmergency(Location loc){
         RequestParams params = new RequestParams();
-        params.put("location", location.toString());
+        params.put("latitude", loc.getLatitude());
+        params.put("longitude", loc.getLongitude());
         params.put("token", FirebaseInstanceId.getInstance().getToken());
         
         MainActivity.showEmergencyToast("text");
