@@ -25,12 +25,9 @@ import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
     private Toolbar appbar;
@@ -126,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
         final Button btnEmergency = (Button) findViewById(R.id.btnEmergency);
-        btnEmergency.setOnClickListener(new View.OnClickListener(){
+        btnEmergency.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int z = 5;
@@ -135,9 +132,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 do {
                     Toast.makeText(MainActivity.this, "Llamando al Same en..." + String.valueOf(z), Toast.LENGTH_SHORT).show();
                     z = z - 1;
-                }while (z!=0);
+                } while (z != 0);
 
-                if(z==0){
+                if (z == 0) {
                     if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                         return;
                     }
@@ -156,12 +153,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             String phone = "107";
                             String temp = "tel:" + phone;
                             intent.setData(Uri.parse(temp));
-                            btnEmergency.setVisibility(View.VISIBLE);
                             startActivity(intent);
+                            btnEmergency.setVisibility(View.VISIBLE);
                         }
                     }, 10000);
-                }
 
+                }
             }
         });
     }
@@ -186,16 +183,21 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.getUiSettings().setZoomControlsEnabled(true); //Botonera de Zoom
         mMap.setTrafficEnabled(false); //Mostar trafico
         mMap.getUiSettings().setMapToolbarEnabled(true); //Botonera del Toolbar
+        mMap.setMyLocationEnabled(true);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            return;
+        }
 
 
-        LatLng obelisco = new LatLng(-34.604346, -58.395783);
+        /*LatLng obelisco = new LatLng(-34.604346, -58.395783);
         mMap.addMarker(new MarkerOptions().position(obelisco).title("Escuela Da Vinci"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(obelisco, 14.0f));
 
         LatLng avaya = new LatLng(-34.602629, -58.393655);
         mMap.addMarker(new MarkerOptions().position(avaya).title("Avaya"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(avaya));
-        mMap.setTrafficEnabled(false);
+        mMap.setTrafficEnabled(false);*/
 
         /*
         //Trazar linea de un punto a otro
