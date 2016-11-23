@@ -88,14 +88,16 @@ public class FragmentEmergencies extends Fragment {
         params.put("latitude", loc.getLatitude());
         params.put("longitude", loc.getLongitude());
         params.put("token", FirebaseInstanceId.getInstance().getToken());
-        
+
         MainActivity.showEmergencyToast("text");
 
         client.post("/emergencies", params,  new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject responseBody) {
                 super.onSuccess(statusCode, headers, responseBody);
-                Log.d("Emergencies", responseBody.toString());
+                if (responseBody != null) {
+                    Log.d("Emergencies", responseBody.toString());
+                }
                 getEmergencies();
                 //Toast.makeText(FragmentEmergencies.this, "asd", Toast.LENGTH_LONG).show();
             }
