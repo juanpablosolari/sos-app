@@ -33,6 +33,9 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
     private Toolbar appbar;
     private DrawerLayout drawerLayout;
@@ -40,6 +43,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private static final String TAG = "MainActivity";
     private static final String LOGTAG = "android-localizacion";
+
+    private Button btnEmergency;
+    private Button btnCancelEmergency;
 
     //Localizacion
     private static final int PETICION_PERMISO_LOCALIZACION = 101;
@@ -126,45 +132,86 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mapFragment.getMapAsync(this);
 
 
-        final Button btnEmergency = (Button) findViewById(R.id.btnEmergency);
+        btnEmergency = (Button) findViewById(R.id.btnEmergency);
+        btnCancelEmergency = (Button) findViewById(R.id.btnCancelEmergency);
+        btnCancelEmergency.setVisibility(View.GONE);
         btnEmergency.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int z = 5;
                 btnEmergency.setVisibility(View.GONE);
-
-                do {
-                    Toast.makeText(MainActivity.this, "Llamando al Same en..." + String.valueOf(z), Toast.LENGTH_SHORT).show();
-                    z = z - 1;
-                } while (z != 0);
-
-                if (z == 0) {
-                    if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                        return;
-                    }
-                    Location loc = LocationServices.FusedLocationApi.getLastLocation(apiClient);
-                    if (loc != null) {
-                        FragmentEmergencies.sendEmergency(loc);
-                        Toast.makeText(MainActivity.this, "Llamando al SAME!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(MainActivity.this, "El GPS deshabilitado, Llamando al SAME!", Toast.LENGTH_SHORT).show();
-                    }
-
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            Intent intent = new Intent(Intent.ACTION_DIAL);
-                            String phone = "107";
-                            String temp = "tel:" + phone;
-                            intent.setData(Uri.parse(temp));
-                            startActivity(intent);
-                            btnEmergency.setVisibility(View.VISIBLE);
-                        }
-                    }, 10000);
-
-                }
+                btnCancelEmergency.setVisibility(View.VISIBLE);
+                startTimer();
             }
         });
+        btnCancelEmergency.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnEmergency.setVisibility(View.VISIBLE);
+                stopTimer();
+            }
+        });
+    }
+
+
+
+    private Timer mTimer1;
+    private TimerTask mTt1;
+    private Handler mTimerHandler = new Handler();
+    private int count = 5;
+
+    private void stopTimer(){
+        if(mTimer1 != null){
+            btnEmergency.setVisibility(View.VISIBLE);
+            btnCancelEmergency.setVisibility(View.GONE);
+            count = 5;
+            mTimer1.cancel();
+            mTimer1.purge();
+        }
+    }
+
+    private void startTimer(){
+        mTimer1 = new Timer();
+        mTt1 = new TimerTask() {
+            public void run() {
+                mTimerHandler.post(new Runnable() {
+                    public void run(){
+                        btnCancelEmergency.setText("Cancelar o Llamando al Same en..." + count);
+                        count--;
+                        if (count == 0) {
+                            stopTimer();
+                            sendNotification();
+                        }
+                    }
+                });
+            }
+        };
+
+        mTimer1.schedule(mTt1, 1, 1000);
+    }
+
+    public void sendNotification () {
+        if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        Location loc = LocationServices.FusedLocationApi.getLastLocation(apiClient);
+        if (loc != null) {
+            FragmentEmergencies.sendEmergency(loc);
+            Toast.makeText(MainActivity.this, "Llamando al SAME!", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(MainActivity.this, "El GPS deshabilitado, Llamando al SAME!", Toast.LENGTH_SHORT).show();
+        }
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            String phone = "107";
+            String temp = "tel:" + phone;
+            intent.setData(Uri.parse(temp));
+            startActivity(intent);
+            btnEmergency.setVisibility(View.VISIBLE);
+            }
+        }, 10000);
     }
 
     //    @Override
