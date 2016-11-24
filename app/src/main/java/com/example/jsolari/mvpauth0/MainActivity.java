@@ -145,9 +145,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     Location loc = LocationServices.FusedLocationApi.getLastLocation(apiClient);
                     if (loc != null) {
                         FragmentEmergencies.sendEmergency(loc);
+                        Toast.makeText(MainActivity.this, "Llamando al SAME!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(MainActivity.this, "El GPS deshabilitado, Llamando al SAME!", Toast.LENGTH_SHORT).show();
                     }
-
-                    Toast.makeText(MainActivity.this, "Llamando al SAME!", Toast.LENGTH_SHORT).show();
 
                     new Handler().postDelayed(new Runnable() {
                         @Override
@@ -238,10 +239,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         Location loc = LocationServices.FusedLocationApi.getLastLocation(apiClient);
         Log.e(TAG, "loc");
 
-        LatLng avaya = new LatLng(loc.getLatitude(), loc.getLongitude());
-        mMap.addMarker(new MarkerOptions().position(avaya).title("Tu posiciòn"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(avaya, 16.0f));
-        mMap.setTrafficEnabled(false);
+        if (loc != null) {
+            LatLng avaya = new LatLng(loc.getLatitude(), loc.getLongitude());
+            mMap.addMarker(new MarkerOptions().position(avaya).title("Tu posiciòn"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(avaya, 16.0f));
+            mMap.setTrafficEnabled(false);
+        } else {
+            Toast.makeText(MainActivity.this, "El GPS deshabilitado!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
