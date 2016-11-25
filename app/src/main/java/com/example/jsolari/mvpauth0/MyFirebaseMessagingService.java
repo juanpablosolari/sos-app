@@ -46,13 +46,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
      */
     private void sendNotification(final String title, final String body) {
 
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
         //Set sound of notification
         Uri notificationSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
-        Intent yesReceive = new Intent();
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntentYes = PendingIntent.getBroadcast(this, 12345, yesReceive, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder notifiBuilder = new NotificationCompat.Builder(this)
