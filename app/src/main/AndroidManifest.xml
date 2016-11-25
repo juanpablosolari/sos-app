@@ -92,7 +92,7 @@
 
         <activity android:name=".MainActivity"></activity>
 
-        <receiver android:name=".MiWidget" android:label="Mi Primer Widget">
+   		<receiver android:name=".MiWidget" android:label="Mi Primer Widget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -100,7 +100,13 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/miwidget_wprovider" />
         </receiver>
-
+        
+        <receiver android:name=".NotificationReceiver" >
+            <intent-filter>
+                <action android:name="OK_ACTION"/>
+                <action android:name="CANCEL_ACTION"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
