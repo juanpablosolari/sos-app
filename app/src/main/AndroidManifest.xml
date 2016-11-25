@@ -91,6 +91,13 @@
         </service>
 
         <activity android:name=".MainActivity"></activity>
+
+        <receiver android:name=".NotificationReceiver" >
+            <intent-filter>
+                <action android:name="OK_ACTION"/>
+                <action android:name="CANCEL_ACTION"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
