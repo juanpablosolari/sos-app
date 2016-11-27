@@ -15,8 +15,8 @@
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
-    <uses-permission android:name="android.permission.READ_LOGS"/>
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
@@ -90,23 +90,27 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
 
-   		<receiver android:name=".MiWidget" android:label="Mi Primer Widget">
+        <receiver
+            android:name=".MiWidget"
+            android:label="Mi Primer Widget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
+
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/miwidget_wprovider" />
         </receiver>
-        
-        <receiver android:name=".NotificationReceiver" >
+        <receiver android:name=".NotificationReceiver">
             <intent-filter>
-                <action android:name="OK_ACTION"/>
-                <action android:name="CANCEL_ACTION"/>
+                <action android:name="OK_ACTION" />
+                <action android:name="CANCEL_ACTION" />
             </intent-filter>
         </receiver>
+
+        <activity android:name=".Profile" />
     </application>
 
 </manifest>

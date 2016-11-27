@@ -6,6 +6,10 @@
             android:icon="@drawable/ic_menu"
             android:title="@string/signup"/>
         <item
+            android:id="@+id/profile"
+            android:icon="@drawable/ic_menu"
+            android:title="@string/profile"/>
+        <item
             android:id="@+id/map"
             android:icon="@drawable/ic_menu"
             android:title="@string/map"/>

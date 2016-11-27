@@ -1,6 +1,7 @@
 package com.example.jsolari.mvpauth0;
 
 import android.Manifest;
+import android.content.ClipData;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -32,6 +33,8 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import org.json.JSONObject;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -72,12 +75,20 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .addApi(LocationServices.API)
                 .build();
 
+        JSONObject user = Global.getUser();
+
+//        MenuItem item = (MenuItem) findViewById(R.id.profile);
+//        if (user == null) {
+//            item.setVisible(false);
+//        } else {
+//            item.setVisible(true);
+//        }
+
         navView = (NavigationView) findViewById(R.id.navview);
         navView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
-
                         boolean fragmentTransaction = false;
                         Fragment fragment = null;
                         Intent intent;
@@ -101,6 +112,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 break;
                             case R.id.emergencies:
                                 fragment = new FragmentEmergencies();
+                                fragmentTransaction = true;
+                                break;
+                            case R.id.profile:
+                                fragment = new FragmentProfile();
                                 fragmentTransaction = true;
                                 break;
                         }

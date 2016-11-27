@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="comunas">
+        <item>Comuna 1 - Retiro, San Nicolás, Puerto Madero, San Telmo, Montserrat y Constitución</item>
+        <item>Comuna 2 - Recoleta</item>
+        <item>Comuna 3 - Balvanera y San Cristóbal</item>
+        <item>Comuna 4 - La Boca, Barracas, Parque Patricios, y Nueva Pompeya</item>
+        <item>Comuna 5 - Almagro y Boedo</item>
+        <item>Comuna 6 - Caballito</item>
+        <item>Comuna 7 - Flores y Parque Chacabuco</item>
+        <item>Comuna 8 - Villa Soldati, Villa Riachuelo y Villa Lugano</item>
+        <item>Comuna 9 - Liniers, Mataderos y Parque Avellaneda</item>
+        <item>Comuna 10 - Villa Real, Monte Castro, Versalles, Floresta, Vélez Sarsfield y Villa Luro</item>
+        <item>Comuna 11 - Villa General Mitre, Villa Devoto, Villa del Parque y Villa Santa Rita</item>
+        <item>Comuna 12 - Coghlan, Saavedra, Villa Urquiza y Villa Pueyrredón</item>
+        <item>Comuna 13 - Núñez, Belgrano y Colegiales</item>
+        <item>Comuna 14 - Palermo</item>
+        <item>Comuna 15 - Chacarita, Villa Crespo, La Paternal, Villa Ortúzar, Agronomía y Parque Chas</item>
+    </string-array>
+</resources>

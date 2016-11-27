@@ -51,7 +51,6 @@ public class FragmentEmergencies extends Fragment {
         return inflater.inflate(R.layout.fragment_emergencies, container, false);
     }
 
-
     @Override
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
