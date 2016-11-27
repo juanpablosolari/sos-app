@@ -1,5 +1,6 @@
 package com.example.jsolari.mvpauth0;
 
+import android.location.Location;
 import android.util.Log;
 
 import com.auth0.android.result.UserProfile;
@@ -29,7 +30,7 @@ public class ApiSrv {
     private static final String BASE_URL_PROD = "https://sos-api-prod.herokuapp.com";
 
     private static AsyncHttpClient client = new AsyncHttpClient();
-    private static SyncHttpClient clientSync = new SyncHttpClient();
+    private static SyncHttpClient syncClient = new SyncHttpClient();
 
     public static void get(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
         client.get(getAbsoluteUrl(url), params, responseHandler);
@@ -48,12 +49,23 @@ public class ApiSrv {
         params.put("email", user.getEmail());
         params.put("name", user.getName());
         params.put("avatar", user.getPictureURL());
-        clientSync.post(getAbsoluteUrl("/users"), params, responseHandler);
+        syncClient.post(getAbsoluteUrl("/users"), params, responseHandler);
     }
     public void updateUser(String userId, Boolean wantToBeVolunteer, String comuna, AsyncHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         params.put("isVolunteer", wantToBeVolunteer);
         params.put("comuna", comuna);
         client.post(getAbsoluteUrl("/users/" + userId), params, responseHandler);
+    }
+    public void getEmergencies(AsyncHttpResponseHandler responseHandler) {
+        syncClient.get(getAbsoluteUrl("/emergencies"), responseHandler);
+    }
+    public void sendEmergency(Location loc, AsyncHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("latitude", loc.getLatitude());
+        params.put("longitude", loc.getLongitude());
+        params.put("token", FirebaseInstanceId.getInstance().getToken());
+
+        client.post(getAbsoluteUrl("/emergencies"), params, responseHandler);
     }
 }

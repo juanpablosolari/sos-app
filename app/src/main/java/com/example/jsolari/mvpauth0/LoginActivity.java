@@ -147,7 +147,6 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "Hola!", Toast.LENGTH_SHORT).show();
                     }
                 });
-                //((Global) this.getApplication()).setUser(responseBody);
                 SharedPreferences prefs = getSharedPreferences("prefs", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("user", responseBody.toString());

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -34,12 +35,15 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URL;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
+
     private Toolbar appbar;
     private DrawerLayout drawerLayout;
     private NavigationView navView;
@@ -49,6 +53,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private Button btnEmergency;
     private Button btnCancelEmergency;
+    public static FrameLayout content_frame;
+    public static FrameLayout map;
+    private static GoogleMap mMap;
 
     //Localizacion
     private static final int PETICION_PERMISO_LOCALIZACION = 101;
@@ -63,6 +70,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         appbar = (Toolbar) findViewById(R.id.appbar);
         setSupportActionBar(appbar);
 
+        new AsyncTaskEmergencies().execute(this);
+
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_nav_menu);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -75,14 +84,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .addApi(LocationServices.API)
                 .build();
 
-        JSONObject user = Global.getUser();
-
 //        MenuItem item = (MenuItem) findViewById(R.id.profile);
 //        if (user == null) {
 //            item.setVisible(false);
 //        } else {
 //            item.setVisible(true);
 //        }
+
+        content_frame = (FrameLayout) findViewById(R.id.content_frame);
+        map = (FrameLayout) findViewById(R.id.map);
 
         navView = (NavigationView) findViewById(R.id.navview);
         navView.setNavigationItemSelectedListener(
@@ -101,9 +111,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             case R.id.map:
                                 getSupportActionBar().setTitle("Mapa");
                                 menuItem.setChecked(true);
-                                FrameLayout content_frame = (FrameLayout) findViewById(R.id.content_frame);
+                                showMap();
                                 content_frame.setVisibility(View.GONE);
-                                FrameLayout map = (FrameLayout) findViewById(R.id.map);
                                 map.setVisibility(View.VISIBLE);
                                 break;
                             case R.id.capacitationCenters:
@@ -143,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         MapFragment mapFragment = (MapFragment) getFragmentManager()
-                .findFragmentById(R.id.map);
+            .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
 
@@ -153,21 +162,19 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         btnEmergency.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btnEmergency.setVisibility(View.GONE);
-                btnCancelEmergency.setVisibility(View.VISIBLE);
-                startTimer();
+            btnEmergency.setVisibility(View.GONE);
+            btnCancelEmergency.setVisibility(View.VISIBLE);
+            startTimer();
             }
         });
         btnCancelEmergency.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btnEmergency.setVisibility(View.VISIBLE);
-                stopTimer();
+            btnEmergency.setVisibility(View.VISIBLE);
+            stopTimer();
             }
         });
     }
-
-
 
     private Timer mTimer1;
     private TimerTask mTt1;
@@ -240,8 +247,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         return super.onOptionsItemSelected(item);
     }
 
-    private GoogleMap mMap;
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -253,7 +258,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-
 
         /*LatLng obelisco = new LatLng(-34.604346, -58.395783);
         mMap.addMarker(new MarkerOptions().position(obelisco).title("Escuela Da Vinci"));
@@ -283,10 +287,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         //Radio de un punto
         Circle circle = mMap.addCircle(circleOptions);
         */
-
-
     }
-
 
 
     public static void showEmergencyToast(String text) {
@@ -299,7 +300,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             return;
         }
         Location loc = LocationServices.FusedLocationApi.getLastLocation(apiClient);
-        Log.e(TAG, "loc");
 
         if (loc != null) {
             LatLng avaya = new LatLng(loc.getLatitude(), loc.getLongitude());
@@ -319,5 +319,28 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+
+    public static void showMapMarker(EmergencyItem item) throws JSONException {
+        Bundle bundle = new Bundle();
+        bundle.putString("EmergencyItem", item.toString());
+        JSONObject location = new JSONObject(item.getLocation());
+        showMap();
+        JSONObject geometry = location.getJSONObject("geometry");
+        JSONObject loc = geometry.getJSONObject("location");
+        double lng = loc.getDouble("lng");
+        double lat = loc.getDouble("lat");
+
+        Log.e("item", location.toString());
+
+        LatLng marker = new LatLng(lat, lng);
+        mMap.addMarker(new MarkerOptions().position(marker).title(item.getBody()));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker, 16.0f));
+        mMap.setTrafficEnabled(false);
+    }
+
+    public static void showMap() {
+        content_frame.setVisibility(View.GONE);
+        map.setVisibility(View.VISIBLE);
     }
 }
