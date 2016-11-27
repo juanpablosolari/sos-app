@@ -103,7 +103,7 @@ public class FragmentEmergencies extends Fragment {
             lblTitulo.setText(datos.get(position).getBody());
 
             TextView lblSubtitulo = (TextView)item.findViewById(R.id.body);
-            lblSubtitulo.setText(datos.get(position).getTitle());
+            lblSubtitulo.setText(datos.get(position).getComuna());
 
             return(item);
         }
