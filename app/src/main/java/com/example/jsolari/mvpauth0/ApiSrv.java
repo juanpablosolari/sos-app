@@ -1,5 +1,7 @@
 package com.example.jsolari.mvpauth0;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.renderscript.Double2;
 import android.util.Log;
@@ -59,16 +61,24 @@ public class ApiSrv {
         params.put("comuna", comuna);
         client.post(getAbsoluteUrl("/users/" + userId), params, responseHandler);
     }
+
     public void getEmergencies(AsyncHttpResponseHandler responseHandler) {
-        syncClient.get(getAbsoluteUrl("/emergencies"), responseHandler);
+        syncClient.get(getAbsoluteUrl("/incidents"), responseHandler);
     }
+
     public void sendEmergency(Location loc, AsyncHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         params.put("latitude", loc.getLatitude());
         params.put("longitude", loc.getLongitude());
         params.put("token", FirebaseInstanceId.getInstance().getToken());
 
-        client.post(getAbsoluteUrl("/emergencies"), params, responseHandler);
+        client.post(getAbsoluteUrl("/incidents"), params, responseHandler);
+    }
+    public void answerEmergency(String incidentsId, String userId, AsyncHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("user", userId);
+        params.put("token", FirebaseInstanceId.getInstance().getToken());
+        client.post(getAbsoluteUrl("/incidents/" + incidentsId + "/respond"), params, responseHandler);
     }
 
     public static void getDistanceBetween(LatLng from, LatLng to, AsyncHttpResponseHandler responseHandler){

@@ -368,7 +368,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         e.printStackTrace();
                     }
 
-                    marker = mMap.addMarker(new MarkerOptions().position(destination).title("Distancia " + distance + " en " + duration));
+                    String address = item.getBody().split(",")[0];
+                    marker = mMap.addMarker(new MarkerOptions().position(destination).title(address + ", Distancia " + distance + " en " + duration));
                 } else {
                     marker = mMap.addMarker(new MarkerOptions().position(destination).title(item.getBody()));
                 }
