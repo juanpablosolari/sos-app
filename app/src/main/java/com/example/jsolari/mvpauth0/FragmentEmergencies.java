@@ -136,9 +136,11 @@ public class FragmentEmergencies extends Fragment {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray responseBody) {
                 super.onSuccess(statusCode, headers, responseBody);
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putString("emergencies", responseBody.toString());
-                editor.commit();
+                if (prefs != null) {
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putString("emergencies", responseBody.toString());
+                    editor.commit();
+                }
                 setEmergencies(responseBody);
             }
 

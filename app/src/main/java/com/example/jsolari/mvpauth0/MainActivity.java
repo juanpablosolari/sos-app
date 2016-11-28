@@ -34,13 +34,18 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.SphericalUtil;
+import com.loopj.android.http.JsonHttpResponseHandler;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URL;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import cz.msebera.android.httpclient.Header;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
 
@@ -59,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     //Localizacion
     private static final int PETICION_PERMISO_LOCALIZACION = 101;
-    private GoogleApiClient apiClient;
+    private static GoogleApiClient apiClient;
     //--Localizacion
 
     @Override
@@ -152,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         MapFragment mapFragment = (MapFragment) getFragmentManager()
-            .findFragmentById(R.id.map);
+                .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
 
@@ -162,16 +167,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         btnEmergency.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            btnEmergency.setVisibility(View.GONE);
-            btnCancelEmergency.setVisibility(View.VISIBLE);
-            startTimer();
+                btnEmergency.setVisibility(View.GONE);
+                btnCancelEmergency.setVisibility(View.VISIBLE);
+                startTimer();
             }
         });
         btnCancelEmergency.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            btnEmergency.setVisibility(View.VISIBLE);
-            stopTimer();
+                btnEmergency.setVisibility(View.VISIBLE);
+                stopTimer();
             }
         });
     }
@@ -181,8 +186,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private Handler mTimerHandler = new Handler();
     private int count = 5;
 
-    private void stopTimer(){
-        if(mTimer1 != null){
+    private void stopTimer() {
+        if (mTimer1 != null) {
             btnEmergency.setVisibility(View.VISIBLE);
             btnCancelEmergency.setVisibility(View.GONE);
             count = 5;
@@ -191,12 +196,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
-    private void startTimer(){
+    private void startTimer() {
         mTimer1 = new Timer();
         mTt1 = new TimerTask() {
             public void run() {
                 mTimerHandler.post(new Runnable() {
-                    public void run(){
+                    public void run() {
                         btnCancelEmergency.setText("Cancelar o Llamando al Same en..." + count);
                         count--;
                         if (count == 0) {
@@ -211,7 +216,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mTimer1.schedule(mTt1, 1, 1000);
     }
 
-    public void sendNotification () {
+    public void sendNotification() {
         if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
@@ -226,12 +231,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-            Intent intent = new Intent(Intent.ACTION_DIAL);
-            String phone = "107";
-            String temp = "tel:" + phone;
-            intent.setData(Uri.parse(temp));
-            startActivity(intent);
-            btnEmergency.setVisibility(View.VISIBLE);
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                String phone = "107";
+                String temp = "tel:" + phone;
+                intent.setData(Uri.parse(temp));
+                startActivity(intent);
+                btnEmergency.setVisibility(View.VISIBLE);
             }
         }, 10000);
     }
@@ -303,7 +308,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         if (loc != null) {
             LatLng avaya = new LatLng(loc.getLatitude(), loc.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(avaya).title("Tu posiciòn"));
+            //mMap.addMarker(new MarkerOptions().position(avaya).title("Tu posiciòn"));
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(avaya, 16.0f));
             mMap.setTrafficEnabled(false);
         } else {
@@ -321,7 +326,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
-    public static void showMapMarker(EmergencyItem item) throws JSONException {
+    @SuppressWarnings("ResourceType")
+    public static void showMapMarker(final EmergencyItem item) throws JSONException {
         Bundle bundle = new Bundle();
         bundle.putString("EmergencyItem", item.toString());
         JSONObject location = new JSONObject(item.getLocation());
@@ -333,10 +339,46 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         Log.e("item", location.toString());
 
-        LatLng marker = new LatLng(lat, lng);
-        mMap.addMarker(new MarkerOptions().position(marker).title(item.getBody()));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker, 16.0f));
-        mMap.setTrafficEnabled(false);
+        final LatLng destination = new LatLng(lat, lng);
+
+        Location myLocation = LocationServices.FusedLocationApi.getLastLocation(apiClient);
+        LatLng myLatLng = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
+
+        //double distance = SphericalUtil.computeDistanceBetween(myLatLng, destination);
+
+        ApiSrv.getDistanceBetween(myLatLng, destination, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject responseBody) {
+                super.onSuccess(statusCode, headers, responseBody);
+                if (responseBody != null) {
+                    Log.d("getDistanceBetween", responseBody.toString());
+                    //D/getDistanceBetween: {"destination_addresses":["Gascón 36, Cdad. Autónoma de Buenos Aires, Argentina"],"origin_addresses":["Gascón 34, C1181ABB CABA, Argentina"],
+                    // "rows":[{"elements":[{"distance":{"text":"8 m","value":8},"duration":{"text":"1 min","value":5},"status":"OK"}]}],"status":"OK"}
+                    String distance = "no se pudo calcular";
+                    String duration = "no se pudo calcular";
+
+                    try {
+                        JSONObject element = responseBody.getJSONArray("rows").getJSONObject(0).getJSONArray("elements").getJSONObject(0);
+                        distance = element.getJSONObject("distance").getString("text");
+                        duration = element.getJSONObject("duration").getString("text");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    mMap.addMarker(new MarkerOptions().position(destination).title("Distancia " + distance +" en "+ duration));
+                } else {
+                    mMap.addMarker(new MarkerOptions().position(destination).title(item.getBody()));
+                }
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(destination, 16.0f));
+                mMap.setTrafficEnabled(false);
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+                Log.e("getDistanceBetween",  "failure: " + responseString);
+                Log.e("getDistanceBetween",  "failurecode: " + statusCode);
+            }
+        });
     }
 
     public static void showMap() {

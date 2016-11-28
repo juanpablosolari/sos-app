@@ -1,9 +1,11 @@
 package com.example.jsolari.mvpauth0;
 
 import android.location.Location;
+import android.renderscript.Double2;
 import android.util.Log;
 
 import com.auth0.android.result.UserProfile;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -67,5 +69,13 @@ public class ApiSrv {
         params.put("token", FirebaseInstanceId.getInstance().getToken());
 
         client.post(getAbsoluteUrl("/emergencies"), params, responseHandler);
+    }
+
+    public static void getDistanceBetween(LatLng from, LatLng to, AsyncHttpResponseHandler responseHandler){
+        Double fromLongitude = from.longitude;
+        Double fromLatitude = from.latitude;
+        Double toLongitude = to.longitude;
+        Double toLatitude = to.latitude;
+        client.get("http://maps.googleapis.com/maps/api/distancematrix/json?origins="+fromLatitude.toString()+","+fromLongitude.toString()+"&destinations="+toLatitude.toString()+","+toLongitude.toString()+"&mode=walking&sensor=false", new RequestParams(), responseHandler);
     }
 }

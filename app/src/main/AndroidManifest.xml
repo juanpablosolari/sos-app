@@ -27,7 +27,6 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".SplashActivity"
-            android:launchMode="singleTask"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -57,7 +56,6 @@
             android:name="com.auth0.android.provider.WebAuthActivity"
             android:theme="@style/Lock.Theme" />
         <!-- Auth0 Lock Embedded WebView End -->
-
 
         <!-- Auth0 Lock Passwordless SMS Country Code Selection -->
         <activity
@@ -109,8 +107,6 @@
                 <action android:name="CANCEL_ACTION" />
             </intent-filter>
         </receiver>
-
-        <activity android:name=".Profile" />
     </application>
 
 </manifest>
