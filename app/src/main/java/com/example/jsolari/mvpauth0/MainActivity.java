@@ -33,6 +33,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.SphericalUtil;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -350,6 +351,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject responseBody) {
                 super.onSuccess(statusCode, headers, responseBody);
+                Marker marker = null;
+
                 if (responseBody != null) {
                     Log.d("getDistanceBetween", responseBody.toString());
                     //D/getDistanceBetween: {"destination_addresses":["Gascón 36, Cdad. Autónoma de Buenos Aires, Argentina"],"origin_addresses":["Gascón 34, C1181ABB CABA, Argentina"],
@@ -365,12 +368,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         e.printStackTrace();
                     }
 
-                    mMap.addMarker(new MarkerOptions().position(destination).title("Distancia " + distance +" en "+ duration));
+                    marker = mMap.addMarker(new MarkerOptions().position(destination).title("Distancia " + distance + " en " + duration));
                 } else {
-                    mMap.addMarker(new MarkerOptions().position(destination).title(item.getBody()));
+                    marker = mMap.addMarker(new MarkerOptions().position(destination).title(item.getBody()));
                 }
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(destination, 16.0f));
                 mMap.setTrafficEnabled(false);
+                marker.showInfoWindow();
             }
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {

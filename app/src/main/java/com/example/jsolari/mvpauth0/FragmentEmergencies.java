@@ -1,7 +1,10 @@
 package com.example.jsolari.mvpauth0;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
@@ -9,6 +12,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,8 +51,7 @@ public class FragmentEmergencies extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_emergencies, container, false);
     }
@@ -63,12 +66,19 @@ public class FragmentEmergencies extends Fragment {
         emergenciesList.setAdapter(arrayAdapter);
         emergenciesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                EmergencyItem item = ((EmergencyItem) a.getItemAtPosition(position));
-                try {
-                    MainActivity.showMapMarker(item);
-                } catch (JSONException e) {
-                    e.printStackTrace();
+            final EmergencyItem item = ((EmergencyItem) a.getItemAtPosition(position));
+            Dialog dialog = onConfirmDialog(new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+                    try {
+                        MainActivity.showMapMarker(item);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
+            });
+
+            dialog.show();
             }
         });
 
@@ -172,5 +182,20 @@ public class FragmentEmergencies extends Fragment {
 
     public static void UpdateEmergencies(JSONObject item) throws JSONException {
         arrayAdapter.add(new EmergencyItem(item));
+    }
+
+    public Dialog onConfirmDialog(DialogInterface.OnClickListener a) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        builder.setTitle("Confirmar?")
+            .setPositiveButton("Dale", a)
+            .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    Log.i("Dialogos", "Confirmacion Cancelada.");
+                    dialog.cancel();
+                }
+            });
+
+        return builder.create();
     }
 }
