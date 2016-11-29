@@ -93,8 +93,6 @@ public class FragmentProfile extends Fragment {
 //                editor.putInt("objective", objectiveRadio.getCheckedRadioButtonId());
 //                editor.putBoolean("otherPreference", otherPreference.isChecked());
 //                editor.commit();
-                // Toast.makeText(getContext(), "guardardo", Toast.LENGTH_LONG).makeText();
-                Toast.makeText(getActivity(),"Guardado",Toast.LENGTH_SHORT).show();
                 try {
                     if (userJson != null) {
                         updateUser();
@@ -114,7 +112,7 @@ public class FragmentProfile extends Fragment {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject responseBody) {
                 super.onSuccess(statusCode, headers, responseBody);
-                Toast.makeText(getContext(), "guardardo", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Guardardo!", Toast.LENGTH_LONG).show();
 
                 SharedPreferences prefs = activity.getSharedPreferences("prefs", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = prefs.edit();
