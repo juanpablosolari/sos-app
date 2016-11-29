@@ -1,9 +1,7 @@
 package com.example.jsolari.mvpauth0;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -15,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -96,7 +93,8 @@ public class FragmentProfile extends Fragment {
 //                editor.putInt("objective", objectiveRadio.getCheckedRadioButtonId());
 //                editor.putBoolean("otherPreference", otherPreference.isChecked());
 //                editor.commit();
-                // Toast.makeText(getContext(), "guardardo", Toast.LENGTH_LONG).show();
+                // Toast.makeText(getContext(), "guardardo", Toast.LENGTH_LONG).makeText();
+                Toast.makeText(getActivity(),"Guardado",Toast.LENGTH_SHORT).show();
                 try {
                     if (userJson != null) {
                         updateUser();
