@@ -45,6 +45,7 @@ public class FragmentEmergencies extends Fragment {
     public static SharedPreferences prefs;
     private static ApiSrv ApiSrv = new ApiSrv();
     private ArrayList<EmergencyItem> datos = new ArrayList<EmergencyItem>();
+    public JSONObject user;
 
     public FragmentEmergencies() {
         // Required empty public constructor
@@ -59,14 +60,12 @@ public class FragmentEmergencies extends Fragment {
     @Override
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
-        JSONObject user = null;
         prefs = this.getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
         try {
             user = new JSONObject(prefs.getString("user", "{}"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        final JSONObject finalUser = user;
 
         arrayAdapter = new FragmentEmergenciesAdapter(this, datos);
         emergenciesList = (ListView)getView().findViewById(R.id.emergenciesList);
@@ -75,20 +74,20 @@ public class FragmentEmergencies extends Fragment {
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
             final EmergencyItem item = ((EmergencyItem) a.getItemAtPosition(position));
             try {
-                if (finalUser != null && finalUser.getBoolean("isVolunteer")) {
+                if (user != null && user.getBoolean("isVolunteer")) {
                     Dialog dialog = onConfirmDialog(new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            try {
-                                answerEmergency(item, finalUser);
-                                MainActivity.showMapMarker(item);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            dialog.cancel();
+                        try {
+                            answerEmergency(item, user);
+                            MainActivity.showMapMarker(item);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        dialog.cancel();
                         }
                     });
                     dialog.show();
-                } else if (finalUser.getBoolean("isVolunteer")) {
+                } else if (user.getBoolean("isVolunteer")) {
                     notVolunteerDialog().show();
                 }
             } catch (JSONException e) {
