@@ -13,6 +13,7 @@ public class EmergencyItem {
     private String body;
     private String comuna;
     private String location;
+    private String token;
 
     public EmergencyItem(JSONObject item) throws JSONException {
         _id = item.getString("_id");
@@ -20,6 +21,7 @@ public class EmergencyItem {
         body = item.getString("body");
         comuna = item.getString("comuna");
         location = item.getString("location");
+        token = item.getString("token");
     }
 
     public String getId(){ return _id; }
@@ -35,5 +37,9 @@ public class EmergencyItem {
 
     public String getLocation(){
         return location;
+    }
+
+    public String getToken(){
+        return token;
     }
 }

@@ -196,6 +196,7 @@ public class FragmentEmergencies extends Fragment {
     }
 
     public static void setEmergencies(JSONArray items){
+        String myToken = FirebaseInstanceId.getInstance().getToken();
         if (arrayAdapter != null) {
             arrayAdapter.clear();
         }
@@ -203,7 +204,7 @@ public class FragmentEmergencies extends Fragment {
         for (int i = 0; i < items.length(); i++ ) {
             try {
                 JSONObject item = items.getJSONObject(i);
-                if (arrayAdapter != null) {
+                if (arrayAdapter != null && item.getString("token") != myToken) {
                     arrayAdapter.add(new EmergencyItem(item));
                 }
             } catch (JSONException e) {
