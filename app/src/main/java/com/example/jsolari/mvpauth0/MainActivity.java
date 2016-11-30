@@ -203,7 +203,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             public void run() {
                 mTimerHandler.post(new Runnable() {
                     public void run() {
-                        btnCancelEmergency.setText("Cancelar o Llamando al Same en..." + count);
+                        btnCancelEmergency.setText(getString(R.string.callCancel) + count);
                         count--;
                         if (count == 0) {
                             stopTimer();
@@ -224,9 +224,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         Location loc = LocationServices.FusedLocationApi.getLastLocation(apiClient);
         if (loc != null) {
             FragmentEmergencies.sendEmergency(loc);
-            Toast.makeText(MainActivity.this, "Llamando al SAME!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, R.string.callSame, Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(MainActivity.this, "El GPS deshabilitado, Llamando al SAME!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, R.string.GPSDisableCallSame, Toast.LENGTH_SHORT).show();
         }
 
         new Handler().postDelayed(new Runnable() {
@@ -313,7 +313,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(avaya, 16.0f));
             mMap.setTrafficEnabled(false);
         } else {
-            Toast.makeText(MainActivity.this, "El GPS deshabilitado!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, R.string.GPSDisable, Toast.LENGTH_SHORT).show();
         }
     }
 
