@@ -21,6 +21,8 @@
     <string name="fragment1">Fragment 1</string>
     <string name="fragment2">Fragment 2</string>
     <string name="fragment3">Fragment 3</string>
+    <string name="iaut">Inicio de sesión automático</string>
+
 
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_alert">AlertActivity</string>
@@ -34,5 +36,32 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="mi_primer_widget">Mi Primer Widget</string>
+
+    <string name="Latitud">Latitud: </string>
+    <string name="Longitud">Longitud: </string>
+    <string name="ErrorLogin">Error al ingresar</string>
+    <string name="hola">Hola!</string>
+    <string name="loginTitle">Login Page</string>
+    <string name="loginCancelled">Log In - Cancelled</string>
+    <string name="logInSuccess">Log In - Success</string>
+    <string name="callCancel">Cancelar o Llamando al Same en...</string>
+    <string name="callSame">Llamando al SAME!</string>
+    <string name="GPSDisableCallSame">El GPS deshabilitado, Llamando al SAME!</string>
+    <string name="GPSDisable">El GPS deshabilitado!</string>
+    <string name="Emergencies">Emergencies</string>
+    <string name="confirm">Confirmar?</string>
+    <string name="si">Dale</string>
+    <string name="no">Cancelar</string>
+    <string name="dialogos">Dialogos</string>
+    <string name="confirmCanceled">Confirmacion Cancelada.</string>
+    <string name="volno">No sos voluntario</string>
+    <string name="volquiero">Ser voluntario</string>
+    <string name="save">guardardo</string>
+    <string name="updateUser">updateUser</string>
+    <string name="latitudDesconocida">Latitud: (desconocida)</string>
+    <string name="longitudDesconocida">Longitud: (desconocida)</string>
+    <string name="pemisoDenegado">Permiso denegado</string>
+    <string name="googlePlayError">Se ha interrumpido la conexión con Google Play Services</string>
+    <string name="calcError">no se pudo calcular</string>
 
 </resources>

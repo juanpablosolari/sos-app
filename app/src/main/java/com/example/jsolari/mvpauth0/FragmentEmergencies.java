@@ -140,15 +140,15 @@ public class FragmentEmergencies extends Fragment {
             public void onSuccess(int statusCode, Header[] headers, JSONObject responseBody) {
                 super.onSuccess(statusCode, headers, responseBody);
                 if (responseBody != null) {
-                    Log.d("Emergencies", responseBody.toString());
+                    Log.d(String.valueOf(R.string.Emergencies), responseBody.toString());
                 }
                 getEmergencies();
             }
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 super.onFailure(statusCode, headers, responseString, throwable);
-                Log.e("Emergencies",  "failure: " + responseString);
-                Log.e("Emergencies",  "failurecode: " + statusCode);
+                Log.e(String.valueOf(R.string.Emergencies),  "failure: " + responseString);
+                Log.e(String.valueOf(R.string.Emergencies),  "failurecode: " + statusCode);
             }
         });
     }
@@ -169,8 +169,8 @@ public class FragmentEmergencies extends Fragment {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 super.onFailure(statusCode, headers, responseString, throwable);
-                Log.e("Emergencies",  "failure: " + responseString);
-                Log.e("Emergencies",  "failurecode: " + statusCode);
+                Log.e(String.valueOf(R.string.Emergencies),  "failure: " + responseString);
+                Log.e(String.valueOf(R.string.Emergencies),  "failurecode: " + statusCode);
             }
         });
     }
@@ -182,15 +182,15 @@ public class FragmentEmergencies extends Fragment {
             public void onSuccess(int statusCode, Header[] headers, JSONObject responseBody) {
                 super.onSuccess(statusCode, headers, responseBody);
                 if (responseBody != null) {
-                    Log.d("Emergencies", responseBody.toString());
+                    Log.d(String.valueOf(R.string.Emergencies), responseBody.toString());
                 }
                 getEmergencies();
             }
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 super.onFailure(statusCode, headers, responseString, throwable);
-                Log.e("Emergencies",  "failure: " + responseString);
-                Log.e("Emergencies",  "failurecode: " + statusCode);
+                Log.e(String.valueOf(R.string.Emergencies),  "failure: " + responseString);
+                Log.e(String.valueOf(R.string.Emergencies),  "failurecode: " + statusCode);
             }
         });
     }
@@ -220,11 +220,11 @@ public class FragmentEmergencies extends Fragment {
     public Dialog onConfirmDialog(DialogInterface.OnClickListener a) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        builder.setTitle("Confirmar?")
-            .setPositiveButton("Dale", a)
-            .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+        builder.setTitle(R.string.confirm)
+            .setPositiveButton(R.string.si, a)
+            .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
-                    Log.i("Dialogos", "Confirmacion Cancelada.");
+                    Log.i(getString(R.string.dialogos), getString(R.string.confirmCanceled));
                     dialog.cancel();
                 }
             });
@@ -235,13 +235,13 @@ public class FragmentEmergencies extends Fragment {
     public Dialog notVolunteerDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        builder.setTitle("No sos voluntario")
-            .setPositiveButton("Ser voluntario", new DialogInterface.OnClickListener() {
+        builder.setTitle(R.string.volno)
+            .setPositiveButton(R.string.volquiero, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     dialog.cancel();
                 }
             })
-            .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     dialog.cancel();
                 }

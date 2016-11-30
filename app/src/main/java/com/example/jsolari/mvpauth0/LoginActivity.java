@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
     private final LockCallback mCallback = new AuthenticationCallback() {
         @Override
         public void onAuthentication(Credentials credentials) {
-            Toast.makeText(getApplicationContext(), "Log In - Success", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.logInSuccess, Toast.LENGTH_SHORT).show();
             Log.d("credentials", credentials.toString());
             CredentialsManager.saveCredentials(getApplicationContext(), credentials);
             getAuth0Profile();
@@ -88,12 +88,12 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         public void onCanceled() {
-            Toast.makeText(getApplicationContext(), "Log In - Cancelled", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.loginCancelled, Toast.LENGTH_SHORT).show();
         }
 
         @Override
         public void onError(LockException error) {
-            Toast.makeText(getApplicationContext(), "Log In - Error Occurred", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.ErrorLogin, Toast.LENGTH_SHORT).show();
         }
     };
 
@@ -105,7 +105,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onSuccess(final UserProfile payload) {
                         LoginActivity.this.runOnUiThread(new Runnable() {
                             public void run() {
-                                Toast.makeText(LoginActivity.this, "Automatic Login Success", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, R.string.iaut, Toast.LENGTH_SHORT).show();
                             }
                         });
 
@@ -117,7 +117,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onFailure(AuthenticationException error) {
                         LoginActivity.this.runOnUiThread(new Runnable() {
                             public void run() {
-                                Toast.makeText(LoginActivity.this, "Error al ingresar", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, R.string.ErrorLogin, Toast.LENGTH_SHORT).show();
                             }
                         });
                         CredentialsManager.deleteCredentials(getApplicationContext());
@@ -139,7 +139,7 @@ public class LoginActivity extends AppCompatActivity {
                 super.onSuccess(statusCode, headers, responseBody);
                 LoginActivity.this.runOnUiThread(new Runnable() {
                     public void run() {
-                    Toast.makeText(LoginActivity.this, "Hola!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, R.string.hola, Toast.LENGTH_SHORT).show();
                     }
                 });
                 SharedPreferences prefs = getSharedPreferences("prefs", Context.MODE_PRIVATE);
@@ -166,7 +166,7 @@ public class LoginActivity extends AppCompatActivity {
      */
     public Action getIndexApiAction() {
         Thing object = new Thing.Builder()
-                .setName("Login Page") // TODO: Define a title for the content shown.
+                .setName(getString(R.string.loginTitle)) // TODO: Define a title for the content shown.
                 // TODO: Make sure this auto-generated URL is correct.
                 .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
                 .build();

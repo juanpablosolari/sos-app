@@ -119,7 +119,7 @@ public class FragmentProfile extends Fragment {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject responseBody) {
                 super.onSuccess(statusCode, headers, responseBody);
-                Toast.makeText(getContext(), "Guardardo!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), R.string.save, Toast.LENGTH_LONG).show();
 
                 SharedPreferences prefs = activity.getSharedPreferences("prefs", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = prefs.edit();
@@ -130,8 +130,8 @@ public class FragmentProfile extends Fragment {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 super.onFailure(statusCode, headers, responseString, throwable);
-                Log.e("updateUser", "failure: " + responseString);
-                Log.e("updateUser", "failurecode: " + statusCode);
+                Log.e(getString(R.string.updateUser), "failure: " + responseString);
+                Log.e(getString(R.string.updateUser), "failurecode: " + statusCode);
             }
         });
     }
