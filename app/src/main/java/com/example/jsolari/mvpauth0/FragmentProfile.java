@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -35,6 +36,7 @@ public class FragmentProfile extends Fragment {
     public JSONObject userJson = null;
     public Boolean isUserVolunteer = false;
     public String userComuna = "";
+    public TextView MyComuna;
 
     public FragmentProfile() {}
 
@@ -43,6 +45,8 @@ public class FragmentProfile extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false);
+
+
     }
 
     @Override
@@ -53,10 +57,13 @@ public class FragmentProfile extends Fragment {
         String user = prefs.getString("user", "");
         wantToBeVolunteer = (CheckBox) getView().findViewById(R.id.wantToBeVolunteer);
 
+        MyComuna = (TextView) getView().findViewById(R.id.MyComuna);
+        MyComuna.setText("Actualmente usted pertenece a la comuna: ");
         try {
             userJson = new JSONObject(user);
             isUserVolunteer = userJson.getBoolean("isVolunteer");
             userComuna = userJson.getString("comuna");
+            MyComuna.setText("Actualmente usted pertenece a la comuna: " + userComuna);
         } catch (JSONException e) {
             e.printStackTrace();
         }
