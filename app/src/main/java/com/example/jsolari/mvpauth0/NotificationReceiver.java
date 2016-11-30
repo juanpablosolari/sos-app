@@ -16,10 +16,10 @@ public class NotificationReceiver extends BroadcastReceiver {
         // TODO Auto-generated method stub
         String action = intent.getAction();
         if (MyFirebaseMessagingService.OK_ACTION.equals(action)) {
-            Toast.makeText(context, "Si", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.si, Toast.LENGTH_SHORT).show();
         }
         else  if (MyFirebaseMessagingService.CANCEL_ACTION.equals(action)) {
-            Toast.makeText(context, "No", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.no, Toast.LENGTH_SHORT).show();
         }
     }
 }
