@@ -23,10 +23,6 @@ import javax.net.ssl.X509TrustManager;
 
 import cz.msebera.android.httpclient.Header;
 
-/**
- * Created by leman on 11/13/2016.
- */
-
 public class ApiSrv {
 
     //private static final String BASE_URL = "http://192.168.0.101:3001";

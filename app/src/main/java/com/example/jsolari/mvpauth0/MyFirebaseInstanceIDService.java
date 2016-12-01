@@ -7,9 +7,6 @@ import com.google.firebase.iid.FirebaseInstanceIdService;
 
 import static android.content.ContentValues.TAG;
 
-/**
- * Created by nahuel ultrabook on 11/1/2016.
- */
 
 public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
 

@@ -5,9 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
-/**
- * Created by v-monjos on 24-Nov-16.
- */
 
 public class NotificationReceiver extends BroadcastReceiver {
 
