@@ -154,7 +154,7 @@ public class FragmentEmergencies extends Fragment {
     }
 
     public static void getEmergencies(){
-        ApiSrv.getEmergencies(new JsonHttpResponseHandler() {
+        ApiSrv.getAsyncEmergencies(new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray responseBody) {
                 super.onSuccess(statusCode, headers, responseBody);

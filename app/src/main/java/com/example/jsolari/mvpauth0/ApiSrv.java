@@ -63,6 +63,10 @@ public class ApiSrv {
         syncClient.get(getAbsoluteUrl("/incidents"), responseHandler);
     }
 
+    public void getAsyncEmergencies(AsyncHttpResponseHandler responseHandler) {
+        client.get(getAbsoluteUrl("/incidents"), responseHandler);
+    }
+
     public void sendEmergency(Location loc, AsyncHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         params.put("latitude", loc.getLatitude());
