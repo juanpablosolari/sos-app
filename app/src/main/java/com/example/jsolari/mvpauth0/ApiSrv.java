@@ -55,6 +55,7 @@ public class ApiSrv {
         RequestParams params = new RequestParams();
         params.put("isVolunteer", wantToBeVolunteer);
         params.put("comuna", comuna);
+        params.put("token", FirebaseInstanceId.getInstance().getToken());
         client.post(getAbsoluteUrl("/users/" + userId), params, responseHandler);
     }
 
