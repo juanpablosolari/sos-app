@@ -204,7 +204,7 @@ public class FragmentEmergencies extends Fragment {
         for (int i = 0; i < items.length(); i++ ) {
             try {
                 JSONObject item = items.getJSONObject(i);
-                if (arrayAdapter != null && item.getString("token") != myToken) {
+                if (arrayAdapter != null && item.getString("token").equals(myToken) == false) {
                     arrayAdapter.add(new EmergencyItem(item));
                 }
             } catch (JSONException e) {
