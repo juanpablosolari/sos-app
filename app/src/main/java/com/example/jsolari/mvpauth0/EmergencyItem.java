@@ -3,9 +3,6 @@ package com.example.jsolari.mvpauth0;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * Created by leman on 11/12/2016.
- */
 
 public class EmergencyItem {
     private String _id;
