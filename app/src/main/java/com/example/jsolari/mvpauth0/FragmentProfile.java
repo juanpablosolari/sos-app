@@ -58,7 +58,7 @@ public class FragmentProfile extends Fragment {
         wantToBeVolunteer = (CheckBox) getView().findViewById(R.id.wantToBeVolunteer);
 
         MyComuna = (TextView) getView().findViewById(R.id.MyComuna);
-        MyComuna.setText("Actualmente usted pertenece a la ");
+        MyComuna.setText("Actualmente no pertenece a ninguna comuna.");
         try {
             userJson = new JSONObject(user);
             isUserVolunteer = userJson.getBoolean("isVolunteer");
@@ -82,7 +82,7 @@ public class FragmentProfile extends Fragment {
                 Bundle b = new Bundle();
                 if (parent.getSelectedItemId() != 0) {
                     //Object com = parent.getItemAtPosition(position);
-                    userComuna = "comuna-" + (position+1);
+                    userComuna = "Comuna " + (position+1);
                     b.putString("comuna", "comuna " + position);
                 }
             }
