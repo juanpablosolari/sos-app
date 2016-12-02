@@ -90,7 +90,7 @@
 
         <receiver
             android:name=".MiWidget"
-            android:label="Mi Primer Widget">
+            android:label="VoluntarioSOS">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
