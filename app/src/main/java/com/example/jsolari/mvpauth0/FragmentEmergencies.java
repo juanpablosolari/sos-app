@@ -217,11 +217,11 @@ public class FragmentEmergencies extends Fragment {
         arrayAdapter.add(new EmergencyItem(item));
     }
 
-    public Dialog onConfirmDialog(DialogInterface.OnClickListener a) {
+    public Dialog onConfirmDialog(DialogInterface.OnClickListener cb) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         builder.setTitle(R.string.confirm)
-            .setPositiveButton(R.string.si, a)
+            .setPositiveButton(R.string.si, cb)
             .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     Log.i(getString(R.string.dialogos), getString(R.string.confirmCanceled));
