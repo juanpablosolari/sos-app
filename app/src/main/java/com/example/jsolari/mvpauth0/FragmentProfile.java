@@ -58,18 +58,27 @@ public class FragmentProfile extends Fragment {
         wantToBeVolunteer = (CheckBox) getView().findViewById(R.id.wantToBeVolunteer);
 
         MyComuna = (TextView) getView().findViewById(R.id.MyComuna);
-        MyComuna.setText("Actualmente no pertenece a ninguna comuna.");
+        //MyComuna.setText("Actualmente no pertenece a ninguna comuna.");
+
+
         try {
             userJson = new JSONObject(user);
             isUserVolunteer = userJson.getBoolean("isVolunteer");
             userComuna = userJson.getString("comuna");
-            MyComuna.setText("Actualmente usted pertenece a la " + userComuna);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
         if (isUserVolunteer.equals(true)) {
             wantToBeVolunteer.setChecked(true);
+            if (userComuna.equals("")) {
+                MyComuna.setText("Actualmente usted NO pertence a ninguna comuna.");
+            }else{
+                MyComuna.setText("Actualmente usted pertenece a la " + userComuna);
+            }
+        }else{
+            MyComuna.setText("");
         }
 
         comunaSpinner = (Spinner) getView().findViewById(R.id.comunaSpinner);
