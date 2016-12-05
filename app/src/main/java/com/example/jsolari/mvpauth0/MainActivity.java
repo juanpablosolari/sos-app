@@ -128,6 +128,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 fragment = new FragmentProfile();
                                 fragmentTransaction = true;
                                 break;
+                            case R.id.logout:
+                                                                
+                                break;
                         }
 
                         if (fragmentTransaction) {

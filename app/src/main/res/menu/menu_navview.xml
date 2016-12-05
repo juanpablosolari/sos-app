@@ -18,8 +18,12 @@
             android:icon="@drawable/logoemergencie"
             android:title="@string/emergencies"/>
         <item
-            android:id="@+id/capacitationCenters"
-            android:icon="@drawable/logocenters"
-            android:title="@string/capacitationCenters"/>
+        android:id="@+id/capacitationCenters"
+        android:icon="@drawable/logocenters"
+        android:title="@string/capacitationCenters"/>
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/logout"
+            android:title="@string/logout"/>
     </group>
 </menu>
