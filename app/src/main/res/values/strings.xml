@@ -50,8 +50,8 @@
     <string name="GPSDisable">El GPS deshabilitado!</string>
     <string name="Emergencies">Emergencies</string>
     <string name="confirm">Confirmar?</string>
-    <string name="si">Dale</string>
-    <string name="no">Cancelar</string>
+    <string name="si">Ayudo</string>
+    <string name="no">NO Puedo</string>
     <string name="dialogos">Dialogos</string>
     <string name="confirmCanceled">Confirmacion Cancelada.</string>
     <string name="volno">No sos voluntario</string>
