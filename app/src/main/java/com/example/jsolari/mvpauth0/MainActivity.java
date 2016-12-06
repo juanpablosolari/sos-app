@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 fragmentTransaction = true;
                                 break;
                             case R.id.logout:
-                                CredentialsManager.deleteCredentials(null);
+                                CredentialsManager.deleteCredentials(MainActivity.this);
                                 intent = new Intent(MainActivity.this, LoginActivity.class);
                                 startActivity(intent);
                                 Toast.makeText(MainActivity.this, "Sesion finalizada", Toast.LENGTH_SHORT).show();
