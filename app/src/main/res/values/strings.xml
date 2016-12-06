@@ -11,11 +11,11 @@
     <string name="profile">Perfil</string>
     <string name="capacitationCenters">Centros de capacitacion</string>
     <string name="map">Mapa</string>
-    <string name="emergencies">Emergencias</string>
+    <string name="emergencies">Centro Emergencias</string>
     <string name="opcion_1">Opción 1</string>
     <string name="opcion_2">Opción 2</string>
     <string name="seccion_3">Sección 3</string>
-    <string name="usuario">Usuario</string>
+    <string name="usuario">Bienvenido</string>
     <string name="menu_abierto">Menu Abierto</string>
     <string name="menu_cerrado">Menu Cerrado</string>
     <string name="fragment1">Fragment 1</string>
