@@ -40,10 +40,10 @@
     <string name="Latitud">Latitud: </string>
     <string name="Longitud">Longitud: </string>
     <string name="ErrorLogin">Error al ingresar</string>
-    <string name="hola">Hola!</string>
+    <string name="hola">Bienvenido Nuevamente!</string>
     <string name="loginTitle">Login Page</string>
-    <string name="loginCancelled">Log In - Cancelled</string>
-    <string name="logInSuccess">Log In - Success</string>
+    <string name="loginCancelled">Log In - Cancelado</string>
+    <string name="logInSuccess">Log In - Exitoso</string>
     <string name="callCancel">Cancelar o Llamando al Same en...</string>
     <string name="callSame">Llamando al SAME!</string>
     <string name="GPSDisableCallSame">El GPS deshabilitado, Llamando al SAME!</string>
