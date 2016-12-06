@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.example.jsolari.mvpauth0.utils.CredentialsManager;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -129,7 +130,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 fragmentTransaction = true;
                                 break;
                             case R.id.logout:
-
+                                CredentialsManager.deleteCredentials(null);
+                                intent = new Intent(MainActivity.this, LoginActivity.class);
+                                startActivity(intent);
+                                Toast.makeText(MainActivity.this, "Sesion finalizada", Toast.LENGTH_SHORT).show();
                                 break;
                         }
 
