@@ -21,7 +21,8 @@
         android:layout_gravity="start"
         android:background="?attr/colorPrimary"
         app:headerLayout="@layout/header_navview"
-        app:menu="@menu/menu_navview" />
+        app:menu="@menu/menu_navview"
+        app:itemTextColor="#FFFFFF"/>
 
 </android.support.v4.widget.DrawerLayout>
 
