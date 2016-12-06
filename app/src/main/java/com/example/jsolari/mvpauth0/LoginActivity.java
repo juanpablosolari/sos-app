@@ -78,12 +78,12 @@ public class LoginActivity extends AppCompatActivity {
     private final LockCallback mCallback = new AuthenticationCallback() {
         @Override
         public void onAuthentication(Credentials credentials) {
-            Toast.makeText(getApplicationContext(), R.string.logInSuccess, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), R.string.logInSuccess, Toast.LENGTH_SHORT).show();
             Log.d("credentials", credentials.toString());
             CredentialsManager.saveCredentials(getApplicationContext(), credentials);
             getAuth0Profile();
             //startActivity(new Intent(LoginActivity.this, MainActivity.class));
-            finish();
+            //finish();
         }
 
         @Override
@@ -105,7 +105,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onSuccess(final UserProfile payload) {
                         LoginActivity.this.runOnUiThread(new Runnable() {
                             public void run() {
-                                Toast.makeText(LoginActivity.this, R.string.iaut, Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(LoginActivity.this, R.string.iaut, Toast.LENGTH_SHORT).show();
                             }
                         });
 
@@ -139,7 +139,7 @@ public class LoginActivity extends AppCompatActivity {
                 super.onSuccess(statusCode, headers, responseBody);
                 LoginActivity.this.runOnUiThread(new Runnable() {
                     public void run() {
-                    Toast.makeText(LoginActivity.this, R.string.hola, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(LoginActivity.this, R.string.hola, Toast.LENGTH_SHORT).show();
                     }
                 });
                 SharedPreferences prefs = getSharedPreferences("prefs", Context.MODE_PRIVATE);
