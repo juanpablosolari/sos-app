@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 fragmentTransaction = true;
                                 break;
                             case R.id.logout:
-                                                                
+
                                 break;
                         }
 
