@@ -1,0 +1,51 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.jsolari.mvpauth0.FragmentVolunteer"
+    android:orientation="vertical">
+
+    <CheckBox
+        android:id="@+id/wantToBeVolunteer"
+        android:text="Queres ser voluntario?"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:checked="false"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp" />
+
+    <TextView
+        android:id="@+id/comunasTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="En que comuna te gustaria ser voluntario?"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/wantToBeVolunteer"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:id="@+id/MyComuna" />
+
+    <Spinner android:id="@+id/comunaSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/comunasTxt"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/comunaSpinner"
+        android:layout_marginTop="20sp"
+        android:id="@+id/BtnSave"
+        android:text="Guardar" />
+
+</LinearLayout>
