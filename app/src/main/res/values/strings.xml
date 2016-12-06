@@ -15,7 +15,7 @@
     <string name="opcion_1">Opción 1</string>
     <string name="opcion_2">Opción 2</string>
     <string name="seccion_3">Sección 3</string>
-    <string name="usuario">Bienvenido</string>
+    <string name="usuario"></string>
     <string name="menu_abierto">Menu Abierto</string>
     <string name="menu_cerrado">Menu Cerrado</string>
     <string name="fragment1">Fragment 1</string>
