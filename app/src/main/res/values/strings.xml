@@ -46,7 +46,7 @@
     <string name="logInSuccess">Log In - Exitoso</string>
     <string name="callCancel">Cancelar o Llamando al Same en...</string>
     <string name="callSame">Llamando al SAME!</string>
-    <string name="GPSDisableCallSame">El GPS deshabilitado, Llamando al SAME!</string>
+    <string name="GPSDisableCallSame">GPS deshabilitado, Llamando al SAME!</string>
     <string name="GPSDisable">El GPS deshabilitado!</string>
     <string name="Emergencies">Emergencies</string>
     <string name="confirm">Confirmar?</string>

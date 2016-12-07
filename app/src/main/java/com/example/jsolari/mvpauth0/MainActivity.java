@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (mTimer1 != null) {
             btnEmergency.setVisibility(View.VISIBLE);
             btnCancelEmergency.setVisibility(View.GONE);
-            count = 5;
+            count = 6;
             mTimer1.cancel();
             mTimer1.purge();
         }
@@ -241,7 +241,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 startActivity(intent);
                 btnEmergency.setVisibility(View.VISIBLE);
             }
-        }, 10000);
+        }, 1000);
     }
 
     //    @Override
