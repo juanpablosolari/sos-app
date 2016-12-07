@@ -106,10 +106,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         Intent intent;
 
                         switch (menuItem.getItemId()) {
-                            case R.id.login:
-                                intent = new Intent(MainActivity.this, LoginActivity.class);
-                                startActivity(intent);
-                                break;
+//                            case R.id.login:
+//                                intent = new Intent(MainActivity.this, LoginActivity.class);
+//                                startActivity(intent);
+//                                break;
                             case R.id.map:
                                 getSupportActionBar().setTitle("Mapa");
                                 menuItem.setChecked(true);
@@ -127,6 +127,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 break;
                             case R.id.profile:
                                 fragment = new FragmentProfile();
+                                fragmentTransaction = true;
+                                break;
+                            case R.id.volunteer:
+                                fragment = new FragmentVolunteer();
                                 fragmentTransaction = true;
                                 break;
                             case R.id.logout:

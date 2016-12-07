@@ -58,6 +58,12 @@ public class ApiSrv {
         params.put("token", FirebaseInstanceId.getInstance().getToken());
         client.post(getAbsoluteUrl("/users/" + userId), params, responseHandler);
     }
+    public void updateUserProfile(String userId, JSONObject user, AsyncHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("user", user.toString());
+        params.put("token", FirebaseInstanceId.getInstance().getToken());
+        client.post(getAbsoluteUrl("/users/" + userId), params, responseHandler);
+    }
 
     public void getEmergencies(AsyncHttpResponseHandler responseHandler) {
         syncClient.get(getAbsoluteUrl("/incidents"), responseHandler);

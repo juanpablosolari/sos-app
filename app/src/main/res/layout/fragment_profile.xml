@@ -5,40 +5,90 @@
     android:orientation="vertical"
     tools:context="com.example.jsolari.mvpauth0.FragmentProfile">
 
-    <CheckBox
-        android:id="@+id/wantToBeVolunteer"
-        android:text="Queres ser voluntario?"
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre"
+        android:layout_marginTop="5dp"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp" />
+
+    <EditText
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:checked="false"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp" />
-
-    <TextView
-        android:id="@+id/comunasTxt"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="En que comuna te gustaria ser voluntario?"
-        android:layout_marginTop="20dp"
-        android:layout_below="@id/wantToBeVolunteer"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:paddingRight="10dp"
         android:paddingLeft="10dp"
-        android:id="@+id/MyComuna" />
+        android:id="@+id/nameField" />
 
-    <Spinner android:id="@+id/comunaSpinner"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/lastname"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_below="@id/comunasTxt"
+        android:text="Apellido"
+        android:layout_marginTop="5dp"
         android:paddingRight="10dp"
         android:paddingLeft="10dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:id="@+id/lastnameField" />
+
+    <TextView
+        android:id="@+id/phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Telefono"
+        android:layout_marginTop="5dp"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:id="@+id/phoneField" />
+
+    <TextView
+        android:id="@+id/dni"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DNI"
+        android:layout_marginTop="5dp"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:id="@+id/dniField" />
+
+    <TextView
+        android:id="@+id/gender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Genero"
+        android:layout_marginTop="5dp"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:id="@+id/genderSpinner" />
 
     <Button
         android:layout_width="match_parent"

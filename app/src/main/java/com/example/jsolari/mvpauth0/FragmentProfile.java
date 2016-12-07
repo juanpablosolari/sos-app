@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,89 +27,48 @@ import cz.msebera.android.httpclient.Header;
 
 public class FragmentProfile extends Fragment {
 
-    private Spinner comunaSpinner;
-    private ArrayAdapter<String> comunaAdapter;
-    private Context applicationContext;
-    private CheckBox wantToBeVolunteer;
-    private String comuna;
     private static ApiSrv ApiSrv = new ApiSrv();
     private SharedPreferences prefs;
     public JSONObject userJson = null;
-    public Boolean isUserVolunteer = false;
-    public String userComuna = "";
-    public TextView MyComuna;
+    public EditText nameField = null;
+    public EditText lastnameField = null;
+    public EditText phoneField = null;
+    public EditText dniField = null;
 
     public FragmentProfile() {}
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false);
-
-
     }
 
     @Override
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
-
         prefs = this.getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
-        String user = prefs.getString("user", "");
-        wantToBeVolunteer = (CheckBox) getView().findViewById(R.id.wantToBeVolunteer);
+        String user = prefs.getString("user", "{}");
 
-        MyComuna = (TextView) getView().findViewById(R.id.MyComuna);
-        //MyComuna.setText("Actualmente no pertenece a ninguna comuna.");
-
+        nameField = (EditText) getView().findViewById(R.id.nameField);
+        lastnameField = (EditText) getView().findViewById(R.id.lastnameField);
+        phoneField = (EditText) getView().findViewById(R.id.phoneField);
+        dniField = (EditText) getView().findViewById(R.id.dniField);
 
         try {
             userJson = new JSONObject(user);
-            isUserVolunteer = userJson.getBoolean("isVolunteer");
-            userComuna = userJson.getString("comuna");
-
+            if (userJson != null) {
+                nameField.setText(userJson.getString("firstName"));
+                lastnameField.setText(userJson.getString("lastName"));
+                phoneField.setText(userJson.getString("phone"));
+                dniField.setText(userJson.getString("phone"));
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        if (isUserVolunteer.equals(true)) {
-            wantToBeVolunteer.setChecked(true);
-            if (userComuna.equals("")) {
-                MyComuna.setText("Actualmente usted NO pertence a ninguna comuna.");
-            }else{
-                MyComuna.setText("Actualmente usted pertenece a la " + userComuna);
-            }
-        }else{
-            MyComuna.setText("");
-        }
-
-        comunaSpinner = (Spinner) getView().findViewById(R.id.comunaSpinner);
-        ArrayAdapter<CharSequence> comunaAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.comunas, android.R.layout.simple_spinner_item);
-
-        comunaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        comunaSpinner.setAdapter(comunaAdapter);
-        comunaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, android.view.View v, int position, long id) {
-                Bundle b = new Bundle();
-                if (parent.getSelectedItemId() != 0) {
-                    //Object com = parent.getItemAtPosition(position);
-                    userComuna = "Comuna " + (position+1);
-                    b.putString("comuna", "comuna " + position);
-                }
-            }
-
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
         Button btnSave = (Button) getView().findViewById(R.id.BtnSave);
         btnSave.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
-//                SharedPreferences prefs = getSharedPreferences("Preferences", Context.MODE_PRIVATE);
-//                SharedPreferences.Editor editor = prefs.edit();
-//                editor.putInt("objective", objectiveRadio.getCheckedRadioButtonId());
-//                editor.putBoolean("otherPreference", otherPreference.isChecked());
-//                editor.commit();
                 try {
                     if (userJson != null) {
                         updateUser();
@@ -122,8 +82,12 @@ public class FragmentProfile extends Fragment {
 
     public void updateUser() throws JSONException {
         final FragmentActivity activity = this.getActivity();
+        userJson.put("firstName", nameField.getText());
+        userJson.put("lastName", lastnameField.getText());
+        userJson.put("phone", phoneField.getText());
+        userJson.put("phone", dniField.getText());
 
-        ApiSrv.updateUser((String) userJson.get("_id"), wantToBeVolunteer.isChecked(), userComuna, new JsonHttpResponseHandler() {
+        ApiSrv.updateUserProfile((String) userJson.get("_id"), userJson, new JsonHttpResponseHandler() {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject responseBody) {
