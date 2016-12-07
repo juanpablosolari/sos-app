@@ -8,10 +8,10 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="signup">Ingresar</string>
-    <string name="profile">Perfil</string>
-    <string name="capacitationCenters">Centros de capacitacion</string>
+    <string name="profile">Mi Perfil</string>
+    <string name="capacitationCenters">Centros de Capacitación</string>
     <string name="map">Mapa</string>
-    <string name="emergencies">Centro Emergencias</string>
+    <string name="emergencies">Centro de Emergencias</string>
     <string name="opcion_1">Opción 1</string>
     <string name="opcion_2">Opción 2</string>
     <string name="seccion_3">Sección 3</string>
