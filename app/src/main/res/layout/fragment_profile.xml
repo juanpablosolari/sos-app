@@ -10,14 +10,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nombre"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:paddingRight="10dp"
         android:paddingLeft="10dp" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:paddingRight="10dp"
         android:paddingLeft="10dp"
         android:id="@+id/nameField" />
@@ -27,14 +27,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Apellido"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:paddingRight="10dp"
         android:paddingLeft="10dp" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:paddingRight="10dp"
         android:paddingLeft="10dp"
         android:id="@+id/lastnameField" />
@@ -44,14 +44,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Telefono"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:paddingRight="10dp"
         android:paddingLeft="10dp" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:paddingRight="10dp"
         android:paddingLeft="10dp"
         android:id="@+id/phoneField" />
@@ -61,14 +61,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="DNI"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:paddingRight="10dp"
         android:paddingLeft="10dp" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:paddingRight="10dp"
         android:paddingLeft="10dp"
         android:id="@+id/dniField" />
@@ -78,14 +78,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Genero"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:paddingRight="10dp"
         android:paddingLeft="10dp" />
 
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:paddingRight="10dp"
         android:paddingLeft="10dp"
         android:id="@+id/genderSpinner" />

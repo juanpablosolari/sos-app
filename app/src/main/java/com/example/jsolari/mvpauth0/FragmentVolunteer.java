@@ -65,7 +65,6 @@ public class FragmentVolunteer extends Fragment {
         MyComuna = (TextView) getView().findViewById(R.id.MyComuna);
         //MyComuna.setText("Actualmente no pertenece a ninguna comuna.");
 
-
         try {
             userJson = new JSONObject(user);
             isUserVolunteer = userJson.getBoolean("isVolunteer");
