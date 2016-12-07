@@ -14,6 +14,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +36,7 @@ public class FragmentProfile extends Fragment {
     public EditText lastnameField = null;
     public EditText phoneField = null;
     public EditText dniField = null;
+    public RadioGroup genderField = null;
 
     public FragmentProfile() {}
 
@@ -53,6 +56,7 @@ public class FragmentProfile extends Fragment {
         lastnameField = (EditText) getView().findViewById(R.id.lastnameField);
         phoneField = (EditText) getView().findViewById(R.id.phoneField);
         dniField = (EditText) getView().findViewById(R.id.dniField);
+        genderField = (RadioGroup) getView().findViewById(R.id.gender);
 
         try {
             userJson = new JSONObject(user);
@@ -85,7 +89,19 @@ public class FragmentProfile extends Fragment {
         userJson.put("firstName", nameField.getText());
         userJson.put("lastName", lastnameField.getText());
         userJson.put("phone", phoneField.getText());
-        userJson.put("phone", dniField.getText());
+        userJson.put("dni", dniField.getText());
+
+        String opcion = "";
+        switch(genderField.getCheckedRadioButtonId()) {
+            case R.id.genderMale:
+                opcion = "male";
+                break;
+            case R.id.genderFemale:
+                opcion = "female";
+                break;
+        }
+
+        userJson.put("gender", opcion);
 
         ApiSrv.updateUserProfile((String) userJson.get("_id"), userJson, new JsonHttpResponseHandler() {
 

@@ -73,22 +73,22 @@
         android:paddingLeft="10dp"
         android:id="@+id/dniField" />
 
-    <TextView
-        android:id="@+id/gender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Genero"
-        android:layout_marginTop="5dp"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp" />
-
-    <Spinner
+    <RadioGroup android:id="@+id/gender"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"
-        android:id="@+id/genderSpinner" />
+        android:text="Genero" >
+
+        <RadioButton android:id="@+id/genderMale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hombre" />
+
+        <RadioButton android:id="@+id/genderFemale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mujer" />
+    </RadioGroup>
 
     <Button
         android:layout_width="match_parent"
