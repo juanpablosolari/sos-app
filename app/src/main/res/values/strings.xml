@@ -56,7 +56,7 @@
     <string name="confirmCanceled">Confirmacion Cancelada.</string>
     <string name="volno">No sos voluntario</string>
     <string name="volquiero">Ser voluntario</string>
-    <string name="save">guardardo</string>
+    <string name="save">Guardardo</string>
     <string name="updateUser">updateUser</string>
     <string name="latitudDesconocida">Latitud: (desconocida)</string>
     <string name="longitudDesconocida">Longitud: (desconocida)</string>
