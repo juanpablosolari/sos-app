@@ -1,4 +1,4 @@
-package com.example.jsolari.mvpauth0;
+package com.app.voluntariosos.mvpauth0;
 
 import org.junit.Test;
 

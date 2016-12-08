@@ -1,4 +1,4 @@
-package com.example.jsolari.mvpauth0;
+package com.app.voluntariosos.mvpauth0;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,7 +19,7 @@ import com.auth0.android.lock.LockCallback;
 import com.auth0.android.lock.utils.LockException;
 import com.auth0.android.result.Credentials;
 import com.auth0.android.result.UserProfile;
-import com.example.jsolari.mvpauth0.utils.CredentialsManager;
+import com.app.voluntariosos.mvpauth0.utils.CredentialsManager;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;

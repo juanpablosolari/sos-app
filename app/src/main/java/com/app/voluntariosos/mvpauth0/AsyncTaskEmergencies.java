@@ -1,15 +1,13 @@
-package com.example.jsolari.mvpauth0;
+package com.app.voluntariosos.mvpauth0;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
 

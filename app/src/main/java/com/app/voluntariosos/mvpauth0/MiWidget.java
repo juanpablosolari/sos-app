@@ -1,4 +1,4 @@
-package com.example.jsolari.mvpauth0;
+package com.app.voluntariosos.mvpauth0;
 
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;

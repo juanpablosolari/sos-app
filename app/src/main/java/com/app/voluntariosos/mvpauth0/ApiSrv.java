@@ -1,27 +1,16 @@
-package com.example.jsolari.mvpauth0;
+package com.app.voluntariosos.mvpauth0;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.location.Location;
-import android.renderscript.Double2;
-import android.util.Log;
 
 import com.auth0.android.result.UserProfile;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.SyncHttpClient;
 
 import org.json.JSONObject;
-
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
-
-import cz.msebera.android.httpclient.Header;
 
 public class ApiSrv {
 

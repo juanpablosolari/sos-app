@@ -1,7 +1,7 @@
-package com.example.jsolari.mvpauth0.utils;
+package com.app.voluntariosos.mvpauth0.utils;
 
 /**
- * Created by jsolari on 11/11/2016.
+ * Created by voluntariosos on 11/11/2016.
  */
 
 class Constants {

@@ -1,12 +1,12 @@
-package com.example.jsolari.mvpauth0.utils;
+package com.app.voluntariosos.mvpauth0.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import com.auth0.android.result.Credentials;
-import com.example.jsolari.mvpauth0.R;
+import com.app.voluntariosos.mvpauth0.R;
 
 /**
- * Created by jsolari on 11/11/2016.
+ * Created by voluntariosos on 11/11/2016.
  */
 
 public class CredentialsManager {

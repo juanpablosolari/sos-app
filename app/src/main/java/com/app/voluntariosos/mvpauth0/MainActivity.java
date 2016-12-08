@@ -1,4 +1,4 @@
-package com.example.jsolari.mvpauth0;
+package com.app.voluntariosos.mvpauth0;
 
 import android.Manifest;
 import android.content.Intent;
@@ -23,7 +23,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.example.jsolari.mvpauth0.utils.CredentialsManager;
+import com.app.voluntariosos.mvpauth0.utils.CredentialsManager;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
