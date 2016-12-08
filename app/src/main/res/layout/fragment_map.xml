@@ -10,7 +10,7 @@ android:orientation="vertical" >
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.v_monjos.googlemaps.MapsActivity" >
+        tools:context="com.app.v_monjos.googlemaps.MapsActivity" >
 
         <LinearLayout
             android:layout_width="fill_parent"

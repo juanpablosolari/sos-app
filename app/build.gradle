@@ -4,12 +4,13 @@ android {
     compileSdkVersion 24
     buildToolsVersion "25.0.0"
     defaultConfig {
-        applicationId "com.example.jsolari.mvpauth0"
+        applicationId "com.app.voluntariosos.mvpauth0"
         minSdkVersion 15
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
 
     buildTypes {

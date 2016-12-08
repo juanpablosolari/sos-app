@@ -3,7 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.jsolari.mvpauth0.FragmentProfile">
+    tools:context="com.app.voluntariosos.mvpauth0.FragmentProfile">
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
     <TextView
         android:id="@+id/name"
@@ -20,7 +33,8 @@
         android:layout_marginTop="5dp"
         android:paddingRight="10dp"
         android:paddingLeft="10dp"
-        android:id="@+id/nameField" />
+        android:id="@+id/nameField"
+        android:inputType="text" />
 
     <TextView
         android:id="@+id/lastname"
@@ -37,7 +51,8 @@
         android:layout_marginTop="5dp"
         android:paddingRight="10dp"
         android:paddingLeft="10dp"
-        android:id="@+id/lastnameField" />
+        android:id="@+id/lastnameField"
+        android:inputType="text" />
 
     <TextView
         android:id="@+id/phone"
@@ -48,15 +63,16 @@
         android:paddingRight="10dp"
         android:paddingLeft="10dp" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"
-        android:id="@+id/phoneField" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:id="@+id/phoneField"
+                android:inputType="number" />
 
-    <TextView
+            <TextView
         android:id="@+id/dni"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -71,7 +87,8 @@
         android:layout_marginTop="5dp"
         android:paddingRight="10dp"
         android:paddingLeft="10dp"
-        android:id="@+id/dniField" />
+        android:id="@+id/dniField"
+        android:inputType="number" />
 
     <RadioGroup android:id="@+id/gender"
         android:orientation="vertical"
@@ -98,4 +115,6 @@
         android:id="@+id/BtnSave"
         android:text="Guardar" />
 
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

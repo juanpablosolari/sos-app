@@ -58,7 +58,7 @@ public class FragmentProfile extends Fragment {
                 nameField.setText(userJson.getString("firstName"));
                 lastnameField.setText(userJson.getString("lastName"));
                 phoneField.setText(userJson.getString("phone"));
-                dniField.setText(userJson.getString("phone"));
+                dniField.setText(userJson.getString("dni"));
             }
         } catch (JSONException e) {
             e.printStackTrace();

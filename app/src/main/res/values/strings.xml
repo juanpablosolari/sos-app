@@ -3,7 +3,7 @@
     <string name="auth0_preferences">AUTH0_SHARED_PREFERENCES_KEY</string>
     <string name="auth0_client_id">QHgkaDd0lh7IDr3NXup3AnegmmMbqZe8</string>
     <string name="auth0_domain">juanpablosolari.auth0.com</string>
-    <string name="auth0_callback">/android/com.example.jsolari.mvpauth0/callback</string>
+    <string name="auth0_callback">/android/com.app.voluntariosos.mvpauth0/callback</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
