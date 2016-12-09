@@ -12,16 +12,18 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:colorForeground">@color/foreground_material_light</item>
-
     </style>
 
-    <style name="MyLockTheme" parent="Lock.Theme">
-        <item name="Auth0.HeaderLogo">@drawable/logo</item>
-        <item name="Auth0.HeaderTitle">sadasdsad</item>
-        <item name="Auth0.HeaderTitleColor">#000000</item>
-        <item name="Auth0.HeaderBackground">#000000</item>
-        <item name="Auth0.PrimaryColor">#000000</item>
-        <item name="Auth0.DarkPrimaryColor">#000000</item>
+    <!--<style name="MyLock.Theme" parent="Lock.Theme" />-->
+
+    <!-- Change to this Theme if you want to customize attrs -->
+    <style name="MyLock.Theme" parent="Lock.Theme">
+        <item name="Auth0.HeaderTitle">@string/app_name</item>
+        <!--<item name="Auth0.HeaderTitleColor">@android:color/holo_orange_light</item>-->
+        <item name="Auth0.HeaderLogo">@mipmap/ic_launcher</item>
+        <!--<item name="Auth0.HeaderBackground">@android:color/holo_red_light</item>-->
+        <!--<item name="Auth0.DarkPrimaryColor">@android:color/holo_blue_dark</item>-->
+        <!--<item name="Auth0.PrimaryColor">@android:color/holo_blue_light</item>-->
     </style>
 </resources>
 

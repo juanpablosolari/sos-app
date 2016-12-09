@@ -38,7 +38,7 @@
             android:name="com.auth0.android.lock.LockActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:theme="@style/Lock.Theme">
+            android:theme="@style/MyLock.Theme">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
