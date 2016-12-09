@@ -13,6 +13,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,20 +26,10 @@ import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link FragmentVolunteer.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link FragmentVolunteer#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class FragmentVolunteer extends Fragment {
     private Spinner comunaSpinner;
     private ArrayAdapter<String> comunaAdapter;
     private Context applicationContext;
-    private CheckBox wantToBeVolunteer;
     private String comuna;
     private static ApiSrv ApiSrv = new ApiSrv();
     private SharedPreferences prefs;
@@ -45,6 +37,9 @@ public class FragmentVolunteer extends Fragment {
     public Boolean isUserVolunteer = false;
     public String userComuna = "";
     public TextView MyComuna;
+    public RadioGroup wantToBeVolunteer;
+    public TextView isVolunteerTxt;
+    public Boolean wantToBe = false;
 
     public FragmentVolunteer() {}
 
@@ -59,7 +54,9 @@ public class FragmentVolunteer extends Fragment {
 
         prefs = this.getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
         String user = prefs.getString("user", "");
-        wantToBeVolunteer = (CheckBox) getView().findViewById(R.id.wantToBeVolunteer);
+        wantToBeVolunteer = (RadioGroup) getView().findViewById(R.id.wantToBeVolunteer);
+        isVolunteerTxt = (TextView) getView().findViewById(R.id.isVolunteerTxt);
+        isVolunteerTxt.setVisibility(View.GONE);
 
         MyComuna = (TextView) getView().findViewById(R.id.MyComuna);
         //MyComuna.setText("Actualmente no pertenece a ninguna comuna.");
@@ -67,14 +64,23 @@ public class FragmentVolunteer extends Fragment {
         try {
             userJson = new JSONObject(user);
             isUserVolunteer = userJson.getBoolean("isVolunteer");
+            wantToBe = userJson.getBoolean("wantToBeVolunteer");
             userComuna = userJson.getString("comuna");
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        if (isUserVolunteer.equals(true)) {
-            wantToBeVolunteer.setChecked(true);
+        RadioButton affirmative = (RadioButton) getView().findViewById(R.id.affirmative);
+        RadioButton negative = (RadioButton) getView().findViewById(R.id.negative);
+
+        if (wantToBe.equals(true)) {
+            affirmative.setChecked(true);
+        } else {
+            negative.setChecked(true);
+        }
+
+        if (isUserVolunteer.equals(true) && wantToBe.equals(true)) {
+            isVolunteerTxt.setVisibility(View.VISIBLE);
             if (userComuna.equals("")) {
                 MyComuna.setText("Actualmente usted NO pertence a ninguna comuna.");
             }else{
@@ -91,11 +97,8 @@ public class FragmentVolunteer extends Fragment {
         comunaSpinner.setAdapter(comunaAdapter);
         comunaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, android.view.View v, int position, long id) {
-                Bundle b = new Bundle();
                 if (parent.getSelectedItemId() != 0) {
-                    //Object com = parent.getItemAtPosition(position);
                     userComuna = "Comuna " + (position+1);
-                    b.putString("comuna", "comuna " + position);
                 }
             }
 
@@ -125,8 +128,17 @@ public class FragmentVolunteer extends Fragment {
 
     public void updateUser() throws JSONException {
         final FragmentActivity activity = this.getActivity();
+        Boolean opcion = false;
+        switch(wantToBeVolunteer.getCheckedRadioButtonId()) {
+            case R.id.affirmative:
+                opcion = true;
+                break;
+            case R.id.negative:
+                opcion = false;
+                break;
+        }
 
-        ApiSrv.updateUser((String) userJson.get("_id"), wantToBeVolunteer.isChecked(), userComuna, new JsonHttpResponseHandler() {
+        ApiSrv.updateUser((String) userJson.get("_id"), opcion, userComuna, new JsonHttpResponseHandler() {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject responseBody) {

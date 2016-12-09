@@ -42,7 +42,7 @@ public class ApiSrv {
     }
     public void updateUser(String userId, Boolean wantToBeVolunteer, String comuna, AsyncHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
-        params.put("isVolunteer", wantToBeVolunteer);
+        params.put("wantToBeVolunteer", wantToBeVolunteer);
         params.put("comuna", comuna);
         params.put("token", FirebaseInstanceId.getInstance().getToken());
         client.post(getAbsoluteUrl("/users/" + userId), params, responseHandler);
