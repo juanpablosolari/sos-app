@@ -1,7 +1,9 @@
 package com.app.voluntariosos.mvpauth0;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.net.Uri;
@@ -21,6 +23,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.app.voluntariosos.mvpauth0.utils.CredentialsManager;
@@ -58,6 +61,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public static FrameLayout content_frame;
     public static FrameLayout map;
     private static GoogleMap mMap;
+    private SharedPreferences prefs;
+    public JSONObject userJson = null;
 
     //Localizacion
     private static final int PETICION_PERMISO_LOCALIZACION = 101;
@@ -68,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        prefs = this.getSharedPreferences("prefs", Context.MODE_PRIVATE);
 
         appbar = (Toolbar) findViewById(R.id.appbar);
             setSupportActionBar(appbar);
@@ -86,17 +92,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .addApi(LocationServices.API)
                 .build();
 
-//        MenuItem item = (MenuItem) findViewById(R.id.profile);
-//        if (user == null) {
-//            item.setVisible(false);
-//        } else {
-//            item.setVisible(true);
-//        }
-
         content_frame = (FrameLayout) findViewById(R.id.content_frame);
         map = (FrameLayout) findViewById(R.id.map);
 
         navView = (NavigationView) findViewById(R.id.navview);
+
         navView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -161,7 +161,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     }
                 });
 
-
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.map);
@@ -186,6 +185,35 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 stopTimer();
             }
         });
+
+        String user = prefs.getString("user", "{}");
+        try {
+            userJson = new JSONObject(user);
+            if (userJson != null) {
+                String firstName = userJson.getString("firstName");
+                String lastName = userJson.getString("lastName");
+                String phone = userJson.getString("phone");
+                String dni = userJson.getString("dni");
+                if (firstName.equals("") || lastName.equals("") || phone.equals("") || dni.equals("")) {
+                    goToProfileFragment();
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void goToProfileFragment(){
+        FragmentProfile fragment = new FragmentProfile();
+        FrameLayout layout = (FrameLayout) findViewById(R.id.map);
+        layout.setVisibility(View.GONE);
+        FrameLayout content_frame = (FrameLayout) findViewById(R.id.content_frame);
+        content_frame.setVisibility(View.VISIBLE);
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.content_frame, fragment)
+                .commit();
+        getSupportActionBar().setTitle("Perfil");
     }
 
     private Timer mTimer1;

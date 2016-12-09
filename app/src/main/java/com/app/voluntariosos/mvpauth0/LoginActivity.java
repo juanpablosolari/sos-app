@@ -117,7 +117,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onFailure(AuthenticationException error) {
                         LoginActivity.this.runOnUiThread(new Runnable() {
                             public void run() {
-                                Toast.makeText(LoginActivity.this, R.string.ErrorLogin, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, R.string.ErrorLogin, Toast.LENGTH_SHORT).show();
                             }
                         });
                         CredentialsManager.deleteCredentials(getApplicationContext());
@@ -146,7 +146,6 @@ public class LoginActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("user", responseBody.toString());
                 editor.commit();
-
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
 
