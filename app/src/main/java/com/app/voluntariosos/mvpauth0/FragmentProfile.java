@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ public class FragmentProfile extends Fragment {
     public EditText phoneField = null;
     public EditText dniField = null;
     public RadioGroup genderField = null;
+    public String gender = null;
 
     public FragmentProfile() {}
 
@@ -59,6 +61,16 @@ public class FragmentProfile extends Fragment {
                 lastnameField.setText(userJson.getString("lastName"));
                 phoneField.setText(userJson.getString("phone"));
                 dniField.setText(userJson.getString("dni"));
+                gender = userJson.getString("gender");
+
+                RadioButton genderMale = (RadioButton) getView().findViewById(R.id.genderMale);
+                RadioButton genderFemale = (RadioButton) getView().findViewById(R.id.genderFemale);
+
+                if (gender.equals("male")) {
+                    genderMale.setChecked(true);
+                } else if (gender.equals("female")) {
+                    genderFemale.setChecked(true);
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();
