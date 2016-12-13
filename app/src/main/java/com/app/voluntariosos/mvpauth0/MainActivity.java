@@ -133,6 +133,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 fragment = new FragmentVolunteer();
                                 fragmentTransaction = true;
                                 break;
+                            case R.id.about:
+                                fragment = new FragmentAbout();
+                                fragmentTransaction = true;
+                                break;
                             case R.id.logout:
                                 CredentialsManager.deleteCredentials(MainActivity.this);
                                 intent = new Intent(MainActivity.this, LoginActivity.class);
