@@ -12,7 +12,7 @@
             android:title="@string/profile"/>
         <item
             android:id="@+id/volunteer"
-            android:icon="@drawable/logoprofile"
+            android:icon="@drawable/logovoluntario"
             android:title="@string/volunteer"/>
         <item
             android:id="@+id/emergencies"
