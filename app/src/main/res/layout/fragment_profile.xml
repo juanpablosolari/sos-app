@@ -3,7 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.app.voluntariosos.mvpauth0.FragmentProfile">
+    tools:context="com.app.voluntariosos.mvpauth0.FragmentProfile"
+    android:paddingLeft="25dp"
+    android:paddingRight="25dp">
 
     <ScrollView
         android:id="@+id/scrollView1"
@@ -24,17 +26,19 @@
         android:layout_height="wrap_content"
         android:text="Nombre"
         android:layout_marginTop="5dp"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp" />
+        android:paddingRight="25dp"
+        android:paddingLeft="25dp" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"
+        android:paddingRight="25dp"
+        android:paddingLeft="25dp"
         android:id="@+id/nameField"
-        android:inputType="text" />
+        android:inputType="text"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp" />
 
     <TextView
         android:id="@+id/lastname"
@@ -42,17 +46,19 @@
         android:layout_height="wrap_content"
         android:text="Apellido"
         android:layout_marginTop="5dp"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp" />
+        android:paddingRight="25dp"
+        android:paddingLeft="25dp" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"
+        android:paddingRight="25dp"
+        android:paddingLeft="25dp"
         android:id="@+id/lastnameField"
-        android:inputType="text" />
+        android:inputType="text"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp" />
 
     <TextView
         android:id="@+id/phone"
@@ -60,17 +66,19 @@
         android:layout_height="wrap_content"
         android:text="Telefono"
         android:layout_marginTop="5dp"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp" />
+        android:paddingRight="25dp"
+        android:paddingLeft="25dp" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp"
+                android:paddingRight="25dp"
+                android:paddingLeft="25dp"
                 android:id="@+id/phoneField"
-                android:inputType="number" />
+                android:inputType="number"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp" />
 
             <TextView
         android:id="@+id/dni"
@@ -78,17 +86,19 @@
         android:layout_height="wrap_content"
         android:text="DNI"
         android:layout_marginTop="5dp"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp" />
+        android:paddingRight="25dp"
+        android:paddingLeft="25dp" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"
+        android:paddingRight="25dp"
+        android:paddingLeft="25dp"
         android:id="@+id/dniField"
-        android:inputType="number" />
+        android:inputType="number"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp" />
 
     <RadioGroup android:id="@+id/gender"
         android:orientation="vertical"
