@@ -24,7 +24,7 @@
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="About"
+                android:text="VoluntarioSOS"
                 android:layout_marginTop="5dp"
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"
@@ -40,17 +40,21 @@
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"
                 android:textSize="14sp"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp" />
 
             <TextView
             android:id="@+id/catAlumnos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Alumnos: "
+            android:text="Desarrolladores:"
             android:layout_marginTop="20dp"
             android:paddingRight="10dp"
             android:paddingLeft="10dp"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp" />
 
             <TextView
                 android:id="@+id/blacher"
@@ -60,7 +64,9 @@
                 android:layout_marginTop="5dp"
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp" />
             <TextView
                 android:id="@+id/montes"
                 android:layout_width="match_parent"
@@ -69,7 +75,9 @@
                 android:layout_marginTop="5dp"
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp" />
 
             <TextView
                 android:id="@+id/lema"
@@ -79,7 +87,9 @@
                 android:layout_marginTop="5dp"
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp" />
 
             <TextView
                 android:id="@+id/solari"
@@ -89,7 +99,9 @@
                 android:layout_marginTop="5dp"
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp" />
 
             <TextView
                 android:id="@+id/catProf"
@@ -99,7 +111,9 @@
                 android:layout_marginTop="20dp"
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp" />
 
             <TextView
                 android:id="@+id/romanos"
@@ -109,7 +123,9 @@
                 android:layout_marginTop="5dp"
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp" />
             <TextView
                 android:id="@+id/straccia"
                 android:layout_width="match_parent"
@@ -118,7 +134,9 @@
                 android:layout_marginTop="5dp"
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp" />
             <TextView
                 android:id="@+id/casas"
                 android:layout_width="match_parent"
@@ -127,7 +145,9 @@
                 android:layout_marginTop="5dp"
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp" />
 
             <ImageView
                 android:layout_width="match_parent"
