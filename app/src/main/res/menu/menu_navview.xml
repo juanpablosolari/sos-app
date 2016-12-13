@@ -3,6 +3,10 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/map"
+            android:icon="@drawable/logomapa"
+            android:title="@string/map"/>
+        <item
             android:id="@+id/profile"
             android:icon="@drawable/logoprofile"
             android:title="@string/profile"/>
@@ -11,10 +15,6 @@
             android:icon="@drawable/logoprofile"
             android:title="@string/volunteer"/>
         <item
-            android:id="@+id/map"
-            android:icon="@drawable/logomapa"
-            android:title="@string/map"/>
-        <item
             android:id="@+id/emergencies"
             android:icon="@drawable/logoemergencie"
             android:title="@string/emergencies"/>
@@ -22,6 +22,10 @@
             android:id="@+id/capacitationCenters"
             android:icon="@drawable/logocenters"
             android:title="@string/capacitationCenters"/>
+        <item
+            android:id="@+id/about"
+            android:icon="@drawable/logoabout"
+            android:title="@string/about"/>
         <item
             android:id="@+id/logout"
             android:icon="@drawable/logout"
