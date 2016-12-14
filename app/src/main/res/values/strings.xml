@@ -63,7 +63,7 @@
     <string name="pemisoDenegado">Permiso denegado</string>
     <string name="googlePlayError">Se ha interrumpido la conexión con Google Play Services</string>
     <string name="calcError">no se pudo calcular</string>
-    <string name="logout">Logout</string>
+    <string name="logout">Cerrar Sesión</string>
     <string name="about">About</string>
 
 </resources>
