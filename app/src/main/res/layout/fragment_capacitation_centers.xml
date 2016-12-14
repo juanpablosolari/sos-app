@@ -2,13 +2,23 @@
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:orientation="vertical"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp">
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView6" android:fillViewport="true">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/centersList" >
-    </ListView>
-</LinearLayout>
+            android:id="@+id/centersList" />
+
+        </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
