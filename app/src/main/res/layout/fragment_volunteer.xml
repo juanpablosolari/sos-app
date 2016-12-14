@@ -4,8 +4,8 @@
     android:layout_height="match_parent"
     tools:context="com.app.voluntariosos.mvpauth0.FragmentVolunteer"
     android:orientation="vertical"
-    android:paddingLeft="25dp"
-    android:paddingRight="25dp">
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp">
 
     <TextView
         android:id="@+id/wantToBeVolunteerTxt"
@@ -13,8 +13,8 @@
         android:layout_height="wrap_content"
         android:text="Te gustaria ser voluntario?"
         android:layout_marginTop="10dp"
-        android:paddingRight="25dp"
-        android:paddingLeft="25dp" />
+        android:paddingRight="5dp"
+        android:paddingLeft="5dp" />
 
     <RadioGroup android:id="@+id/wantToBeVolunteer"
         android:orientation="vertical"
@@ -25,13 +25,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Si"
-            android:layout_marginLeft="35dp" />
+            android:layout_marginLeft="10dp" />
 
         <RadioButton android:id="@+id/negative"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="No"
-            android:layout_marginLeft="35dp" />
+            android:layout_marginLeft="10dp" />
     </RadioGroup>
 
     <TextView
@@ -40,15 +40,15 @@
         android:layout_height="wrap_content"
         android:text="Fuiste aprobado como voluntario"
         android:layout_marginTop="10dp"
-        android:paddingRight="25dp"
-        android:paddingLeft="25dp" />
+        android:paddingRight="5dp"
+        android:paddingLeft="5dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:paddingRight="25dp"
-        android:paddingLeft="25dp"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
         android:id="@+id/MyComuna" />
 
     <TextView
@@ -58,16 +58,16 @@
         android:text="En que comuna te gustaria ser voluntario?"
         android:layout_marginTop="20dp"
         android:layout_below="@id/wantToBeVolunteer"
-        android:paddingRight="25dp"
-        android:paddingLeft="25dp" />
+        android:paddingRight="5dp"
+        android:paddingLeft="5dp" />
 
     <Spinner android:id="@+id/comunaSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_below="@id/comunasTxt"
-        android:paddingRight="25dp"
-        android:paddingLeft="25dp" />
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp" />
 
     <Button
         android:layout_width="match_parent"
