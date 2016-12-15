@@ -11,6 +11,7 @@ public class EmergencyItem {
     private String comuna;
     private String location;
     private String token;
+    private String horario;
 
     public EmergencyItem(JSONObject item) throws JSONException {
         _id = item.getString("_id");
@@ -19,6 +20,7 @@ public class EmergencyItem {
         comuna = item.getString("comuna");
         location = item.getString("location");
         token = item.getString("token");
+        horario = item.getString("createdAt");
     }
 
     public String getId(){ return _id; }
@@ -34,6 +36,10 @@ public class EmergencyItem {
 
     public String getLocation(){
         return location;
+    }
+
+    public String getHorario(){
+        return horario;
     }
 
     public String getToken(){

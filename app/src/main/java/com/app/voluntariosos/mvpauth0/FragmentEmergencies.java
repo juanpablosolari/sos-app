@@ -122,6 +122,8 @@ public class FragmentEmergencies extends Fragment {
             TextView lblSubtitulo = (TextView)item.findViewById(R.id.body);
             lblSubtitulo.setText(datos.get(position).getComuna());
 
+            TextView lblHorario  =(TextView)item.findViewById(R.id.horario);
+            lblHorario.setText(datos.get(position).getLocation());
             return(item);
         }
     }
