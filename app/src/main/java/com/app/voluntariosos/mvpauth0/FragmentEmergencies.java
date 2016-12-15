@@ -123,7 +123,7 @@ public class FragmentEmergencies extends Fragment {
             lblSubtitulo.setText(datos.get(position).getComuna());
 
             TextView lblHorario  =(TextView)item.findViewById(R.id.horario);
-            lblHorario.setText(datos.get(position).getLocation());
+            lblHorario.setText(datos.get(position).getHorario());
             return(item);
         }
     }
