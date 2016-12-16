@@ -52,6 +52,7 @@
     <string name="confirm">Confirmar?</string>
     <string name="si">Ayudo</string>
     <string name="no">NO Puedo</string>
+    <string name="terms">Aceptas los terminos y condiciones?</string>
     <string name="dialogos">Dialogos</string>
     <string name="confirmCanceled">Confirmacion Cancelada.</string>
     <string name="volno">No sos voluntario</string>

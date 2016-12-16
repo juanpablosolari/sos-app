@@ -1,6 +1,9 @@
 package com.app.voluntariosos.mvpauth0;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -71,6 +74,27 @@ public class FragmentProfile extends Fragment {
                 } else if (gender.equals("female")) {
                     genderFemale.setChecked(true);
                 }
+
+                 if (!userJson.has("acceptedTerms") || userJson.getBoolean("acceptedTerms") == false) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+                    builder.setTitle(R.string.terms)
+                        .setMessage("VoluntarioSOS (VSOS) no se hace responsable de los hechos que haya o pueda haber ocurrido en el Incidente.\n" +
+                                    "VSOS no se hace responsable de lo que pueda sucederle a la persona que se encuentra en emergencia.\n" +
+                                    "VSOS recomienda no tocar al accidentado, solo esperar que la ambulancia llegue.")
+                        .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                            try {
+                                userJson.put("acceptedTerms", "true");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            dialog.cancel();
+                            }
+                        });
+
+                    builder.create().show();
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -88,6 +112,21 @@ public class FragmentProfile extends Fragment {
                 }
             }
         });
+    }
+
+    public Dialog onConfirmDialog(DialogInterface.OnClickListener cb) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        builder.setTitle(R.string.terms)
+                .setPositiveButton(R.string.si, cb)
+                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Log.i(getString(R.string.dialogos), getString(R.string.confirmCanceled));
+                        dialog.cancel();
+                    }
+                });
+
+        return builder.create();
     }
 
     public void updateUser() throws JSONException {
