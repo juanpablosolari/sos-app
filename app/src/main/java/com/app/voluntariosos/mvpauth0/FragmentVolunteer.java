@@ -39,6 +39,7 @@ public class FragmentVolunteer extends Fragment {
     public TextView MyComuna;
     public RadioGroup wantToBeVolunteer;
     public TextView isVolunteerTxt;
+    public TextView comunasTxt;
     public Boolean wantToBe = false;
 
     public FragmentVolunteer() {}
@@ -56,7 +57,12 @@ public class FragmentVolunteer extends Fragment {
         String user = prefs.getString("user", "");
         wantToBeVolunteer = (RadioGroup) getView().findViewById(R.id.wantToBeVolunteer);
         isVolunteerTxt = (TextView) getView().findViewById(R.id.isVolunteerTxt);
+        comunaSpinner = (Spinner) getView().findViewById(R.id.comunaSpinner);
+        comunasTxt = (TextView) getView().findViewById(R.id.comunasTxt);
+
         isVolunteerTxt.setVisibility(View.GONE);
+        comunaSpinner.setVisibility(View.GONE);
+        comunasTxt.setVisibility(View.GONE);
 
         MyComuna = (TextView) getView().findViewById(R.id.MyComuna);
         //MyComuna.setText("Actualmente no pertenece a ninguna comuna.");
@@ -81,6 +87,8 @@ public class FragmentVolunteer extends Fragment {
 
         if (isUserVolunteer.equals(true) && wantToBe.equals(true)) {
             isVolunteerTxt.setVisibility(View.VISIBLE);
+            comunaSpinner.setVisibility(View.VISIBLE);
+            comunasTxt.setVisibility(View.VISIBLE);
             if (userComuna.equals("")) {
                 MyComuna.setText("Actualmente usted NO pertence a ninguna comuna.");
             }else{
@@ -90,7 +98,6 @@ public class FragmentVolunteer extends Fragment {
             MyComuna.setText("");
         }
 
-        comunaSpinner = (Spinner) getView().findViewById(R.id.comunaSpinner);
         ArrayAdapter<CharSequence> comunaAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.comunas, android.R.layout.simple_spinner_item);
 
         comunaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
