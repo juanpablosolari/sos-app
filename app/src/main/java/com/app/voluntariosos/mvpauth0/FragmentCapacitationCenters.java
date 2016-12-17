@@ -1,16 +1,24 @@
 package com.app.voluntariosos.mvpauth0;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.support.v4.app.Fragment;
+import android.widget.AdapterView.OnItemClickListener;
 
+import com.google.android.gms.common.api.Api;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -23,17 +31,18 @@ import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
+
+import static android.R.attr.fragment;
+import static com.app.voluntariosos.mvpauth0.FragmentEmergencies.prefs;
+
 public class FragmentCapacitationCenters extends Fragment {
 
     public ListView centersList;
     public static CapacitationCentersAdapter arrayAdapter;
     private ListView lstOpciones;
+    public static SharedPreferences prefs;
 
-    private static final String BASE_URL = "https://sos-api-qa.herokuapp.com";
-    private static AsyncHttpClient client = new AsyncHttpClient();
-    private static String getAbsoluteUrl(String relativeUrl) {
-        return BASE_URL + relativeUrl;
-    }
+    private static ApiSrv ApiSrv = new ApiSrv();
 
     private ArrayList<CapacitationCenterItem> datos = new ArrayList<CapacitationCenterItem>();
 
@@ -53,38 +62,44 @@ public class FragmentCapacitationCenters extends Fragment {
     @Override
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
-//        lstListado = (ListView)getView().findViewById(R.id.LstListado);
-//
-//        lstListado.setAdapter(new AdaptadorCorreos(this));
-//
-//        lstListado.setOnItemClickListener(new OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> list, View view, int pos, long id) {
-//                if (listener!=null) {
-//                    listener.onCorreoSeleccionado(
-//                            (Correo)lstListado.getAdapter().getItem(pos));
-//                }
-//            }
-//        });
+        prefs = this.getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
         arrayAdapter = new CapacitationCentersAdapter(this, datos);
         centersList = (ListView)getView().findViewById(R.id.centersList);
-        centersList.setAdapter(arrayAdapter);
+        centersList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                final CapacitationCenterItem item = ((CapacitationCenterItem) parent.getItemAtPosition(position));
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString("capacitationCenterId", item.getId());
+                editor.commit();
 
-        RequestParams params = new RequestParams();
-        client.get(getAbsoluteUrl("/capacitation-centers"), null, new JsonHttpResponseHandler() {
+                FragmentCapacitationCenter fragment = new FragmentCapacitationCenter();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_frame, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+        centersList.setAdapter(arrayAdapter);
+        centersList.setItemsCanFocus(false);
+        centersList.setFocusable(false);
+
+        ApiSrv.getCapacitationCenters(new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray responseBody) {
                 super.onSuccess(statusCode, headers, responseBody);
                 Log.d("Centers", responseBody.toString());
+                if (arrayAdapter != null) {
+                    arrayAdapter.clear();
+                }
 
                 for (int i = 0; i < responseBody.length(); i++ ) {
-                    String name = null;
-                    String description = null;
                     try {
                         JSONObject item = responseBody.getJSONObject(i);
-                        name = item.getString("name");
-                        description = item.getString("description");
-                        arrayAdapter.add(new CapacitationCenterItem(name, description));
+                        if (arrayAdapter != null) {
+                            arrayAdapter.add(new CapacitationCenterItem(item));
+                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -121,9 +136,5 @@ public class FragmentCapacitationCenters extends Fragment {
 
             return(item);
         }
-    }
-
-    public static void UpdateCenters(String title, String body){
-        arrayAdapter.add(new CapacitationCenterItem(title, body));
     }
 }
