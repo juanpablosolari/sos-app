@@ -84,4 +84,12 @@ public class ApiSrv {
         Double toLatitude = to.latitude;
         client.get("http://maps.googleapis.com/maps/api/distancematrix/json?origins="+fromLatitude.toString()+","+fromLongitude.toString()+"&destinations="+toLatitude.toString()+","+toLongitude.toString()+"&mode=walking&sensor=false", new RequestParams(), responseHandler);
     }
+
+    public void getCapacitationCenters(AsyncHttpResponseHandler responseHandler){
+        client.get(getAbsoluteUrl("/capacitation-centers"), new RequestParams(), responseHandler);
+    }
+
+    public void getCapacitationCenter(String id, AsyncHttpResponseHandler responseHandler){
+        client.get(getAbsoluteUrl("/capacitation-centers/" + id), new RequestParams(), responseHandler);
+    }
 }
