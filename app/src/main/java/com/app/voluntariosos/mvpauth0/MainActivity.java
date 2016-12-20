@@ -1,6 +1,7 @@
 package com.app.voluntariosos.mvpauth0;
 
 import android.Manifest;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -88,6 +89,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 e.printStackTrace();
             }
         }
+
+        NotificationManager notificationManagerNS = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManagerNS.cancel(0);
 
         appbar = (Toolbar) findViewById(R.id.appbar);
             setSupportActionBar(appbar);
