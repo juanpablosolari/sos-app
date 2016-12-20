@@ -6,32 +6,19 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.RadioGroup;
-import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import cz.msebera.android.httpclient.Header;
-
-import static android.view.View.GONE;
 
 public class FragmentCapacitationCenter extends Fragment {
     public static SharedPreferences prefs;
@@ -98,19 +85,21 @@ public class FragmentCapacitationCenter extends Fragment {
                     name.setText(responseBody.getString("name"));
                     description.setText(responseBody.getString("description"));
                     url.setText(responseBody.getString("url"));
-                    phone.setText(responseBody.getString("phone"));
+                    JSONObject contact = responseBody.getJSONObject("contact");
                     if (responseBody.has("hours")) {
                         hours.setText(responseBody.getString("hours"));
                     }
-                    if (responseBody.has("location")) {
-                        JSONObject location = responseBody.getJSONObject("location");
-                        JSONObject locAddress = location.getJSONObject("address");
-                        String formattedAddress = locAddress.getString("formatted_address");
-                        address.setText(formattedAddress);
-                    }
-                    if (responseBody.has("phone")) {
+                    if (contact.has("phone")) {
+                        phone.setText(contact.getString("phone"));
                         phone.setVisibility(View.VISIBLE);
                         btnCall.setVisibility(View.VISIBLE);
+                    }
+                    if (responseBody.has("location")) {
+                        JSONObject location = responseBody.getJSONObject("location");
+                        //JSONObject locAddress = location.getJSONObject("address");
+                        //String formattedAddress = locAddress.getString("formatted_address");
+                        String formattedAddress = location.getString("address");
+                        address.setText(formattedAddress);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
