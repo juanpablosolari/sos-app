@@ -86,7 +86,8 @@
             </intent-filter>
         </service>
 
-        <activity android:name="com.app.voluntariosos.mvpauth0.MainActivity" />
+        <activity
+            android:name="com.app.voluntariosos.mvpauth0.MainActivity"/>
 
         <receiver
             android:name="com.app.voluntariosos.mvpauth0.MiWidget"

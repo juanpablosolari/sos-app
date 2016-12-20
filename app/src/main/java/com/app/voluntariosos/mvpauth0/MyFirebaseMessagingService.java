@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -35,8 +36,18 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             String title = remoteMessage.getNotification().getTitle();
             String body = remoteMessage.getNotification().getBody();
             Log.d(TAG, "Mesage body:" + body);
-            sendNotification(title, body);
+            sendNotification(title, body, remoteMessage.getData().toString());
         }
+    }
+
+    public PendingIntent getPendingAction(Context context) {
+        // Prepare intent which is triggered if the
+        // notification is selected
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.putExtra("CLICK", true);
+        Log.e(TAG, "set action : ");
+
+        return PendingIntent.getBroadcast(context, 0, intent, 0);
     }
 
     /**
@@ -44,14 +55,17 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
      * @param title
      * @param body
      */
-    private void sendNotification(final String title, final String body) {
+    private void sendNotification(final String title, final String body, final String Data) {
 
         //Set sound of notification
         Uri notificationSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
         Intent intent = new Intent(this, MainActivity.class);
+        Bundle c = new Bundle();
+        c.putString("notification", Data);
+        intent.putExtras(c);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntentYes = PendingIntent.getBroadcast(this, 12345, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder notifiBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
@@ -59,12 +73,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .setContentText(body)
                 .setAutoCancel(true)
                 .setSound(notificationSound)
-                .setContentIntent(pendingIntentYes);
+                .addAction(R.drawable.back_dialog, "Ayudo", pendingIntent)
+                .setContentIntent(pendingIntent);
 
         NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(0 /*ID of notification*/, notifiBuilder.build());
-
+        notificationManager.notify(0, notifiBuilder.build());
         intent.setAction(this.OK_ACTION);
-        notifiBuilder.addAction(R.drawable.back_dialog, "Yes", pendingIntentYes);
     }
 }

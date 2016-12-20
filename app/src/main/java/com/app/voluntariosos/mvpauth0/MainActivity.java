@@ -70,10 +70,24 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     //--Localizacion
 
     @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        Log.e("123", "123".toString());
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         prefs = this.getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        String notification = getIntent().getStringExtra("notification");
+        if (notification != null) {
+            try {
+                JSONObject obj = new JSONObject(notification);
+                this.showMapMarker(new EmergencyItem(obj));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
 
         appbar = (Toolbar) findViewById(R.id.appbar);
             setSupportActionBar(appbar);
