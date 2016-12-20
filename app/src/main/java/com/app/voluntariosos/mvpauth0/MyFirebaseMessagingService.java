@@ -66,6 +66,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         intent.putExtras(c);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent cancelIntent = PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder notifiBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
@@ -74,6 +75,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .setAutoCancel(true)
                 .setSound(notificationSound)
                 .addAction(R.drawable.back_dialog, "Ayudo", pendingIntent)
+                .addAction(R.drawable.back_dialog, "No Ayudo", cancelIntent)
                 .setContentIntent(pendingIntent);
 
         NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
