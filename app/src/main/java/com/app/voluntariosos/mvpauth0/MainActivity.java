@@ -148,26 +148,32 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 showMap();
                                 content_frame.setVisibility(View.GONE);
                                 map.setVisibility(View.VISIBLE);
+                                btnEmergency.setVisibility(View.VISIBLE);
                                 break;
                             case R.id.capacitationCenters:
                                 fragment = new FragmentCapacitationCenters();
                                 fragmentTransaction = true;
+                                btnEmergency.setVisibility(View.GONE);
                                 break;
                             case R.id.emergencies:
                                 fragment = new FragmentEmergencies();
                                 fragmentTransaction = true;
+                                btnEmergency.setVisibility(View.GONE);
                                 break;
                             case R.id.profile:
                                 fragment = new FragmentProfile();
                                 fragmentTransaction = true;
+                                btnEmergency.setVisibility(View.GONE);
                                 break;
                             case R.id.volunteer:
                                 fragment = new FragmentVolunteer();
                                 fragmentTransaction = true;
+                                btnEmergency.setVisibility(View.GONE);
                                 break;
                             case R.id.about:
                                 fragment = new FragmentAbout();
                                 fragmentTransaction = true;
+                                btnEmergency.setVisibility(View.GONE);
                                 break;
                             case R.id.logout:
                                 CredentialsManager.deleteCredentials(MainActivity.this);
