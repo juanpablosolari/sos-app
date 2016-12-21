@@ -86,6 +86,9 @@ public class FragmentProfile extends Fragment {
                             public void onClick(DialogInterface dialog, int id) {
                             try {
                                 userJson.put("acceptedTerms", "true");
+                                SharedPreferences.Editor editor = prefs.edit();
+                                editor.putString("user", userJson.toString());
+                                editor.commit();
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
