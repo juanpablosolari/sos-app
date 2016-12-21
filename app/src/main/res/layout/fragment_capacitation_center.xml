@@ -7,15 +7,19 @@
     android:paddingRight="5dp"
     tools:context="com.app.voluntariosos.mvpauth0.FragmentCapacitationCenter">
 
+
     <ScrollView
+        android:id="@+id/scrollView1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/scrollView6" android:fillViewport="true">
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" >
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/name"
