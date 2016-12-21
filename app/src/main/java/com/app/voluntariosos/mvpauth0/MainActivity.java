@@ -1,6 +1,7 @@
 package com.app.voluntariosos.mvpauth0;
 
 import android.Manifest;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private static final String TAG = "MainActivity";
     private static final String LOGTAG = "android-localizacion";
+    private static ApiSrv ApiSrv = new ApiSrv();
 
     private Button btnEmergency;
     private Button btnCancelEmergency;
@@ -62,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public static FrameLayout map;
     private static GoogleMap mMap;
     private SharedPreferences prefs;
-    public JSONObject userJson = null;
+    public JSONObject userJson;
 
     //Localizacion
     private static final int PETICION_PERMISO_LOCALIZACION = 101;
@@ -70,24 +72,41 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     //--Localizacion
 
     @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        Log.e("123", "123".toString());
-    }
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         prefs = this.getSharedPreferences("prefs", Context.MODE_PRIVATE);
         String notification = getIntent().getStringExtra("notification");
+
+        String user = prefs.getString("user", "{}");
+        try {
+            userJson = new JSONObject(user);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         if (notification != null) {
             try {
                 JSONObject obj = new JSONObject(notification);
-                this.showMapMarker(new EmergencyItem(obj));
+                EmergencyItem item = new EmergencyItem(obj);
+                this.showMapMarker(item);
+                ApiSrv.answerEmergency(item.getId(), userJson.getString("_id"), new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject responseBody) {
+                        super.onSuccess(statusCode, headers, responseBody);
+                    }
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                        super.onFailure(statusCode, headers, responseString, throwable);
+                    }
+                });
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
+
+        NotificationManager notificationManagerNS = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManagerNS.cancel(0);
 
         appbar = (Toolbar) findViewById(R.id.appbar);
             setSupportActionBar(appbar);
@@ -204,10 +223,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
-        String user = prefs.getString("user", "{}");
-        try {
-            userJson = new JSONObject(user);
-            if (userJson != null) {
+        if (userJson != null) {
+            try {
                 String firstName = userJson.getString("firstName");
                 String lastName = userJson.getString("lastName");
                 String phone = userJson.getString("phone");
@@ -215,9 +232,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 if (firstName.equals("") || lastName.equals("") || phone.equals("") || dni.equals("")) {
                     goToProfileFragment();
                 }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
     }
 
