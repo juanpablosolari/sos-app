@@ -7,8 +7,8 @@ android {
         applicationId "com.app.voluntariosos.mvpauth0"
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 8
-        versionName "1.3"
+        versionCode 9
+        versionName "1.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
