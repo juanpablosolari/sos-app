@@ -96,9 +96,9 @@ public class FragmentCapacitationCenter extends Fragment {
                     }
                     if (responseBody.has("location")) {
                         JSONObject location = responseBody.getJSONObject("location");
-                        //JSONObject locAddress = location.getJSONObject("address");
-                        //String formattedAddress = locAddress.getString("formatted_address");
-                        String formattedAddress = location.getString("address");
+                        JSONObject locAddress = location.getJSONObject("address");
+                        String formattedAddress = locAddress.getString("formatted_address");
+                        //String formattedAddress = location.getString("address");
                         address.setText(formattedAddress);
                     }
                 } catch (JSONException e) {
