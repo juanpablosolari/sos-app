@@ -24,7 +24,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.app.voluntariosos.mvpauth0.utils.CredentialsManager;
@@ -231,6 +230,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 String dni = userJson.getString("dni");
                 if (firstName.equals("") || lastName.equals("") || phone.equals("") || dni.equals("")) {
                     goToProfileFragment();
+                    Toast.makeText(MainActivity.this, R.string.DataProfile, Toast.LENGTH_LONG).show();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

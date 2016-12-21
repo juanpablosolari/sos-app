@@ -130,7 +130,7 @@
                 android:layout_below="@+id/phone"
                 android:layout_marginTop="20sp"
                 android:id="@+id/btnCall"
-                android:text="Llamar" />
+                android:text="Llamar al Centro" />
 
         </LinearLayout>
     </ScrollView>

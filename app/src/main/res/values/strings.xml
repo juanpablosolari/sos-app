@@ -66,5 +66,5 @@
     <string name="calcError">no se pudo calcular</string>
     <string name="logout">Cerrar Sesión</string>
     <string name="about">About</string>
-
+    <string name="DataProfile">Debe completar el perfíl</string>
 </resources>
