@@ -67,4 +67,31 @@
     <string name="logout">Cerrar Sesión</string>
     <string name="about">About</string>
     <string name="DataProfile">Debe completar el perfíl</string>
+
+    <!-- STRING Auth0 en ESPAÑOL -->
+    <string name="com_auth0_lock_action_forgot_password">Olvidaste tu contraseña?</string>
+    <string name="com_auth0_lock_action_log_in">Iniciar Sesión</string>
+    <string name="com_auth0_lock_action_sign_up">Registrarme</string>
+    <string name="com_auth0_lock_forms_separator">O</string>
+    <string name="com_auth0_lock_sign_up_terms">Al registrarse, usted acepta nuestros términos de servicio y política de privacidad.</string>
+    <string name="com_auth0_lock_title_change_password">Restablecer Contraseña</string>
+    <string name="com_auth0_lock_description_change_password">Por favor, introduzca su dirección de correo electrónico. Le enviaremos un correo para restablecer su contraseña.</string>
+    <string name="com_auth0_lock_input_error_username" formatted="false">Nombre de usuario no válido. Sólo puede contener entre 1 y 15 caracteres alfanuméricos y  \'_\'.</string>
+    <string name="com_auth0_lock_input_error_email">Email invalido</string>
+    <string name="com_auth0_lock_input_error_password">Contraseña invalida</string>
+    <string name="com_auth0_lock_input_error_username_email">Usuario o Email invalido.</string>
+    <string name="com_auth0_lock_password_strength_title_must_have">Debe tener:</string>
+    <string name="com_auth0_lock_password_strength_chars_length" formatted="false">El menos 8 caracteres.</string>
+    <string name="com_auth0_lock_password_strength_title_at_least">Y contener al menos 3 de los siguientes 4 tipos de caracteres:</string>
+    <string name="com_auth0_lock_password_strength_lowercase_letters">Letras minúsculas (a-z)</string>
+    <string name="com_auth0_lock_password_strength_uppercase_letters">Letras mayúsculas (A-Z)</string>
+    <string name="com_auth0_lock_password_strength_numbers">Números (0–9)</string>
+    <string name="com_auth0_lock_password_strength_special_chars">Caracteres especiales (!@#$%*)</string>
+    <string name="com_auth0_lock_hint_username_or_email">Usuario/Correo</string>
+    <string name="com_auth0_lock_hint_password">Contraseña</string>
+    <string name="com_auth0_lock_db_change_password_message_success">Acabamos de enviarle un correo electrónico para restablecer su contraseña</string>
+    <string name="com_auth0_lock_db_login_error_invalid_credentials_message">Correo o Contraseña INCORRECTA</string>
+    <string name="com_auth0_lock_db_signup_user_already_exists_error_message">El usuario ya existe</string>
+
+
 </resources>
