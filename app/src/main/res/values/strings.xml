@@ -92,6 +92,8 @@
     <string name="com_auth0_lock_db_change_password_message_success">Acabamos de enviarle un correo electrónico para restablecer su contraseña</string>
     <string name="com_auth0_lock_db_login_error_invalid_credentials_message">Correo o Contraseña INCORRECTA</string>
     <string name="com_auth0_lock_db_signup_user_already_exists_error_message">El usuario ya existe</string>
+    <string name="com_auth0_lock_configuration_retrieving_error">Problemas de conexión. Asegúrate de tener conexión a internet.</string>
+    <string name="com_auth0_lock_action_retry">Volver a intentar.</string>
 
 
 </resources>

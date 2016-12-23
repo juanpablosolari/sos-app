@@ -1,5 +1,6 @@
 package com.app.voluntariosos.mvpauth0;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,6 +18,9 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -61,6 +65,22 @@ public class FragmentCapacitationCenter extends Fragment {
         hours = (TextView) getView().findViewById(R.id.hours);
         phone = (TextView) getView().findViewById(R.id.phone);
         phone.setVisibility(View.GONE);
+
+        final ProgressDialog dialog = new ProgressDialog(getActivity());
+        dialog.setTitle("Cargando datos del centro...");
+        dialog.setMessage("Aguarde unos segundos...");
+        dialog.setIndeterminate(true);
+        dialog.setCancelable(false);
+        dialog.show();
+
+        long delayInMillis = 1500;
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                dialog.dismiss();
+            }
+        }, delayInMillis);
 
         String capacitationCenterId = prefs.getString("capacitationCenterId", "");
 

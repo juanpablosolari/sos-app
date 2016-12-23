@@ -6,6 +6,20 @@
     android:orientation="vertical"
     tools:context="com.app.voluntariosos.mvpauth0.FragmentAbout">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="71dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                app:srcCompat="@drawable/logoaboutpng"
+                android:id="@+id/imageView2"
+                android:elevation="1dp"
+                android:textAlignment="center"
+                android:visibility="visible" />
+    </RelativeLayout>
+
+
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
@@ -17,7 +31,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:weightSum="1">
 
 
             <TextView
@@ -25,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="VoluntarioSOS"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="0dp"
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"
                 android:textSize="30sp"

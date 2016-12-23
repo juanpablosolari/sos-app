@@ -1,9 +1,11 @@
 package com.app.voluntariosos.mvpauth0;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -12,28 +14,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.support.v4.app.Fragment;
-import android.widget.AdapterView.OnItemClickListener;
 
-import com.google.android.gms.common.api.Api;
-import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import cz.msebera.android.httpclient.Header;
-
-
-import static android.R.attr.fragment;
-import static com.app.voluntariosos.mvpauth0.FragmentEmergencies.prefs;
 
 public class FragmentCapacitationCenters extends Fragment {
 
@@ -53,6 +47,22 @@ public class FragmentCapacitationCenters extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        final ProgressDialog dialog = new ProgressDialog(getActivity());
+        dialog.setTitle("Cargando Centros...");
+        dialog.setMessage("Aguarde unos segundos...");
+        dialog.setIndeterminate(true);
+        dialog.setCancelable(false);
+        dialog.show();
+
+        long delayInMillis = 1500;
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                dialog.dismiss();
+            }
+        }, delayInMillis);
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_capacitation_centers, container, false);
