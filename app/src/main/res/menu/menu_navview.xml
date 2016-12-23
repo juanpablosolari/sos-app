@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+
+        <group android:id="@+id/first_section" android:checkableBehavior="all">
         <item
             android:id="@+id/map"
             android:icon="@drawable/logomapa"
@@ -22,6 +23,9 @@
             android:id="@+id/capacitationCenters"
             android:icon="@drawable/logocenters"
             android:title="@string/capacitationCenters"/>
+        </group>
+
+        <group android:id="@+id/second_section" android:checkableBehavior="all">
         <item
             android:id="@+id/about"
             android:icon="@drawable/logoabout"
@@ -30,5 +34,8 @@
             android:id="@+id/logout"
             android:icon="@drawable/logout"
             android:title="@string/logout"/>
-    </group>
-</menu>
+
+        </group>
+
+
+    </menu>
