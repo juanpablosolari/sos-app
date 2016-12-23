@@ -3,6 +3,7 @@ package com.app.voluntariosos.mvpauth0;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -27,6 +28,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -48,10 +51,28 @@ public class FragmentEmergencies extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_emergencies, container, false);
+
     }
 
     @Override
     public void onActivityCreated(Bundle state) {
+
+        final ProgressDialog dialog = new ProgressDialog(getActivity());
+        dialog.setTitle("Cargando Emergencias...");
+        dialog.setMessage("Aguarde unos segundos...");
+        dialog.setIndeterminate(true);
+        dialog.setCancelable(false);
+        dialog.show();
+
+        long delayInMillis = 1500;
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                dialog.dismiss();
+            }
+        }, delayInMillis);
+
         super.onActivityCreated(state);
         prefs = this.getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
         try {

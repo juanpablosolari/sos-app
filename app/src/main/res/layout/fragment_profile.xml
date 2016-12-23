@@ -5,7 +5,8 @@
     android:orientation="vertical"
     tools:context="com.app.voluntariosos.mvpauth0.FragmentProfile"
     android:paddingLeft="25dp"
-    android:paddingRight="25dp">
+    android:paddingRight="25dp"
+    >
 
     <ScrollView
         android:id="@+id/scrollView1"
