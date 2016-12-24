@@ -31,6 +31,7 @@ public class FragmentCapacitationCenter extends Fragment {
     public TextView address = null;
     public TextView hours = null;
     public TextView phone = null;
+    public TextView email = null;
     public TextView description = null;
     public TextView url = null;
 
@@ -64,6 +65,7 @@ public class FragmentCapacitationCenter extends Fragment {
         address = (TextView) getView().findViewById(R.id.address);
         hours = (TextView) getView().findViewById(R.id.hours);
         phone = (TextView) getView().findViewById(R.id.phone);
+        email = (TextView) getView().findViewById(R.id.email);
         phone.setVisibility(View.GONE);
 
         final ProgressDialog dialog = new ProgressDialog(getActivity());
@@ -109,7 +111,11 @@ public class FragmentCapacitationCenter extends Fragment {
                     if (responseBody.has("hours")) {
                         hours.setText(responseBody.getString("hours"));
                     }
+                    if (contact.has("email")) {
+                        email.setText(contact.getString("email"));
+                    }
                     if (contact.has("phone")) {
+                        email.setText(contact.getString("email"));
                         phone.setText(contact.getString("phone"));
                         phone.setVisibility(View.VISIBLE);
                         btnCall.setVisibility(View.VISIBLE);
