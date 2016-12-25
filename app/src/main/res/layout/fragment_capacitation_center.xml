@@ -127,7 +127,8 @@
                 android:layout_marginTop="5dp"
                 android:paddingRight="5dp"
                 android:paddingLeft="5dp"
-                android:layout_marginLeft="10dp" />
+                android:layout_marginLeft="10dp"
+                android:autoLink="phone" />
 
             <TextView
                 android:text="Email:"
@@ -136,8 +137,7 @@
                 android:id="@+id/emailView5"
                 android:layout_marginTop="10dp"
                 android:textSize="20dp"
-                android:textStyle="bold"
-                />/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/email"
@@ -146,7 +146,8 @@
                 android:layout_marginTop="5dp"
                 android:paddingRight="5dp"
                 android:paddingLeft="5dp"
-                android:layout_marginLeft="10dp" />
+                android:layout_marginLeft="10dp"
+                android:autoLink="email" />
 
             <Button
                 android:layout_width="match_parent"

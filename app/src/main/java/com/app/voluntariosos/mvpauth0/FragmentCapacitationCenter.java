@@ -115,7 +115,6 @@ public class FragmentCapacitationCenter extends Fragment {
                         email.setText(contact.getString("email"));
                     }
                     if (contact.has("phone")) {
-                        email.setText(contact.getString("email"));
                         phone.setText(contact.getString("phone"));
                         phone.setVisibility(View.VISIBLE);
                         btnCall.setVisibility(View.VISIBLE);
