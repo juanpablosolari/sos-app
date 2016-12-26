@@ -403,6 +403,66 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     @SuppressWarnings("ResourceType")
+    public static void showCapacitationCenterMapMarker(final JSONObject item) throws JSONException {
+        Bundle bundle = new Bundle();
+        bundle.putString("EmergencyItem", item.toString());
+        JSONObject address = item.getJSONObject("address");
+        showMap();
+        JSONObject geometry = address.getJSONObject("geometry");
+        JSONObject loc = geometry.getJSONObject("location");
+        double lng = loc.getDouble("lng");
+        double lat = loc.getDouble("lat");
+        Log.e("item", item.toString());
+
+        final LatLng destination = new LatLng(lat, lng);
+
+        Location myLocation = LocationServices.FusedLocationApi.getLastLocation(apiClient);
+        LatLng myLatLng = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
+
+        //double distance = SphericalUtil.computeDistanceBetween(myLatLng, destination);
+
+        ApiSrv.getDistanceBetween(myLatLng, destination, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject responseBody) {
+                super.onSuccess(statusCode, headers, responseBody);
+                Marker marker = null;
+
+                if (responseBody != null) {
+                    Log.d("getDistanceBetween", responseBody.toString());
+                    //D/getDistanceBetween: {"destination_addresses":["Gascón 36, Cdad. Autónoma de Buenos Aires, Argentina"],"origin_addresses":["Gascón 34, C1181ABB CABA, Argentina"],
+                    // "rows":[{"elements":[{"distance":{"text":"8 m","value":8},"duration":{"text":"1 min","value":5},"status":"OK"}]}],"status":"OK"}
+                    String distance = "no se pudo calcular";
+                    String duration = "no se pudo calcular";
+
+                    try {
+                        JSONObject element = responseBody.getJSONArray("rows").getJSONObject(0).getJSONArray("elements").getJSONObject(0);
+                        distance = element.getJSONObject("distance").getString("text");
+                        duration = element.getJSONObject("duration").getString("text");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    //String address = item.getBody().split(",")[0];
+                    String address = "Centro";
+                    marker = mMap.addMarker(new MarkerOptions().position(destination).title(address + ", Distancia " + distance + " en " + duration));
+                } else {
+                    //item.getBody()
+                    marker = mMap.addMarker(new MarkerOptions().position(destination).title("Centro"));
+                }
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(destination, 16.0f));
+                mMap.setTrafficEnabled(false);
+                marker.showInfoWindow();
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+                Log.e("getDistanceBetween",  "failure: " + responseString);
+                Log.e("getDistanceBetween",  "failurecode: " + statusCode);
+            }
+        });
+    }
+
+    @SuppressWarnings("ResourceType")
     public static void showMapMarker(final EmergencyItem item) throws JSONException {
         Bundle bundle = new Bundle();
         bundle.putString("EmergencyItem", item.toString());

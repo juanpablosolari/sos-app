@@ -27,6 +27,7 @@ import cz.msebera.android.httpclient.Header;
 public class FragmentCapacitationCenter extends Fragment {
     public static SharedPreferences prefs;
     private static ApiSrv ApiSrv = new ApiSrv();
+    public JSONObject capacitationCenter = null;
     public TextView name = null;
     public TextView address = null;
     public TextView hours = null;
@@ -97,19 +98,32 @@ public class FragmentCapacitationCenter extends Fragment {
             }
         });
 
+        final Button btnGoToMap = (Button) getView().findViewById(R.id.btnGoToMap);
+        btnGoToMap.setVisibility(View.GONE);
+        btnGoToMap.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View arg0) {
+                try {
+                    MainActivity.showCapacitationCenterMapMarker(capacitationCenter.getJSONObject("location"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
         ApiSrv.getCapacitationCenter(capacitationCenterId, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject responseBody) {
                 super.onSuccess(statusCode, headers, responseBody);
                 Log.d("Centers", responseBody.toString());
+                capacitationCenter = responseBody;
 
                 try {
-                    name.setText(responseBody.getString("name"));
-                    description.setText(responseBody.getString("description"));
-                    url.setText(responseBody.getString("url"));
-                    JSONObject contact = responseBody.getJSONObject("contact");
-                    if (responseBody.has("hours")) {
-                        hours.setText(responseBody.getString("hours"));
+                    name.setText(capacitationCenter.getString("name"));
+                    description.setText(capacitationCenter.getString("description"));
+                    url.setText(capacitationCenter.getString("url"));
+                    JSONObject contact = capacitationCenter.getJSONObject("contact");
+                    if (capacitationCenter.has("hours")) {
+                        hours.setText(capacitationCenter.getString("hours"));
                     }
                     if (contact.has("email")) {
                         email.setText(contact.getString("email"));
@@ -119,8 +133,9 @@ public class FragmentCapacitationCenter extends Fragment {
                         phone.setVisibility(View.VISIBLE);
                         btnCall.setVisibility(View.VISIBLE);
                     }
-                    if (responseBody.has("location")) {
-                        JSONObject location = responseBody.getJSONObject("location");
+                    if (capacitationCenter.has("location")) {
+                        btnGoToMap.setVisibility(View.VISIBLE);
+                        JSONObject location = capacitationCenter.getJSONObject("location");
                         JSONObject locAddress = location.getJSONObject("address");
                         String formattedAddress = locAddress.getString("formatted_address");
                         //String formattedAddress = location.getString("address");

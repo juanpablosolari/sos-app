@@ -14,7 +14,7 @@ import org.json.JSONObject;
 
 public class ApiSrv {
 
-    //private static final String BASE_URL = "http://192.168.0.101:3001";
+    //private static final String BASE_URL = "http://192.168.1.99:3001";
     private static final String BASE_URL = "https://sos-api-qa.herokuapp.com";
     private static final String BASE_URL_PROD = "https://sos-api-prod.herokuapp.com";
 
