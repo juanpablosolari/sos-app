@@ -14,7 +14,7 @@ import org.json.JSONObject;
 
 public class ApiSrv {
 
-    //private static final String BASE_URL = "http://192.168.1.99:3001";
+    //private static final String BASE_URL = "http://192.168.1.122:3001";
     private static final String BASE_URL = "https://sos-api-qa.herokuapp.com";
     private static final String BASE_URL_PROD = "https://sos-api-prod.herokuapp.com";
 
@@ -38,6 +38,7 @@ public class ApiSrv {
         params.put("email", user.getEmail());
         params.put("name", user.getName());
         params.put("avatar", user.getPictureURL());
+        params.put("token", FirebaseInstanceId.getInstance().getToken());
         syncClient.post(getAbsoluteUrl("/users"), params, responseHandler);
     }
     public void updateUser(String userId, Boolean wantToBeVolunteer, String comuna, AsyncHttpResponseHandler responseHandler) {
@@ -67,7 +68,6 @@ public class ApiSrv {
         params.put("latitude", loc.getLatitude());
         params.put("longitude", loc.getLongitude());
         params.put("token", FirebaseInstanceId.getInstance().getToken());
-
         client.post(getAbsoluteUrl("/incidents"), params, responseHandler);
     }
     public void answerEmergency(String incidentsId, String userId, AsyncHttpResponseHandler responseHandler) {
