@@ -12,6 +12,9 @@ import android.util.Log;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private static final String TAG = "123";
     public static final String OK_ACTION = "OK_ACTION";
@@ -78,9 +81,18 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .setContentText(body)
                 .setAutoCancel(true)
                 .setSound(notificationSound)
-                .addAction(R.drawable.back_dialog, "Ayudo", pendingIntent)
-                .addAction(R.drawable.back_dialog, "No Ayudo", cancelIntent)
                 .setContentIntent(pendingIntent);
+
+        JSONObject noti = null;
+        try {
+            noti = new JSONObject(Data);
+            if (noti.has("type") && noti.getString("type").equals("incident")) {
+                notifiBuilder.addAction(R.drawable.back_dialog, "Ayudo", pendingIntent);
+                notifiBuilder.addAction(R.drawable.back_dialog, "No Ayudo", cancelIntent);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(0, notifiBuilder.build());
