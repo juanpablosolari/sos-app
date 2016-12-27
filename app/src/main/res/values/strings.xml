@@ -94,6 +94,6 @@
     <string name="com_auth0_lock_db_signup_user_already_exists_error_message">El usuario ya existe</string>
     <string name="com_auth0_lock_configuration_retrieving_error">Problemas de conexión. Asegúrate de tener conexión a internet.</string>
     <string name="com_auth0_lock_action_retry">Volver a intentar.</string>
-
+    <string name="com_auth0_lock_db_login_error_message">Error al procesar el inicio de sesión</string>
 
 </resources>
