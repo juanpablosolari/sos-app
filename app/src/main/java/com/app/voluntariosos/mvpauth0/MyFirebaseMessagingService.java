@@ -80,8 +80,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .setContentTitle(title)
                 .setContentText(body)
                 .setAutoCancel(true)
-                .setSound(notificationSound)
-                .setContentIntent(pendingIntent);
+                .setSound(notificationSound);
 
         JSONObject noti = null;
         try {
@@ -89,6 +88,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             if (noti.has("type") && noti.getString("type").equals("incident")) {
                 notifiBuilder.addAction(R.drawable.back_dialog, "Ayudo", pendingIntent);
                 notifiBuilder.addAction(R.drawable.back_dialog, "No Ayudo", cancelIntent);
+                notifiBuilder.setContentIntent(pendingIntent);
             }
         } catch (JSONException e) {
             e.printStackTrace();
