@@ -50,7 +50,7 @@
                 android:id="@+id/descripcion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Entendiendo que a la hora de salvar una vida cada minuto cuenta, surge la iniciativa de desarrollar una aplicación capaz de: Establecer un registro de voluntarios, los cuales mediante la aplicación instalada en sus Smartphone podrán ser geolocalizados y ante un accidente producido en la zona en donde cumple ese rol serán notificados para que acudan como primer auxilio a la persona con dificultades hasta la llegada del servicio de emergencia. \n www.voluntariosos.org"
+                android:text="Entendiendo que a la hora de salvar una vida cada minuto cuenta, surge la iniciativa de desarrollar una aplicación capaz de: Establecer un registro de voluntarios, los cuales mediante la aplicación instalada en sus Smartphone podrán ser geolocalizados y ante un accidente producido en la zona en donde cumple ese rol serán notificados para que acudan como primer auxilio a la persona con dificultades hasta la llegada del servicio de emergencia. \n \n www.voluntariosos.org"
                 android:autoLink="web"
                 android:layout_marginTop="5dp"
                 android:paddingRight="10dp"
