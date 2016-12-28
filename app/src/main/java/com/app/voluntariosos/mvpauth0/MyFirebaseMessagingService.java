@@ -84,11 +84,14 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         JSONObject noti = null;
         try {
-            noti = new JSONObject(Data);
-            if (noti.has("type") && noti.getString("type").equals("incident")) {
-                notifiBuilder.addAction(R.drawable.back_dialog, "Ayudo", pendingIntent);
-                notifiBuilder.addAction(R.drawable.back_dialog, "No Ayudo", cancelIntent);
-                notifiBuilder.setContentIntent(pendingIntent);
+            noti = new JSONObject(c.getString("notification"));
+            if (noti.has("type")) {
+                String type = noti.getString("type");
+                if (type.equals("incident")) {
+                    notifiBuilder.addAction(R.drawable.back_dialog, "Ayudo", pendingIntent);
+                    notifiBuilder.addAction(R.drawable.back_dialog, "No Ayudo", cancelIntent);
+                    notifiBuilder.setContentIntent(pendingIntent);
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();
