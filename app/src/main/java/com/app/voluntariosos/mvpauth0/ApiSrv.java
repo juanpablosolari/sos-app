@@ -63,11 +63,12 @@ public class ApiSrv {
         client.get(getAbsoluteUrl("/incidents"), responseHandler);
     }
 
-    public void sendEmergency(Location loc, AsyncHttpResponseHandler responseHandler) {
+    public void sendEmergency(Location loc, String userId, AsyncHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         params.put("latitude", loc.getLatitude());
         params.put("longitude", loc.getLongitude());
         params.put("token", FirebaseInstanceId.getInstance().getToken());
+        params.put("user", userId);
         client.post(getAbsoluteUrl("/incidents"), params, responseHandler);
     }
     public void answerEmergency(String incidentsId, String userId, AsyncHttpResponseHandler responseHandler) {
