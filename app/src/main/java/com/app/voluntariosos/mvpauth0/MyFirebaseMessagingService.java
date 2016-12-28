@@ -39,7 +39,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             String title = remoteMessage.getNotification().getTitle();
             String body = remoteMessage.getNotification().getBody();
             Log.d(TAG, "Mesage body:" + body);
-            sendNotification(title, body, remoteMessage.getData().toString());
+            sendNotification(title, body, new JSONObject(remoteMessage.getData()));
         }
     }
 
@@ -58,7 +58,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
      * @param title
      * @param body
      */
-    private void sendNotification(final String title, final String body, final String Data) {
+    private void sendNotification(final String title, final String body, final JSONObject Data) {
 
         //Set sound of notification
         Uri notificationSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
@@ -66,7 +66,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Intent intent = new Intent(this, MainActivity.class);
         intent.setAction(this.OK_ACTION);
         Bundle c = new Bundle();
-        c.putString("notification", Data);
+        c.putString("notification", Data.toString());
         intent.putExtras(c);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         Intent intent_cancel = new Intent(this, MainActivity.class);
