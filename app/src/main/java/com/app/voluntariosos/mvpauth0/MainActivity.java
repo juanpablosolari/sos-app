@@ -254,13 +254,19 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Log.e("123", currentFragment.getClass().getSimpleName());
-
-        if (currentFragment.getClass().getSimpleName().equals("FragmentCapacitationCenters")) {
-            getSupportActionBar().setTitle("Mapa");
-            showMap();
-            btnEmergency.setVisibility(View.VISIBLE);
-            currentFragment = null;
+        if (currentFragment != null){
+            String currentClass = currentFragment.getClass().getSimpleName();
+            Log.e("123", currentClass);
+            if (currentClass.equals("FragmentCapacitationCenters") ||
+                    currentClass.equals("FragmentAbout") ||
+                    currentClass.equals("FragmentVolunteer") ||
+                    currentClass.equals("FragmentEmergencies") ||
+                    currentClass.equals("FragmentProfile")) {
+                getSupportActionBar().setTitle("Mapa");
+                showMap();
+                btnEmergency.setVisibility(View.VISIBLE);
+                currentFragment = null;
+            }
         }
     }
 

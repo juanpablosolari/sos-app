@@ -70,7 +70,9 @@ public class FragmentVolunteer extends Fragment {
         try {
             userJson = new JSONObject(user);
             isUserVolunteer = userJson.getBoolean("isVolunteer");
-            wantToBe = userJson.getBoolean("wantToBeVolunteer");
+            if (userJson.has("wantToBeVolunteer")) {
+                wantToBe = userJson.getBoolean("wantToBeVolunteer");
+            }
             userComuna = userJson.getString("comuna");
         } catch (JSONException e) {
             e.printStackTrace();
