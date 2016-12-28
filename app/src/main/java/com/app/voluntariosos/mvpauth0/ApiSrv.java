@@ -15,8 +15,8 @@ import org.json.JSONObject;
 public class ApiSrv {
 
     //private static final String BASE_URL = "http://192.168.1.122:3001";
-    private static final String BASE_URL = "https://sos-api-qa.herokuapp.com";
-    private static final String BASE_URL_PROD = "https://sos-api-prod.herokuapp.com";
+    //private static final String BASE_URL = "https://sos-api-qa.herokuapp.com";
+    private static final String BASE_URL = "https://sos-api-prod.herokuapp.com";
 
     private static AsyncHttpClient client = new AsyncHttpClient();
     private static SyncHttpClient syncClient = new SyncHttpClient();
