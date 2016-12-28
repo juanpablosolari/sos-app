@@ -148,10 +148,10 @@ public class FragmentEmergencies extends Fragment {
             return(item);
         }
     }
-    public static void sendEmergency(Location loc){
+    public static void sendEmergency(Location loc, JSONObject finalUser) throws JSONException {
         MainActivity.showEmergencyToast("text");
 
-        ApiSrv.sendEmergency(loc, new JsonHttpResponseHandler() {
+        ApiSrv.sendEmergency(loc, finalUser.getString("_id"), new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject responseBody) {
                 super.onSuccess(statusCode, headers, responseBody);

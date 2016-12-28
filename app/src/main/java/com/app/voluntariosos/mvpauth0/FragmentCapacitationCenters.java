@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,9 +87,10 @@ public class FragmentCapacitationCenters extends Fragment {
                 FragmentCapacitationCenter fragment = new FragmentCapacitationCenter();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.addToBackStack("");
                 fragmentTransaction.replace(R.id.content_frame, fragment);
-                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
+                MainActivity.setCurrentFragment(fragment);
             }
         });
         centersList.setAdapter(arrayAdapter);

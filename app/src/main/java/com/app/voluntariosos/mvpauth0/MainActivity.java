@@ -15,11 +15,13 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -42,6 +44,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -64,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private static GoogleMap mMap;
     private SharedPreferences prefs;
     public JSONObject userJson;
+    public static Fragment currentFragment = null;
 
     //Localizacion
     private static final int PETICION_PERMISO_LOCALIZACION = 101;
@@ -134,7 +138,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         boolean fragmentTransaction = false;
-                        Fragment fragment = null;
                         Intent intent;
 
                         switch (menuItem.getItemId()) {
@@ -146,32 +149,31 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 getSupportActionBar().setTitle("Mapa");
                                 menuItem.setChecked(true);
                                 showMap();
-                                content_frame.setVisibility(View.GONE);
-                                map.setVisibility(View.VISIBLE);
                                 btnEmergency.setVisibility(View.VISIBLE);
+                                currentFragment = null;
                                 break;
                             case R.id.capacitationCenters:
-                                fragment = new FragmentCapacitationCenters();
+                                currentFragment = new FragmentCapacitationCenters();
                                 fragmentTransaction = true;
                                 btnEmergency.setVisibility(View.GONE);
                                 break;
                             case R.id.emergencies:
-                                fragment = new FragmentEmergencies();
+                                currentFragment = new FragmentEmergencies();
                                 fragmentTransaction = true;
                                 btnEmergency.setVisibility(View.GONE);
                                 break;
                             case R.id.profile:
-                                fragment = new FragmentProfile();
+                                currentFragment = new FragmentProfile();
                                 fragmentTransaction = true;
                                 btnEmergency.setVisibility(View.GONE);
                                 break;
                             case R.id.volunteer:
-                                fragment = new FragmentVolunteer();
+                                currentFragment = new FragmentVolunteer();
                                 fragmentTransaction = true;
                                 btnEmergency.setVisibility(View.GONE);
                                 break;
                             case R.id.about:
-                                fragment = new FragmentAbout();
+                                currentFragment = new FragmentAbout();
                                 fragmentTransaction = true;
                                 btnEmergency.setVisibility(View.GONE);
                                 break;
@@ -180,6 +182,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 intent = new Intent(MainActivity.this, LoginActivity.class);
                                 startActivity(intent);
                                 Toast.makeText(MainActivity.this, "Sesion finalizada", Toast.LENGTH_SHORT).show();
+                                currentFragment = null;
+                                break;
+                            default:
+                                currentFragment = null;
                                 break;
                         }
 
@@ -190,7 +196,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             content_frame.setVisibility(View.VISIBLE);
 
                             getSupportFragmentManager().beginTransaction()
-                                    .replace(R.id.content_frame, fragment)
+                                    .addToBackStack("")
+                                    .replace(R.id.content_frame, currentFragment)
                                     .commit();
 
                             menuItem.setChecked(true);
@@ -244,6 +251,19 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Log.e("123", currentFragment.getClass().getSimpleName());
+
+        if (currentFragment.getClass().getSimpleName().equals("FragmentCapacitationCenters")) {
+            getSupportActionBar().setTitle("Mapa");
+            showMap();
+            btnEmergency.setVisibility(View.VISIBLE);
+            currentFragment = null;
+        }
+    }
+
     private void goToProfileFragment(){
         FragmentProfile fragment = new FragmentProfile();
         FrameLayout layout = (FrameLayout) findViewById(R.id.map);
@@ -252,6 +272,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         content_frame.setVisibility(View.VISIBLE);
 
         getSupportFragmentManager().beginTransaction()
+                .addToBackStack("")
                 .replace(R.id.content_frame, fragment)
                 .commit();
         getSupportActionBar().setTitle("Perfil");
@@ -298,7 +319,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
         Location loc = LocationServices.FusedLocationApi.getLastLocation(apiClient);
         if (loc != null) {
-            FragmentEmergencies.sendEmergency(loc);
+            try {
+                FragmentEmergencies.sendEmergency(loc, userJson);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             Toast.makeText(MainActivity.this, R.string.callSame, Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(MainActivity.this, R.string.GPSDisableCallSame, Toast.LENGTH_SHORT).show();
@@ -524,5 +549,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public static void showMap() {
         content_frame.setVisibility(View.GONE);
         map.setVisibility(View.VISIBLE);
+    }
+
+    public static void setCurrentFragment(FragmentCapacitationCenter fragment) {
+        currentFragment = fragment;
     }
 }
