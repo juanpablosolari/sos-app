@@ -509,7 +509,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         final LatLng destination = new LatLng(lat, lng);
 
         Location myLocation = LocationServices.FusedLocationApi.getLastLocation(apiClient);
-        LatLng myLatLng = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
+
+        LatLng myLatLng = null;
+
+        try {
+            myLatLng = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
+        }catch(Exception ex){
+            myLatLng = new LatLng(-34.604346, -58.395783);
+
+        }
 
         //double distance = SphericalUtil.computeDistanceBetween(myLatLng, destination);
 
