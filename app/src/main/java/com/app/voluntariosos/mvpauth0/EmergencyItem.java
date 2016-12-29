@@ -20,7 +20,9 @@ public class EmergencyItem {
         comuna = item.getString("comuna");
         location = item.getString("location");
         token = item.getString("token");
-        horario = item.getString("horario");
+        if (item.has("horario")) {
+            horario = item.getString("horario");
+        }
     }
 
     public String getId(){ return _id; }
