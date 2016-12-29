@@ -68,12 +68,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Bundle c = new Bundle();
         c.putString("notification", Data.toString());
         intent.putExtras(c);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        Intent intent_cancel = new Intent(this, MainActivity.class);
-        intent_cancel.setAction(this.CANCEL_ACTION);
-        intent_cancel.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        PendingIntent cancelIntent = PendingIntent.getActivity(this, 0, intent_cancel, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder notifiBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
@@ -88,6 +82,13 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             if (noti.has("type")) {
                 String type = noti.getString("type");
                 if (type.equals("incident")) {
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    Intent intent_cancel = new Intent(this, MainActivity.class);
+                    intent_cancel.setAction(this.CANCEL_ACTION);
+                    intent_cancel.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    PendingIntent cancelIntent = PendingIntent.getActivity(this, 0, intent_cancel, PendingIntent.FLAG_UPDATE_CURRENT);
+
                     notifiBuilder.addAction(R.drawable.back_dialog, "Ayudo", pendingIntent);
                     notifiBuilder.addAction(R.drawable.back_dialog, "No Ayudo", cancelIntent);
                     notifiBuilder.setContentIntent(pendingIntent);
