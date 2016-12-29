@@ -69,7 +69,8 @@ public class YourUniversalFCM extends WakefulBroadcastReceiver {
                 .setContentTitle(title)
                 .setContentText(body)
                 .setAutoCancel(true)
-                .setOngoing(true)
+                .setPriority(NotificationCompat.PRIORITY_MAX)
+                .setWhen(0)
                 .setSound(notificationSound)
                 .setContentIntent(pendingIntent);
 

@@ -70,8 +70,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .setContentTitle(title)
                 .setContentText(body)
                 .setAutoCancel(true)
-                .setOngoing(true)
                 .setSound(notificationSound)
+                .setPriority(NotificationCompat.PRIORITY_MAX)
+                .setWhen(0)
                 .setContentIntent(pendingIntent);
 
         JSONObject noti = null;
