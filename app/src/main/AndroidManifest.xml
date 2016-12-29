@@ -11,13 +11,14 @@
     <uses-permission android:name="com.expocodetech.android.maps.permission.MAPS_RECEIVE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!--<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> -->
+    <!-- <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> -->
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.READ_LOGS" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -26,7 +27,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.app.voluntariosos.mvpauth0.SplashActivity"
+            android:name=".SplashActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -58,12 +59,13 @@
             android:theme="@style/Lock.Theme" />
         <!-- Auth0 Lock Embedded WebView End -->
 
+
         <!-- Auth0 Lock Passwordless SMS Country Code Selection -->
         <activity
             android:name="com.auth0.android.lock.CountryCodeActivity"
             android:theme="@style/Lock.Theme.ActionBar" />
         <!-- Auth0 Lock Passwordless SMS Country Code Selection -->
-        <activity android:name="com.app.voluntariosos.mvpauth0.LoginActivity" />
+        <activity android:name=".LoginActivity" />
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -72,17 +74,18 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-
-        <!--<uses-feature
+        <!--
+            <uses-feature
             android:glEsVersion="0x00020000"
-            android:required="true" /> -->
+            android:required="true" />
+        -->
 
-        <service android:name="com.app.voluntariosos.mvpauth0.MyFirebaseMessagingService">
+        <service android:name=".MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service android:name="com.app.voluntariosos.mvpauth0.MyFirebaseInstanceIDService">
+        <service android:name=".MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
@@ -92,11 +95,10 @@
             android:name="android.support.PARENT_ACTIVITY"
             android:value="com.app.voluntariosos.mvpauth0.MainActivity" />
 
-        <activity
-            android:name="com.app.voluntariosos.mvpauth0.MainActivity"/>
+        <activity android:name=".MainActivity" />
 
         <receiver
-            android:name="com.app.voluntariosos.mvpauth0.MiWidget"
+            android:name=".MiWidget"
             android:label="VoluntarioSOS">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -106,12 +108,22 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/miwidget_wprovider" />
         </receiver>
-        <receiver android:name="com.app.voluntariosos.mvpauth0.NotificationReceiver">
+        <receiver android:name=".NotificationReceiver"
+            android:enabled="true"
+            android:exported="true">
             <intent-filter>
                 <action android:name="OK_ACTION" />
                 <action android:name="CANCEL_ACTION" />
+
             </intent-filter>
         </receiver>
+
+        <service android:name=".MyService">
+            <intent-filter>
+                <action android:name="com.app.voluntariosos.mvpauth0.MyService" />
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>

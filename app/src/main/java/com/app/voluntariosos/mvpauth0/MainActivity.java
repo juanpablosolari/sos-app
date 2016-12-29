@@ -1,6 +1,7 @@
 package com.app.voluntariosos.mvpauth0;
 
 import android.Manifest;
+import android.app.ActivityManager;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
@@ -15,13 +16,11 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -44,7 +43,6 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -78,6 +76,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (!isMyServiceRunning()){
+            Intent serviceIntent = new Intent(this, MyService.class);
+            this.startService(serviceIntent);
+        }
+
         prefs = this.getSharedPreferences("prefs", Context.MODE_PRIVATE);
         String notification = getIntent().getStringExtra("notification");
 
@@ -559,5 +563,18 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     public static void setCurrentFragment(FragmentCapacitationCenter fragment) {
         currentFragment = fragment;
+
     }
+
+    private boolean isMyServiceRunning() {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (service.service.equals(service) && MyService.class.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 }
