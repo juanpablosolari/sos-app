@@ -158,6 +158,7 @@ public class FragmentVolunteer extends Fragment {
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("user", responseBody.toString());
                 editor.commit();
+                MyComuna.setText("Actualmente usted pertenece a la " + userComuna);
             }
 
             @Override
