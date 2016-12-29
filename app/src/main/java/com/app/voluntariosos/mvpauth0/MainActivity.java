@@ -95,18 +95,23 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (notification != null) {
             try {
                 JSONObject obj = new JSONObject(notification);
+                if (obj.has("item")) {
+                    obj = new JSONObject(obj.getString("item"));
+                }
                 EmergencyItem item = new EmergencyItem(obj);
-                this.showMapMarker(item);
-                ApiSrv.answerEmergency(item.getId(), userJson.getString("_id"), new JsonHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, JSONObject responseBody) {
-                        super.onSuccess(statusCode, headers, responseBody);
-                    }
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                        super.onFailure(statusCode, headers, responseString, throwable);
-                    }
-                });
+                if (obj.has("type") && obj.getString("type").equals("incident")) {
+                    this.showMapMarker(item);
+                    ApiSrv.answerEmergency(item.getId(), userJson.getString("_id"), new JsonHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, JSONObject responseBody) {
+                            super.onSuccess(statusCode, headers, responseBody);
+                        }
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                            super.onFailure(statusCode, headers, responseString, throwable);
+                        }
+                    });
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
