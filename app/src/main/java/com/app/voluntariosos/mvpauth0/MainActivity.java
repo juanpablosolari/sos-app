@@ -253,6 +253,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 if (firstName.equals("") || lastName.equals("") || phone.equals("") || dni.equals("")) {
                     goToProfileFragment();
                     Toast.makeText(MainActivity.this, R.string.DataProfile, Toast.LENGTH_LONG).show();
+                    btnEmergency.setVisibility(View.GONE);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
