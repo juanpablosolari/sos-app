@@ -60,10 +60,18 @@ public class FragmentProfile extends Fragment {
         try {
             userJson = new JSONObject(user);
             if (userJson != null) {
-                nameField.setText(userJson.getString("firstName"));
-                lastnameField.setText(userJson.getString("lastName"));
-                phoneField.setText(userJson.getString("phone"));
-                dniField.setText(userJson.getString("dni"));
+                if (userJson.has("firstName") && !userJson.getString("firstName").equals("null")) {
+                    nameField.setText(userJson.getString("firstName"));
+                }
+                if (userJson.has("lastName") && !userJson.getString("lastName").equals("null")) {
+                    lastnameField.setText(userJson.getString("lastName"));
+                }
+                if (userJson.has("phone") && !userJson.getString("phone").equals("null")) {
+                    phoneField.setText(userJson.getString("phone"));
+                }
+                if (userJson.has("dni") && !userJson.getString("dni").equals("null")) {
+                    dniField.setText(userJson.getString("phone"));
+                }
                 gender = userJson.getString("gender");
 
                 RadioButton genderMale = (RadioButton) getView().findViewById(R.id.genderMale);

@@ -246,14 +246,19 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         if (userJson != null) {
             try {
-                String firstName = userJson.getString("firstName");
-                String lastName = userJson.getString("lastName");
-                String phone = userJson.getString("phone");
-                String dni = userJson.getString("dni");
-                if (firstName.equals("") || lastName.equals("") || phone.equals("") || dni.equals("")) {
+                if (!userJson.has("firstName") || !userJson.has("lastName") || !userJson.has("phone") || !userJson.has("dni") || !userJson.has("gender")) {
                     goToProfileFragment();
                     Toast.makeText(MainActivity.this, R.string.DataProfile, Toast.LENGTH_LONG).show();
-                    btnEmergency.setVisibility(View.GONE);
+                } else {
+                    String firstName = userJson.getString("firstName");
+                    String lastName = userJson.getString("lastName");
+                    String phone = userJson.getString("phone");
+                    String dni = userJson.getString("dni");
+                    String gender = userJson.getString("gender");
+                     if (firstName.equals("") || lastName.equals("") || phone.equals("") || dni.equals("") || gender.equals("")) {
+                        goToProfileFragment();
+                        Toast.makeText(MainActivity.this, R.string.DataProfile, Toast.LENGTH_LONG).show();
+                    }
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
