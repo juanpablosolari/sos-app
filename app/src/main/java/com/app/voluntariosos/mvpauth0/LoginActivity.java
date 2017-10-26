@@ -42,6 +42,11 @@ public class LoginActivity extends AppCompatActivity {
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
+
+    //  lema.nahuel+vol@gmail.com
+    //  KAmina88
+    //  nahuel@coderhouse.com
+    //  KAmina88!
     public GoogleApiClient client;
 
     protected void onCreate(Bundle savedInstanceState) {

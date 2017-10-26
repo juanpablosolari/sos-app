@@ -11,70 +11,83 @@
         android:id="@+id/wantToBeVolunteerTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Te gustaria ser voluntario?"
         android:layout_marginTop="10dp"
+        android:paddingLeft="5dp"
         android:paddingRight="5dp"
-        android:paddingLeft="5dp" />
+        android:text="Te gustaria ser voluntario?:" />
 
     <RadioGroup android:id="@+id/wantToBeVolunteer"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <RadioButton android:id="@+id/affirmative"
+        <RadioButton
+            android:id="@+id/affirmative"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
             android:text="Si"
-            android:layout_marginLeft="10dp" />
+            android:textAlignment="viewStart"
+            android:textColor="#fff" />
 
-        <RadioButton android:id="@+id/negative"
+        <RadioButton
+            android:id="@+id/negative"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
             android:text="No"
-            android:layout_marginLeft="10dp" />
+            android:textColor="#fff" />
     </RadioGroup>
 
     <TextView
         android:id="@+id/isVolunteerTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Fuiste aprobado como voluntario"
         android:layout_marginTop="10dp"
+        android:paddingLeft="5dp"
         android:paddingRight="5dp"
-        android:paddingLeft="5dp" />
+        android:text="Fuiste aprobado como voluntario:" />
 
     <TextView
+        android:id="@+id/MyComuna"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:paddingRight="10dp"
         android:paddingLeft="10dp"
-        android:id="@+id/MyComuna" />
+        android:paddingRight="10dp"
+        android:textColor="#fff" />
 
     <TextView
         android:id="@+id/comunasTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="En que comuna te gustaria ser voluntario?"
-        android:layout_marginTop="20dp"
         android:layout_below="@id/wantToBeVolunteer"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="5dp"
         android:paddingRight="5dp"
-        android:paddingLeft="5dp" />
+        android:text="En que comuna te gustaria ser voluntario?:" />
 
-    <Spinner android:id="@+id/comunaSpinner"
+    <Spinner
+        android:id="@+id/comunaSpinner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_height="40dp"
         android:layout_below="@id/comunasTxt"
+        android:layout_marginTop="10dp"
+        android:background="#fff"
+        android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:paddingLeft="10dp" />
+        android:popupBackground="#fff" />
 
     <Button
+        android:id="@+id/BtnSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/comunaSpinner"
         android:layout_marginTop="20sp"
-        android:id="@+id/BtnSave"
-        android:text="Guardar" />
+        android:autoText="false"
+        android:background="#ffa621"
+        android:text="Guardar"
+        android:textColor="#000"
+        android:textColorLink="#ffffff" />
 
 </LinearLayout>

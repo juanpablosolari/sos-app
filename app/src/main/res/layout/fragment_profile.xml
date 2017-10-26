@@ -22,22 +22,22 @@
             android:orientation="vertical">
 
 
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nombre"
-        android:layout_marginTop="10dp" />
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Nombre" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"
-        android:id="@+id/nameField"
-        android:inputType="text"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp" />
+            <EditText
+                android:id="@+id/nameField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:inputType="text"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" />
 
     <TextView
         android:id="@+id/lastname"
@@ -48,15 +48,15 @@
         android:paddingRight="5dp"
         android:paddingLeft="5dp" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"
-        android:id="@+id/lastnameField"
-        android:inputType="text"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp" />
+            <EditText
+                android:id="@+id/lastnameField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:inputType="text"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" />
 
     <TextView
         android:id="@+id/phone"
@@ -67,15 +67,15 @@
         android:paddingRight="5dp"
         android:paddingLeft="5dp" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"
-        android:id="@+id/phoneField"
-        android:inputType="number"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp" />
+            <EditText
+                android:id="@+id/phoneField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:inputType="number"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" />
 
     <TextView
         android:id="@+id/dni"
@@ -86,15 +86,15 @@
         android:paddingRight="5dp"
         android:paddingLeft="5dp" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"
-        android:id="@+id/dniField"
-        android:inputType="number"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp" />
+            <EditText
+                android:id="@+id/dniField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:inputType="number"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" />
 
     <RadioGroup android:id="@+id/gender"
         android:orientation="vertical"
@@ -107,22 +107,23 @@
             android:layout_height="wrap_content"
             android:text="Hombre" />
 
-        <RadioButton android:id="@+id/genderFemale"
+        <RadioButton
+            android:id="@+id/genderFemale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Mujer" />
     </RadioGroup>
 
 
-
-
-<Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/comunaSpinner"
-        android:layout_marginTop="20sp"
-        android:id="@+id/BtnSave"
-        android:text="Guardar" />
+            <Button
+                android:id="@+id/BtnSave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/comunaSpinner"
+                android:layout_marginTop="20sp"
+                android:background="#ffa621"
+                android:text="Guardar"
+                android:textColor="#000" />
 
         </LinearLayout>
     </ScrollView>

@@ -65,7 +65,7 @@
     <string name="googlePlayError">Se ha interrumpido la conexión con Google Play Services</string>
     <string name="calcError">no se pudo calcular</string>
     <string name="logout">Cerrar Sesión</string>
-    <string name="about">About</string>
+    <string name="about">Sobre VoluntarioSOS</string>
     <string name="DataProfile">Debe completar el perfíl</string>
 
     <!-- STRING Auth0 en ESPAÑOL -->
